@@ -8,7 +8,7 @@ export async function serverFetch(path) {
   try {
     const res = await fetch(`${base}${path}`, {
       headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
+      next: { revalidate: 60 }, // Revalidate every 60 seconds (ISR)
     });
     const json = await res.json();
     if (json?.success) {

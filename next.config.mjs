@@ -30,11 +30,11 @@ const nextConfig = {
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Production URLs (uncomment when deploying to production) ─
-    // PUBLIC_SITE_URL:          "https://www.cloudintellect.com/",
-    // NEXT_PUBLIC_SITE_URL:     "https://www.cloudintellect.com",
-    // BASE_URL_PATH:            "https://deen3evddmddt.cloudfront.net/production/",
-    // API_BASE_URL:             "https://www.cloudintellect.com/api/",
-    // DYNAMIC_IMG_PATH: 'https://cloudintellect.in/',
+    // PUBLIC_SITE_URL: "https://www.cloudintellect.com/",
+    // NEXT_PUBLIC_SITE_URL: "https://www.cloudintellect.com",
+    // BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/production/",
+    // API_BASE_URL: "https://www.cloudintellect.com/api/",
+    // DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Pages / Hero ─────────────────────────────────────────────
     GET_PAGE_BY_SLUG: "pages/slug/",

@@ -2,7 +2,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, create a `.env.local` file for local development (already created):
+
+```bash
+API_BASE_URL=http://localhost:5002/api/
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -20,6 +32,20 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+### Local Development
+
+- `API_BASE_URL`: Backend API URL (default: `http://localhost:5002/api/`)
+
+### Production (Vercel)
+
+Set the following environment variable in your Vercel project settings:
+
+- `API_BASE_URL`: Production API URL (e.g., `https://www.cloudintellect.com/api/`)
+
+The production API URL is configured in `vercel.json` and can be overridden in Vercel dashboard.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -32,5 +58,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+### Deployment Steps
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Vercel will automatically detect Next.js and configure the build
+4. Set the `API_BASE_URL` environment variable in Vercel project settings if different from default
+5. Deploy!
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
