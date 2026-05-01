@@ -5,11 +5,15 @@ import EcosystemSection from './EcosystemSection';
 import CoursesSection from './CoursesSection';
 import LegacySection from './LegacySection';
 import RecognitionSection from './RecognitionSection';
+import AchievementHighlights from './AchievementHighlights';
 import PlacementOverview from './PlacementOverview';
 import PlacementNetwork from './PlacementNetwork';
 import IndustryExperience from './IndustryExperience';
 import CommunityImage from './CommunityImage';
 import WhyChooseUs from './WhyChooseUs';
+import StudentSuccess from './StudentSuccess';
+import StudentReviews from './StudentReviews';
+import NewsAndEvents from './NewsAndEvents';
 
 export default function MainHome({ homePageData }) {
   return (
@@ -25,6 +29,13 @@ export default function MainHome({ homePageData }) {
       <IndustryExperience industryExperience={homePageData?.pageData?.content?.industryExperience} />
       <CommunityImage />
       <WhyChooseUs whyChoose={homePageData?.pageData?.content?.whyChoose} />
+      <StudentSuccess
+        successStories={homePageData?.successStories}
+        sectionContent={homePageData?.pageData?.content?.studentSuccess}
+      />
+      <StudentReviews />
+      <AchievementHighlights />
+      <NewsAndEvents newsAndEventsData={homePageData?.pageData?.content?.newsAndEvents} />
     </>
   );
 }

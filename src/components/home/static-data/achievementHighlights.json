@@ -1,0 +1,40 @@
+{
+  "headingLight": "CI Achievement",
+  "headingBold": "Highlights",
+  "stats": [
+    {
+      "number": "1400+",
+      "title": "SUCCESSFUL CANDIDATE PLACEMENTS",
+      "description": "Across top Salesforce Partner Companies"
+    },
+    {
+      "number": "5000+",
+      "title": "LEARNERS TRAINED ACROSS INDIA",
+      "description": "Workforce Programs & Online Batches"
+    },
+    {
+      "number": "11+ Years",
+      "title": "STRONG TRACK RECORD",
+      "description": "in Salesforce Workforce Upskilling"
+    },
+    {
+      "number": "20+",
+      "title": "INDUSTRY RECOGNIZED MENTORS & CONSULTANTS",
+      "description": "Training students with real project exposure"
+    }
+  ],
+  "gallery": [
+    {
+      "image": "images/home/gallery-img-1.webp",
+      "alt": "Achievement highlight 1"
+    },
+    {
+      "image": "images/home/gallery-img-2.webp",
+      "alt": "Achievement highlight 2"
+    },
+    {
+      "image": "images/home/gallery-img-3.webp",
+      "alt": "Achievement highlight 3"
+    }
+  ]
+}

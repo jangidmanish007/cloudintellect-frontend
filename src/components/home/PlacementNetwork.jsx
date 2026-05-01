@@ -44,8 +44,6 @@ export default function PlacementNetwork({ placementData }) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
 
-  console.log('placementData', placementData);
-
   const heading = placementData?.heading ?? '';
   const headingBold = placementData?.headingBold ?? '';
 
