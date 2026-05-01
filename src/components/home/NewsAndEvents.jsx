@@ -59,7 +59,7 @@ export default function NewsAndEvents({ newsAndEventsData }) {
   const sideArticles = Array.isArray(data.sideArticles) ? data.sideArticles : [];
 
   return (
-    <section className="relative bg-[#F8FAFC] py-16 px-4 sm:px-8">
+    <section className="relative bg-[#F8FAFC] py-16 px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         {/* ── Section Title ── */}
         <motion.h2
@@ -74,10 +74,10 @@ export default function NewsAndEvents({ newsAndEventsData }) {
         </motion.h2>
 
         {/* ── Content Grid ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* ── Left Column: Timeline Items ── */}
           <motion.div
-            className="lg:col-span-3 flex flex-col gap-4 max-h-[400px] sm:max-h-[500px] lg:max-h-[742px] overflow-y-auto pr-2 custom-scrollbar"
+            className="lg:col-span-3 md:col-span-4 flex flex-col gap-4 max-h-[400px] sm:max-h-[500px] lg:max-h-[742px] overflow-y-auto pr-2 custom-scrollbar"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -114,15 +114,15 @@ export default function NewsAndEvents({ newsAndEventsData }) {
 
           {/* ── Center Column: Main Feature ── */}
           <motion.div
-            className="lg:col-span-6"
+            className="lg:col-span-6  md:col-span-8"
             variants={mainFeatureVariant}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <article className="relative rounded-[4px] overflow-hidden min-h-[504px] flex flex-col group cursor-pointer">
+            <article className="relative rounded-[4px] overflow-hidden lg:min-h-[504px] md:min-h-[400px] flex flex-col group cursor-pointer">
               {mainFeature?.image && (
-                <div className="relative w-full h-[280px] sm:h-[504px] overflow-hidden">
+                <div className="relative w-full h-[280px] lg:h-[504px] h-size-[300px] overflow-hidden">
                   <Image
                     src={process.env.DYNAMIC_IMG_BASE_PATH + mainFeature?.image}
                     alt={mainFeature?.title || ''}
@@ -156,7 +156,7 @@ export default function NewsAndEvents({ newsAndEventsData }) {
 
           {/* ── Right Column: Side Articles ── */}
           <motion.div
-            className="lg:col-span-3 flex flex-col gap-4"
+            className="lg:col-span-3 md:col-span-10 flex md:flex-row lg:flex-col flex-col gap-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -175,7 +175,7 @@ export default function NewsAndEvents({ newsAndEventsData }) {
                       src={process.env.DYNAMIC_IMG_BASE_PATH + article?.image}
                       alt={article?.title || ''}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-110"
                       sizes="(max-width: 1024px) 100vw, 25vw"
                     />
                   </div>

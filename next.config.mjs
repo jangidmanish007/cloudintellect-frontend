@@ -44,6 +44,9 @@ const nextConfig = {
     GET_FAQ: "faq",
     GET_ALUMNI: "alumni-success",
     GET_ALUMNI_PROFILE: "alumni",
+
+
+    GET_ABOUT_PAGE: "pages/slug/about",
     // ─── Auth ─────────────────────────────────────────────────────
     ADMIN_LOGIN: "auth/login",
   },

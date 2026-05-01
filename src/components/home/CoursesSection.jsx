@@ -265,7 +265,7 @@ export default function CoursesSection({ courses }) {
 
         {/* ── CTA ── */}
         <motion.div
-          className="flex  gap-[14px] items-center"
+          className="sm:flex   gap-[14px] items-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.8 }}
@@ -278,7 +278,7 @@ export default function CoursesSection({ courses }) {
           >
             <Link
               href={applyHref}
-              className="excon-font inline-flex items-center gap-2 bg-[#009FFF] hover:bg-[#0088e6] text-white text-[14px] font-semibold rounded-[4px] md:px-6 px-4 py-[13px] no-underline transition-colors duration-200"
+              className="xs:mb-0 mb-3 excon-font sm:w-auto w-full inline-flex justify-center items-center gap-2 bg-[#009FFF] hover:bg-[#0088e6] text-white text-[14px] font-semibold rounded-[4px] md:px-6 px-4 py-[13px] no-underline transition-colors duration-200"
             >
               {applyText}
               <ArrowRight width={16} height={16} />
@@ -292,7 +292,7 @@ export default function CoursesSection({ courses }) {
           >
             <Link
               href={brochureHref}
-              className="excon-font inline-flex items-center gap-2 bg-white text-black text-[14px] font-normal rounded-[4px] px-4 py-[13px] border border-[#e2e8f0] no-underline hover:bg-[#f8fafc] transition-colors duration-200"
+              className="excon-font sm:w-auto w-full inline-flex justify-center gap-2 bg-white text-black text-[14px] font-normal rounded-[4px] px-4 py-[13px] border border-[#e2e8f0] no-underline hover:bg-[#f8fafc] transition-colors duration-200"
             >
               {brochureText}
               <DownloadIcon width={16} height={16} />

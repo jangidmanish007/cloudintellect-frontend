@@ -48,8 +48,8 @@ export default function PlacementNetwork({ placementData }) {
   const headingBold = placementData?.headingBold ?? '';
 
   return (
-    <section ref={sectionRef} className="bg-[#F8FAFC] py-12 lg:py-[80px] overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="bg-[#F8FAFC] py-12 lg:py-[80px] overflow-hidden px-[16px]">
+      <div className="max-w-[1280px] mx-auto">
         {/* ── Heading ── */}
         {(heading || headingBold) && (
           <motion.h2

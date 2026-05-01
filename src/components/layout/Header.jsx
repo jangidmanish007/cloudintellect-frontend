@@ -49,7 +49,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileAccordion, setOpenMobileAccordion] = useState(null);
-  const [carouselSlides, setCarouselSlides] = useState(topBar.carousel);
+  const [carouselSlides, setCarouselSlides] = useState([]);
 
   // Sync scroll state on mount — browser scroll restoration is async so we
   // poll a few frames to catch the restored scroll position after refresh.
@@ -91,14 +91,14 @@ export default function Header() {
       try {
         const response = await getHeaderCarousel();
         console.log('response', response);
-        if (response?.status && response?.result) {
+        if (response?.status && response?.result && response.result.length > 0) {
           setCarouselSlides(response.result);
         } else {
-          setCarouselSlides(topBar.carousel);
+          setCarouselSlides([]);
         }
       } catch (error) {
         console.error('Error fetching carousel data:', error);
-        setCarouselSlides(topBar.carousel);
+        setCarouselSlides([]);
       }
     }
     fetchCarouselData();
@@ -171,75 +171,79 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}
     >
       {/* ── Top Bar ── */}
-      <div
-        className={`transition-all duration-300 overflow-hidden ${showTopBar ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}
-      >
-        <div className={`h-12 ${isScrolled ? 'text-dark' : 'text-white'}`}>
-          <div className="mx-auto max-w-[1522px] px-4 flex items-center justify-between h-full">
-            {/* Slick Carousel */}
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="flex-1 min-w-0 overflow-hidden">
-                <Slider {...slickSettings}>
-                  {carouselSlides?.map((slide, idx) => (
-                    <div key={idx} className="outline-none text-center">
-                      <div className="flex justify-center items-center gap-4">
-                        {slide.link ? (
-                          <Link href={slide.link} className="block truncate text-xs text-normal">
-                            {slide.text}
-                          </Link>
-                        ) : (
-                          <span className="block truncate text-center md:text-left md:text-base text-[8px]">
-                            {slide.text}
-                          </span>
-                        )}
-                        <Link
-                          href={topBar.registerButton.link}
-                          className="hidden md:inline-block shrink-0 px-4 py-1.5 btn-primary rounded text-xs font-medium transition"
-                        >
-                          {topBar.registerButton.text}
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-              </div>
-            </div>
+      {carouselSlides && carouselSlides.length > 0 && (
+        <>
+          <div
+            className={`transition-all duration-300 overflow-hidden ${showTopBar ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}
+          >
+            <div className={`h-12 ${isScrolled ? 'text-dark' : 'text-white'}`}>
+              <div className="mx-auto max-w-[1522px] px-4 flex items-center justify-between h-full">
+                {/* Slick Carousel */}
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <Slider {...slickSettings}>
+                      {carouselSlides.map((slide, idx) => (
+                        <div key={idx} className="outline-none text-center">
+                          <div className="flex justify-center items-center gap-4">
+                            {slide.link ? (
+                              <Link href={slide.link} className="block truncate text-xs text-normal">
+                                {slide.text}
+                              </Link>
+                            ) : (
+                              <span className="block truncate text-center  md:text-[10px] text-[8px]">
+                                {slide.text}
+                              </span>
+                            )}
+                            <Link
+                              href={topBar.registerButton.link}
+                              className="md:inline-block shrink-0 md:px-4 px-3 md:py-1.5 py-1 btn-primary rounded md:text-xs text-[10px] font-medium transition"
+                            >
+                              {topBar.registerButton.text}
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                    </Slider>
+                  </div>
+                </div>
 
-            {/* Top links */}
-            <div
-              className={`hidden lg:flex items-center gap-4 text-xs ml-6 shrink-0 transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
-            >
-              <a href={topBar.whatsapp.link} className="flex items-center gap-1.5 hover:text-[#25D366] transition">
-                <WhatsAppIcon />
-                {topBar.whatsapp.text}
-              </a>
-              <span className={`w-px h-4 ${isScrolled ? 'bg-gray-300' : 'bg-white/20'}`} />
-              <a href={topBar.callUs.link} className="flex items-center gap-1.5 hover:text-cyan transition">
-                <Phone size={14} />
-                {topBar.callUs.text}
-              </a>
-              <span className={`w-px h-4 ${isScrolled ? 'bg-gray-300' : 'bg-white/20'}`} />
-              <div className="flex items-center gap-2">
-                {topBar.socialLinks.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`transition hover:text-white ${isScrolled ? 'text-gray-500' : 'text-white/70'}`}
-                    aria-label={social.platform}
-                  >
-                    {SOCIAL_ICONS[social.platform]}
+                {/* Top links */}
+                <div
+                  className={`hidden lg:flex items-center gap-4 text-xs ml-6 shrink-0 transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                >
+                  <a href={topBar.whatsapp.link} className="flex items-center gap-1.5 hover:text-[#25D366] transition">
+                    <WhatsAppIcon />
+                    {topBar.whatsapp.text}
                   </a>
-                ))}
+                  <span className={`w-px h-4 ${isScrolled ? 'bg-gray-300' : 'bg-white/20'}`} />
+                  <a href={topBar.callUs.link} className="flex items-center gap-1.5 hover:text-cyan transition">
+                    <Phone size={14} />
+                    {topBar.callUs.text}
+                  </a>
+                  <span className={`w-px h-4 ${isScrolled ? 'bg-gray-300' : 'bg-white/20'}`} />
+                  <div className="flex items-center gap-2">
+                    {topBar.socialLinks.map((social) => (
+                      <a
+                        key={social.platform}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`transition hover:text-white ${isScrolled ? 'text-gray-500' : 'text-white/70'}`}
+                        aria-label={social.platform}
+                      >
+                        {SOCIAL_ICONS[social.platform]}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div
-        className={`h-px w-full max-w-[1522px] mx-auto transition-colors duration-300 ${isScrolled ? 'bg-transparent' : 'bg-[#FFFFFF80]'}`}
-      ></div>
+          <div
+            className={`h-px w-full max-w-[1522px] mx-auto transition-colors duration-300 ${isScrolled ? 'bg-transparent' : 'bg-[#FFFFFF80]'}`}
+          ></div>
+        </>
+      )}
 
       {/* ── Main Nav ── */}
       <nav className={`transition-colors duration-300 ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>

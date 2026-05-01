@@ -49,8 +49,8 @@ export default function IndustryExperience({ industryExperience }) {
   const activeTab = tabs[activeIndex];
 
   return (
-    <section className="bg-white py-16 pb-18 rounded-b-3xl">
-      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-16 pb-18 rounded-b-3xl px-[16px] overflow-hidden">
+      <div className="max-w-[1280px] mx-auto">
         {/* ── Heading ── */}
         {(headingPart1 || headingStrong1 || headingStrong2) && (
           <motion.h2
@@ -77,7 +77,7 @@ export default function IndustryExperience({ industryExperience }) {
             {/* ════════════════════════════════════
                 DESKTOP (lg+): horizontal accordion
                 ════════════════════════════════════ */}
-            <div className="hidden lg:flex gap-[10px] items-stretch">
+            <div className="hidden lg:flex gap-[10px] items-stretch w-full">
               {tabs.map((tab, index) => {
                 const isActive = activeIndex === index;
                 return (
@@ -184,7 +184,9 @@ function DesktopTabPanel({ tab, isActive, bgUrl, onOpen }) {
           'rounded-xl bg-[#F9FAFB] transition-all duration-400 ease-in-out',
           'flex flex-col justify-center',
           'rotate-180 [writing-mode:vertical-rl]',
-          isActive ? 'w-0 p-0 opacity-0 overflow-hidden min-w-0' : 'hover:bg-[#eef2f7] w-[89px] h-[600px] px-5',
+          isActive
+            ? 'w-0 p-0 opacity-0 overflow-hidden min-w-0'
+            : 'hover:bg-[#eef2f7] w-[70px] lg:w-[80px] xl:w-[89px] h-[450px] lg:h-[500px] xl:h-[600px] px-4 lg:px-5',
         ].join(' ')}
       >
         <span className="flex justify-between items-center w-full gap-2">
@@ -200,34 +202,34 @@ function DesktopTabPanel({ tab, isActive, bgUrl, onOpen }) {
         role="region"
         aria-label={`${tab.label} panel`}
         className={[
-          'relative rounded-2xl overflow-hidden shrink-0',
+          'relative rounded-2xl overflow-hidden',
           'bg-no-repeat bg-center bg-cover',
           'transition-all duration-500 ease-in-out',
-          'h-[600px]',
-          isActive ? 'w-[738px]' : 'w-0',
+          'h-[450px] lg:h-[500px] xl:h-[600px]',
+          isActive ? 'flex-1 min-w-0' : 'w-0 flex-shrink-0',
         ].join(' ')}
         style={bgUrl ? { backgroundImage: `url(${process.env.DYNAMIC_IMG_BASE_PATH}${bgUrl})` } : undefined}
       >
         {isActive && (
           <div
-            className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 px-8 pt-10 pb-9 rounded-b-2xl"
+            className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 lg:gap-3 px-5 lg:px-6 xl:px-8 pt-8 lg:pt-9 xl:pt-10 pb-6 lg:pb-7 xl:pb-9 rounded-b-2xl"
             style={{
               background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 55%, transparent 100%)',
             }}
             role="presentation"
           >
-            <h3 className="excon-font text-white text-[1.5rem] font-bold m-0 leading-snug max-w-[85%] text-left">
+            <h3 className="excon-font text-white text-[1.2rem] lg:text-[1.35rem] xl:text-[1.5rem] font-bold m-0 leading-snug max-w-[90%] lg:max-w-[85%] text-left">
               {tab.title}
             </h3>
-            <div className="flex items-end justify-between w-full gap-16 mt-1">
-              <p className="ranade-font text-white/95 text-[0.9rem] font-normal leading-normal m-0 flex-1 min-w-0 text-left">
+            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-4 lg:gap-8 xl:gap-16 mt-1">
+              <p className="ranade-font text-white/95 text-[0.8rem] lg:text-[0.85rem] xl:text-[0.9rem] font-normal leading-normal m-0 flex-1 min-w-0 text-left">
                 {tab.description}
               </p>
               <Link
                 href="#learn-more"
-                className="shrink-0 inline-block px-6 py-[0.65rem]
+                className="shrink-0 inline-block px-4 lg:px-5 xl:px-6 py-[0.55rem] lg:py-[0.6rem] xl:py-[0.65rem]
                   bg-[#4299E1] hover:bg-[#3182ce] text-white no-underline
-                  excon-font text-[0.8rem] font-semibold tracking-[0.04em]
+                  excon-font text-[0.75rem] lg:text-[0.775rem] xl:text-[0.8rem] font-semibold tracking-[0.04em]
                   rounded-lg transition-all duration-200 hover:-translate-y-px"
               >
                 READ MORE
