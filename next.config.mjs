@@ -26,7 +26,7 @@ const nextConfig = {
     PUBLIC_SITE_URL: "http://localhost:3000/",
     NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
     BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/staging/",
-    API_BASE_URL: "http://localhost:5002/api/",
+    API_BASE_URL: "https://cloudintellect.in/api/",
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Production URLs (uncomment when deploying to production) ─
