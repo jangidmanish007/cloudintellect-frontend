@@ -52,12 +52,27 @@ export default function AchievementHighlights() {
     swipeToSlide: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1400,
         settings: {
           slidesToShow: 1.5,
           slidesToScroll: 1,
           infinite: gallery?.length > 1,
           variableWidth: true,
+          pauseOnHover: true,
+          draggable: true,
+          swipeToSlide: true,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 1.2,
+          slidesToScroll: 1,
+          infinite: gallery?.length > 1,
+          variableWidth: true,
+          pauseOnHover: true,
+          draggable: true,
+          swipeToSlide: true,
         },
       },
       {
@@ -67,15 +82,45 @@ export default function AchievementHighlights() {
           slidesToScroll: 1,
           infinite: gallery?.length > 1,
           variableWidth: true,
+          pauseOnHover: true,
+          draggable: true,
+          swipeToSlide: true,
+        },
+      },
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: gallery?.length > 1,
+          variableWidth: true,
+          pauseOnHover: true,
+          draggable: true,
+          swipeToSlide: true,
+        },
+      },
+      {
+        breakpoint: 340,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: gallery?.length > 1,
+          variableWidth: true,
+          pauseOnHover: true,
+          draggable: true,
+          swipeToSlide: true,
         },
       },
     ],
   };
 
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-[80px]" aria-labelledby="achievement-highlights-heading">
+    <section
+      className="bg-white  overflow-hidden lg:py-[80px] py-[60px]"
+      aria-labelledby="achievement-highlights-heading"
+    >
       {/* Container for title and stats */}
-      <div className="max-w-[1280px] mx-auto">
+      <div className="max-w-[1320px] mx-auto px-[16px]">
         {/* ── Title ── */}
         <motion.h2
           id="achievement-highlights-heading"
@@ -96,7 +141,7 @@ export default function AchievementHighlights() {
 
         {/* ── Stats Grid ── */}
         <motion.div
-          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8 lg:gap-10 mb-8 sm:mb-10 md:mb-12 lg:mb-14"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8 lg:gap-10 mb-8 sm:mb-10 md:mb-12 lg:mb-14"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -145,7 +190,7 @@ export default function AchievementHighlights() {
               {gallery.map((item, i) => (
                 <div
                   key={i}
-                  className="outline-none px-1 w-full lg:max-w-[560px] md:max-w-[400px] sm:max-w-[360px] max-w-[300px]"
+                  className="outline-none px-1 w-full lg:max-w-[560px] md:max-w-[400px] sm:max-w-[360px] xs:max-w-[280px] max-w-[260px]"
                 >
                   <div className="rounded-lg overflow-hidden aspect-4/3 bg-gray-200 shadow-sm">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

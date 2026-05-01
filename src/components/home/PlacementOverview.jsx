@@ -148,7 +148,7 @@ export default function PlacementOverview({ overview }) {
   };
 
   return (
-    <section ref={sectionRef} className="bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="bg-white py-12 sm:py-16 lg:py-20 px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 items-stretch">
         {/* ── LEFT: Image Slider ── */}
         <motion.div
@@ -289,7 +289,7 @@ export default function PlacementOverview({ overview }) {
                   className={[
                     'min-w-0 pt-2 pr-3',
                     /* On sm+ keep the original left-border divider pattern */
-                    i === 0 ? 'pl-0 sm:border-l-0' : 'pl-3 sm:border-l sm:border-l-black/12',
+                    i === 0 ? 'sm:pl-0 pl-3 sm:border-l-0' : 'pl-3 sm:border-l sm:border-l-black/12',
                     /* On mobile (2-col grid): add left border to col 2 items */
                     i % 2 !== 0 ? 'border-l border-l-black/12' : '',
                   ].join(' ')}

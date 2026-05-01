@@ -158,7 +158,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
   const handleNext = () => setActiveIndex((i) => (i >= learners.length - 1 ? 0 : i + 1));
 
   return (
-    <section className="bg-[#009FFF] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#009FFF] py-12 sm:py-16 lg:py-20 px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row lg:justify-between gap-10 lg:gap-8 items-start">
         {/* ══ LEFT COLUMN ══ */}
         <motion.div

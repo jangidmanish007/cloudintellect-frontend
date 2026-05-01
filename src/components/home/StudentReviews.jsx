@@ -153,7 +153,7 @@ function ReviewCard({ review }) {
 ───────────────────────────────────────────── */
 export default function StudentReviews() {
   return (
-    <section className="bg-[#FFFBF2] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#FFFBF2] py-12 sm:py-16 lg:py-20 px-[16px]">
       <div className="max-w-[1280px] mx-auto">
         {/* ── Section Header ── */}
         <motion.div

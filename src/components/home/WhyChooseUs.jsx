@@ -30,7 +30,7 @@ export default function WhyChooseUs({ whyChoose }) {
   };
 
   return (
-    <section className="bg-white py-16 px-4 sm:px-6">
+    <section className="bg-white py-16 px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         {/* ── Section Heading ── */}
         <motion.h2
