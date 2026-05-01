@@ -1,5 +1,5 @@
 import MainHome from "@/components/home/MainHome";
-import { getPageBySlug, getHeaderCarousel, getSuccessStories } from "@/_services/homeService";
+import { getPageBySlug, getSuccessStories } from "@/_services/homeService";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';

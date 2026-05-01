@@ -88,10 +88,16 @@ export default function Header() {
   // Fetch top-bar carousel slides from API on mount
   useEffect(() => {
     async function fetchCarouselData() {
-      const response = await getHeaderCarousel();
-      if (response?.status) {
-        setCarouselSlides(response.result);
-      } else {
+      try {
+        const response = await getHeaderCarousel();
+        console.log('response', response);
+        if (response?.status && response?.result) {
+          setCarouselSlides(response.result);
+        } else {
+          setCarouselSlides(topBar.carousel);
+        }
+      } catch (error) {
+        console.error('Error fetching carousel data:', error);
         setCarouselSlides(topBar.carousel);
       }
     }
@@ -159,7 +165,7 @@ export default function Header() {
     slidesToScroll: 1,
     fade: true,
     pauseOnHover: true,
-  }; 
+  };
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}
