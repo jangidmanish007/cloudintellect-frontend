@@ -3,7 +3,6 @@ const nextConfig = {
   // basePath: '/cloudintellect-react',
   // assetPrefix: '/cloudintellect-react',
   // trailingSlash: false,
-
   images: {
     remotePatterns: [
       {

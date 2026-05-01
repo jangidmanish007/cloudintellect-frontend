@@ -6,7 +6,15 @@ export const getPageBySlug = async (slug) => {
 
 // get header carousel slides
 export const getHeaderCarousel = async () => {
-  return serverFetch(process.env.GET_HEADER_CAROUSEL);
+  try {
+    const response = await fetchAPI(process.env.GET_HEADER_CAROUSEL, {
+      method: 'GET',
+    });
+    return response;
+  } catch (err) {
+    console.error('[getHeaderCarousel] error:', err);
+    return { status: false, result: null, message: err.message };
+  }
 };
 
 // get success stories (StudentSuccessSection)

@@ -64,7 +64,6 @@ export async function fetcher(method, url, params = null) {
       response = await Axios.post(`${process.env.API_BASE_URL}${url}`, params, headers);
     }
     if (response.status == 200) {
-      // return response.data;
       return successResponse(response?.data);
     } else {
       return errorResponse(response);
@@ -90,12 +89,13 @@ export async function fetchAPI(url, options = null) {
       headers = { ...headers, ...options };
     }
     response = await fetch(`${process.env.API_BASE_URL}${url}`, headers);
-    response = await response.json();
-    if (response.statusCode == 200) {
-      // return response.data;
-      return successResponse(response);
+    const jsonResponse = await response.json();
+
+    // Check if the HTTP response was successful (status 200-299)
+    if (response.ok) {
+      return successResponse(jsonResponse);
     } else {
-      return errorResponse(response);
+      return errorResponse(jsonResponse);
     }
   } catch (err) {
     if (err?.response?.status == 500) {
@@ -105,22 +105,33 @@ export async function fetchAPI(url, options = null) {
       Cookies.remove('_token', { path: '/' });
       Cookies.remove('_token', { domain: `${process.env.COOKIES_DOMAIN}` });
     }
-    return errorResponse({ resultMessage: err });
+    return errorResponse({ message: err.message });
   }
 }
 
 function successResponse(response) {
-  if (response?.result) {
+  // Handle response format: {success: true, data: [...]}
+  if (response?.success && response?.data !== undefined) {
     return {
       status: true,
-      result: response['result'],
-      message: response['message'],
+      result: response.data,
+      message: response.message || null,
     };
-  } else {
+  }
+  // Handle response format: {result: [...], message: '...'}
+  else if (response?.result !== undefined) {
     return {
       status: true,
-      result: null,
-      message: response['message'],
+      result: response.result,
+      message: response.message || null,
+    };
+  }
+  // Fallback: return the response as-is wrapped in status
+  else {
+    return {
+      status: true,
+      result: response,
+      message: response?.message || null,
     };
   }
 }
@@ -128,7 +139,7 @@ function successResponse(response) {
 function errorResponse(response) {
   return {
     status: false,
-    data: null,
-    message: response['message'],
+    result: null,
+    message: response?.message || response?.resultMessage || 'An error occurred',
   };
 }
