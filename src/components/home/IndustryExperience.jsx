@@ -29,15 +29,22 @@ export default function IndustryExperience({ industryExperience }) {
   const tabs = Array.isArray(industry.tabs) && industry.tabs.length > 0 ? industry.tabs : [];
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const isInitialMount = useRef(true);
 
   const openTab = (index) => {
     if (activeIndex === index) return;
     setActiveIndex(index);
   };
 
-  // Auto-scroll active pill to center on mobile
+  // Auto-scroll active pill to center on mobile (only when user changes tabs, not on mount)
   const pillRefs = useRef([]);
   useEffect(() => {
+    // Skip scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     const el = pillRefs.current[activeIndex];
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
