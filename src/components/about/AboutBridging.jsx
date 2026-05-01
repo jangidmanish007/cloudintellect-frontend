@@ -1,12 +1,9 @@
-'use client';
 import React from 'react';
 import Image from 'next/image';
 
-function AboutBridging({ bridgingData }) {
-  console.log('bridgingData', bridgingData?.headingLine1);
-
+export default function AboutBridging({ bridgingData }) {
   return (
-    <section className="w-full bg-white py-16 md:py-20 lg:py-24 px=[16px]">
+    <section className="w-full bg-white py-16 md:py-20 lg:py-24 px-[16px]">
       <div className="max-w-[1280px] mx-auto">
         <div className="w-full max-w-[439px]">
           {/* Heading */}
@@ -156,5 +153,3 @@ function AboutBridging({ bridgingData }) {
     </section>
   );
 }
-
-export default AboutBridging;

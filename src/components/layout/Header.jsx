@@ -359,7 +359,7 @@ export default function Header() {
                       {item.label}
                       <ChevronDown size={12} />
                     </button>
-                    <ul className="secondary-dropdown">
+                    <ul className="secondary-dropdown text-start">
                       {item.children.map((child) => (
                         <li key={child.label}>
                           <Link href={child.href}>{child.label}</Link>
