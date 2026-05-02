@@ -23,7 +23,7 @@ function AboutUsHero({ hero }) {
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="max-w-[1280px] mx-auto bg-no-repeat bg-bottom bg-contain pt-[120px] xl:pt-[280px] lg:pt-[200px] xl:pb-[100px]"
+        className="max-w-[1280px] mx-auto bg-no-repeat bg-bottom bg-contain pt-[120px] xl:pt-[280px] md:pt-[230px] md:pb-[80px] xl:pb-[100px]"
         style={{ backgroundImage: `url('${bgImageUrl}')` }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16">

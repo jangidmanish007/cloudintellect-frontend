@@ -16,7 +16,7 @@ export default async function AboutPage() {
 
   try {
     // Fetch about page data from API
-    const pageRes = await getAboutPageData();
+    const pageRes = await getAboutPageData('home');
     if (pageRes?.status) {
       aboutPageData = pageRes.result;
     }

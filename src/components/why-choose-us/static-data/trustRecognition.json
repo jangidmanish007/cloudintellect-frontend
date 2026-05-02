@@ -1,0 +1,22 @@
+{
+  "headingLight": "Institutional",
+  "headingBold": "Trust & Recognition",
+  "items": [
+    {
+      "text": "Salesforce Workforce Development Partner",
+      "icon": "images/about-us/recognition-icon-1.svg"
+    },
+    {
+      "text": "Training aligned with Salesforce role frameworks",
+      "icon": "images/about-us/recognition-icon-2.svg"
+    },
+    {
+      "text": "Expert trainers from the Salesforce ecosystem",
+      "icon": "images/about-us/recognition-icon-3.svg"
+    },
+    {
+      "text": "Strong alumni & corporate network",
+      "icon": "images/about-us/recognition-icon-4.svg"
+    }
+  ]
+}

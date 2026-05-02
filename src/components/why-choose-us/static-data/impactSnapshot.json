@@ -1,0 +1,27 @@
+{
+  "headingLight": "CI Impact",
+  "headingBold": "Snapshot",
+  "metrics": [
+    {
+      "value": "5000+",
+      "label": "LEARNERS TRAINED"
+    },
+    {
+      "value": "1400+",
+      "label": "SUCCESSFUL PLACEMENTS"
+    },
+    {
+      "value": "20+",
+      "label": "CERTIFIED INDUSTRY MENTORS"
+    },
+    {
+      "value": "11+",
+      "label": "YEARS EXPERIENCE"
+    }
+  ],
+  "tagline": "CHOOSING CLOUD INTELLECT MEANS CHOOSING PRACTICAL LEARNING",
+  "ctaHeading": "industry exposure, and long-term career growth.",
+  "ctaDescription": "With structured training, real project experience, and placement support until hiring, we empower learners to confidently step into the Salesforce ecosystem.",
+  "ctaText": "Apply Today",
+  "ctaHref": "#apply"
+}

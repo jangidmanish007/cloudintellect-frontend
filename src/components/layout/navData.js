@@ -37,37 +37,45 @@ export const helpline = {
 };
 
 export const secondaryNav = [
+  { label: 'Home', href: '/' },
   {
     label: 'ABOUT US',
     href: '/about-us',
     children: [
-      { label: 'About Cloud Intellect', href: '/about-us' },
-      { label: 'Leadership', href: '/about-us/leadership' },
-      { label: 'Our Mission', href: '/about-us#mission' },
+      { label: 'Who We Are', href: '/about' },
+      { label: 'Why Choose Cloudintellect', href: '/why-choose-us' },
+      { label: 'Leadership', href: '/leadership' },
+      { label: 'About Cloudintellect', href: '/about-cloudintellect' },
     ],
   },
   {
     label: 'COURSES',
     href: '/courses',
     children: [
-      { label: 'Salesforce Administrator', href: '/courses/salesforce-administrator' },
-      { label: 'Salesforce Developer', href: '/courses/salesforce-developer' },
-      { label: 'Salesforce + AI', href: '/courses/salesforce-ai' },
-      { label: 'Marketing Cloud', href: '/courses/marketing-cloud' },
+      { label: 'Salesforce Developer', href: '/salesforce-developer' },
+      { label: 'Salesforce Marketing', href: '/salesforce-marketing-cloud' },
     ],
   },
   { label: 'BLOG', href: '/blog' },
   { label: 'TESTIMONIALS', href: '/testimonials' },
   {
-    label: 'PLACEMENT',
+    label: 'Honors',
     href: '/placement',
     children: [
-      { label: 'Placement Overview', href: '/placement' },
-      { label: 'Alumni', href: '/placement/alumni' },
-      { label: 'Success Stories', href: '/placement/success-stories' },
+      { label: 'Testimonials', href: '/testimonials' },
+      { label: 'Alumni Success', href: '/alumni-success' },
     ],
   },
-  { label: 'WEBINAR', href: '/webinar' },
-  { label: 'GALLERY', href: '/gallery' },
-  { label: 'CONTACT US', href: '/contact-us' },
+  { label: 'Placement', href: '/placements' },
+  { label: 'Webinar', href: '/webinars' },
+  { label: 'gallery', href: '/gallery' },
+  {
+    label: 'Consult',
+    href: '/placement',
+    children: [
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'Faq', href: '/faq' },
+      { label: 'Career', href: '/career' },
+    ],
+  },
 ];

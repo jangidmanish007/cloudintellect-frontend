@@ -90,7 +90,6 @@ export default function Header() {
     async function fetchCarouselData() {
       try {
         const response = await getHeaderCarousel();
-        console.log('response', response);
         if (response?.status && response?.result && response.result.length > 0) {
           setCarouselSlides(response.result);
         } else {
@@ -359,7 +358,7 @@ export default function Header() {
                       {item.label}
                       <ChevronDown size={12} />
                     </button>
-                    <ul className="secondary-dropdown">
+                    <ul className="secondary-dropdown text-start">
                       {item.children.map((child) => (
                         <li key={child.label}>
                           <Link href={child.href}>{child.label}</Link>
