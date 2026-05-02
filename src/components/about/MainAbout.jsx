@@ -15,7 +15,7 @@ export default function MainAbout({ aboutPageData }) {
       <AboutBridging bridgingData={content?.bridging} />
       <CloudIntellectEdge edgeData={content?.cloudIntellectEdge} />
       <LeaderShipEdge leadershipData={content?.leadershipEdge} />
-      <AboutCoreValues />
+      <AboutCoreValues coreValuesData={content?.coreValues} />
     </>
   );
 }

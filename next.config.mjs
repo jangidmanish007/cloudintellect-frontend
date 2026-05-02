@@ -47,6 +47,8 @@ const nextConfig = {
 
 
     GET_ABOUT_PAGE: "pages/slug/about",
+    GET_WHY_CHOOSE_US_PAGE: "pages/slug/why-choose-us",
+
     // ─── Auth ─────────────────────────────────────────────────────
     ADMIN_LOGIN: "auth/login",
   },

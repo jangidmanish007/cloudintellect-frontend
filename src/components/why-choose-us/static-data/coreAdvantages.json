@@ -1,0 +1,55 @@
+{
+  "title": "Core Advantages of Learning at Cloud Intellect",
+  "advantages": [
+    {
+      "title": "100% Practical & Hands-On Training",
+      "description": "Learning at Cloud Intellect is focused on real-time Salesforce implementation, not theory.",
+      "bullets": [
+        "Hands-on assignments on Salesforce org",
+        "Real business scenarios & use cases",
+        "Project-based learning approach"
+      ],
+      "additionalText": ""
+    },
+    {
+      "title": "Real-Time Experience Equivalent to Industry Exposure",
+      "description": "Every learner works on live business use cases and project simulations, gaining experience aligned with real industry expectations.",
+      "bullets": [
+        "Industry-based tasks",
+        "Project simulations designed by consultants",
+        "Practical exposure equivalent to real project environments"
+      ],
+      "additionalText": ""
+    },
+    {
+      "title": "Structured Assignments & Continuous Assessments",
+      "description": "Learner progress is tracked through topic-wise assignments, quizzes, and real-world exercises.",
+      "bullets": ["Skill validation at every stage", "Practical assessments", "Performance-driven learning journey"],
+      "additionalText": ""
+    },
+    {
+      "title": "Smart Learning Infrastructure (LMS + Student Portal)",
+      "description": "Cloud Intellect provides a technology-enabled learning ecosystem through LMS and a dedicated student portal. Students can",
+      "bullets": [
+        "Access recorded lectures & resources",
+        "Book interview slots",
+        "Connect with mentors for 1:1 doubt sessions",
+        "Track learning & placement progress",
+        "Collaborate with peers"
+      ],
+      "additionalText": ""
+    },
+    {
+      "title": "Mentorship from Experienced Certified Trainers",
+      "description": "All trainers at Cloud Intellect are active Salesforce professionals with strong project delivery experience.",
+      "bullets": ["Industry-certified mentors", "Real consulting exposure", "Practical problem-solving guidance"],
+      "additionalText": ""
+    },
+    {
+      "title": "Job-Oriented Curriculum & Career Focus",
+      "description": "Our curriculum is continuously updated based on:",
+      "bullets": ["Salesforce product releases", "Market skill demand", "Hiring partner expectations"],
+      "additionalText": "Training is designed to deliver job readiness within a structured timeline, not just course completion."
+    }
+  ]
+}

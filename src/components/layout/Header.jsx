@@ -90,7 +90,6 @@ export default function Header() {
     async function fetchCarouselData() {
       try {
         const response = await getHeaderCarousel();
-        console.log('response', response);
         if (response?.status && response?.result && response.result.length > 0) {
           setCarouselSlides(response.result);
         } else {
