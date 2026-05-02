@@ -11,7 +11,7 @@ export default function WhyChooseUsHero({ hero }) {
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
       <motion.div
-        className="px-[16px] bg-no-repeat bg-bottom bg-cover pt-[120px] xl:pt-[280px] md:pt-[230px] md:pb-[80px] xl:pb-[100px]"
+        className="px-[16px] bg-no-repeat bg-cover lg:bg-bottom  bg-center pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[80px] xl:pb-[100px]"
         style={{ backgroundImage: `url('${bgImageUrl}')` }}
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
