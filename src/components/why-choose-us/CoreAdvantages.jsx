@@ -43,7 +43,7 @@ export default function CoreAdvantages({ coreAdvantages }) {
   ];
 
   return (
-    <section className="bg-white lg:pt-[80px] lg:pb-[40px] pb-[20px] px-[16px] overflow-hidden">
+    <section className="bg-white lg:pt-[80px] pt-[60px] lg:pb-[40px] pb-[20px] px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         {/* ── Section Title ── */}
         {title && (

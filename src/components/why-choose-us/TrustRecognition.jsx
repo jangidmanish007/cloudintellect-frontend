@@ -23,30 +23,28 @@ export default function TrustRecognition({ trustRecognition }) {
   });
 
   return (
-    <section className="w-full bg-[#F8FAFC] py-20 lg:py-20 md:py-16 sm:py-14">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-5 sm:px-4">
+    <section className="w-full bg-[#F8FAFC] lg:py-[80px] md:py-[60px] py-[50px]">
+      <div className="max-w-[1280px] mx-auto lg:px-6 md:px-6 px-4">
         {/* Title */}
         <motion.h2
-          className="text-center mb-14 lg:mb-14 md:mb-12 sm:mb-10 leading-normal"
+          className="text-center lg:mb-14 md:mb-10 mb-8 leading-normal"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <span className="text-black font-excon text-5xl lg:text-5xl md:text-4xl sm:text-[32px] font-light">
+          <span className="text-black font-excon lg:text-5xl md:text-[36px] text-[28px] font-light">
             {headingLight}
           </span>{' '}
-          <span className="text-black font-excon text-5xl lg:text-5xl md:text-4xl sm:text-[32px] font-bold">
-            {headingBold}
-          </span>
+          <span className="text-black font-excon lg:text-5xl md:text-[36px] text-[28px] font-bold">{headingBold}</span>
         </motion.h2>
 
         {/* Grid */}
-        <div className="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6 md:gap-5 sm:gap-5">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-6 md:gap-4 gap-4">
           {mergedItems.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-2xl p-8 md:p-6 sm:p-6 border border-[#0000001A] flex flex-col items-start gap-5"
+              className="bg-white rounded-2xl lg:p-8 md:p-5 p-5 border border-[#0000001A] flex flex-col items-start lg:gap-5 md:gap-4 gap-3"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -62,7 +60,7 @@ export default function TrustRecognition({ trustRecognition }) {
             >
               {/* Icon Wrapper */}
               <motion.div
-                className="w-14 h-14 min-w-[56px] flex items-center justify-center bg-[#e0f2fe] rounded-xl"
+                className="lg:w-14 lg:h-14 md:w-12 md:h-12 w-12 h-12 lg:min-w-[56px] md:min-w-[48px] min-w-[48px] flex items-center justify-center bg-[#e0f2fe] rounded-xl"
                 whileHover={{
                   scale: 1.1,
                   rotate: 5,
@@ -74,13 +72,13 @@ export default function TrustRecognition({ trustRecognition }) {
                   alt=""
                   width={28}
                   height={28}
-                  className="w-7 h-7 object-contain"
+                  className="lg:w-7 lg:h-7 md:w-6 md:h-6 w-6 h-6 object-contain"
                   aria-hidden="true"
                 />
               </motion.div>
 
               {/* Text */}
-              <p className="font-excon text-base md:text-base sm:text-[15px] leading-[1.5] text-black m-0">
+              <p className="font-excon lg:text-base md:text-[15px] text-[14px] lg:leading-[1.5] md:leading-[1.5] leading-[1.6] text-black m-0">
                 {item.text}
               </p>
             </motion.div>
