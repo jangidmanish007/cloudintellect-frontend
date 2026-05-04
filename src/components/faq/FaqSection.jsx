@@ -140,7 +140,7 @@ export default function FaqSection({ pageData }) {
 
                         {/* Question + answer */}
                         <div className="flex-1 min-w-0">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                          <div className={`grid grid-cols-1 ${isActive && "md:grid-cols-2"} gap-4 items-stretch`}>
                             <div className="flex flex-col h-[100%]">
                               <div>
                                 <h3 className="m-0 text-[16px] md:text-[24px] sm:text-[16px] font-bold text-[#000] leading-[1.15]">
