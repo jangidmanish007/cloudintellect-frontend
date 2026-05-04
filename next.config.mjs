@@ -44,7 +44,7 @@ const nextConfig = {
     GET_FAQ: "faq",
     GET_ALUMNI: "alumni-success",
     GET_ALUMNI_PROFILE: "alumni",
-
+    GET_CONTACT: "contact",
 
     GET_ABOUT_PAGE: "pages/slug/about",
     GET_WHY_CHOOSE_US_PAGE: "pages/slug/why-choose-us",

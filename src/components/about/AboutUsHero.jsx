@@ -73,7 +73,7 @@ function AboutUsHero({ hero }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="font-ranade text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 max-w-full lg:max-w-[540px]"
+                className="ranade-font text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 max-w-full lg:max-w-[540px]"
               >
                 {heroData.description}
               </motion.p>
@@ -129,7 +129,7 @@ function AboutUsHero({ hero }) {
                     <span className="font-excon text-[32px] sm:text-[40px] md:text-[48px] font-bold text-[#009FFF] leading-none">
                       {stat.value}
                     </span>
-                    <span className="font-ranade text-[10px] sm:text-xs font-medium text-white/70 tracking-wider uppercase">
+                    <span className="ranade-font text-[10px] sm:text-xs font-medium text-white/70 tracking-wider uppercase">
                       {stat.label}
                     </span>
                   </motion.div>
