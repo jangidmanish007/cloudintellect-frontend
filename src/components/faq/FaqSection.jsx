@@ -100,7 +100,7 @@ export default function FaqSection({ pageData }) {
             id="faq-page-heading"
             className="flex flex-wrap gap-1.5 m-0 mb-11 leading-[1.15]"
           >
-            <span className="text-[28px] lg:text-[1.8rem] sm:text-[1.45rem] font-bold text-[#1E1E1E]">
+            <span className="text-[28px] lg:text-[40px] font-bold text-[#1E1E1E]">
               {headingLight}
             </span>
           </h2>
