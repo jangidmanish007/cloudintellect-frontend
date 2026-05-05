@@ -22,6 +22,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Excon';
   src:
@@ -31,6 +32,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Excon';
   src:
@@ -178,10 +180,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Excon', sans-serif;
   }
+
   html {
     font-family: 'Excon', sans-serif;
   }
@@ -232,15 +236,19 @@
    that should look like a form control.
    ─────────────────────────────────────────────────────────────────────────── */
 .form-field {
-  height: 2.75rem; /* h-11 = 44px */
+  height: 2.75rem;
+  /* h-11 = 44px */
   min-height: 2.75rem;
   width: 100%;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
-  padding-inline: 0.75rem; /* px-3 */
-  font-size: 0.875rem; /* text-sm */
-  color: #374151; /* text-gray-700 */
+  padding-inline: 0.75rem;
+  /* px-3 */
+  font-size: 0.875rem;
+  /* text-sm */
+  color: #374151;
+  /* text-gray-700 */
   outline: none;
   transition:
     border-color 0.15s ease,
@@ -248,11 +256,12 @@
 }
 
 .form-field::placeholder {
-  color: #9ca3af; /* placeholder:text-gray-400 */
+  color: #9ca3af;
+  /* placeholder:text-gray-400 */
 }
 
 /* Radix SelectTrigger uses a data attribute instead of ::placeholder */
-.form-field[data-placeholder] > span,
+.form-field[data-placeholder]>span,
 .form-field[data-placeholder] {
   color: #9ca3af;
 }
@@ -266,6 +275,10 @@
 /* Font utility classes */
 .excon-font {
   font-family: 'Excon', sans-serif;
+}
+
+.plusjakarta-font {
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .ranade-font {
@@ -288,6 +301,7 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function FaqSection({ pageData }) {
@@ -86,17 +87,10 @@ export default function FaqSection({ pageData }) {
           }}
           aria-hidden="true"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(7,15,28,0.55) 0%, rgba(7,15,28,0.68) 100%)",
-          }}
-        />
       </section>
       {/* ── FAQ accordion section ── */}
       <section
-        className="py-20 px-[60px] lg:py-[60px] lg:px-6 sm:py-10 sm:px-4 min-h-[620px]"
+        className="py-20 px-[20px] lg:py-[60px] lg:px-6 sm:py-10 sm:px-4 min-h-[620px]"
         aria-labelledby="faq-page-heading"
       >
         <div className="max-w-[1200px] mx-auto">
@@ -106,7 +100,7 @@ export default function FaqSection({ pageData }) {
             id="faq-page-heading"
             className="flex flex-wrap gap-1.5 m-0 mb-11 leading-[1.15]"
           >
-            <span className="text-[48px] lg:text-[1.8rem] sm:text-[1.45rem] font-bold text-[#1E1E1E]">
+            <span className="text-[28px] lg:text-[40px] font-bold text-[#1E1E1E]">
               {headingLight}
             </span>
           </h2>
@@ -122,8 +116,8 @@ export default function FaqSection({ pageData }) {
                   const isActive = activeIndex === index;
                   const numberValue = (item.number || String(index + 1)).padStart(2, "0");
                   const rowImageUrl = item.image
-                    ? resolveImageUrl(item.image)
-                    : DEFAULT_FAQ_IMAGE;
+                    ? process.env.DYNAMIC_IMG_BASE_PATH + item.image
+                    : null;
 
                   return (
                     <div
@@ -132,7 +126,7 @@ export default function FaqSection({ pageData }) {
                       role="listitem"
                     >
                       <div
-                        className="flex items-center gap-[22px] md:gap-[14px] py-5 md:py-4 cursor-pointer md:flex-wrap"
+                        className={`flex items-center gap-[10px] md:gap-[30px] ${isActive ? 'py-5 md:py-10' : 'py-4 md:py-5'} cursor-pointer md:flex-wrap`}
                         onClick={() => setActiveIndex(index)}
                         onKeyDown={(e) => e.key === "Enter" && setActiveIndex(index)}
                         role="button"
@@ -140,44 +134,51 @@ export default function FaqSection({ pageData }) {
                         aria-expanded={isActive}
                       >
                         {/* Number */}
-                        <div className="w-[46px] md:w-[34px] shrink-0 text-[46px] md:text-[34px] leading-none font-normal text-[rgba(30,30,30,0.18)]">
+                        <div className="w-[34px] md:w-[50px] shrink-0 plusjakarta-font font-bold text-[30px] md:text-[50px] leading-none text-[#E9E9E9]">
                           {numberValue}
                         </div>
 
                         {/* Question + answer */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="m-0 text-[24px] md:text-[20px] sm:text-[16px] font-bold text-[#111] leading-[1.15]">
-                            {item.question}
-                          </h3>
-                          {isActive && (
-                            <p className="mt-2.5 sm:mt-2 text-[#4b5563] text-base sm:text-[14px] leading-[1.45] max-w-[560px] m-0">
-                              {item.answer}
-                            </p>
-                          )}
+                          <div className={`grid grid-cols-1 ${isActive && "md:grid-cols-2"} gap-4 items-stretch`}>
+                            <div className="flex flex-col h-[100%]">
+                              <div>
+                                <h3 className="m-0 text-[16px] md:text-[24px] sm:text-[16px] font-bold text-[#000] leading-[1.15]">
+                                  {item.question}
+                                </h3>
+                                {isActive && (<span className="inline-block bg-[#000000] h-[2px] w-[44px]"></span>)}
+                              </div>
+                              {isActive && (
+                                <div className="mt-2.5 sm:mt-2 ranade-font font-[100] text-[#212529] text-[14px] md:text-base leading-[1.45] max-w-[560px] m-0">
+                                  {item.answer}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex ">
+                              {isActive && (
+                                <div className="flex gap-2.5 shrink-0 md:w-full md:mt-2 md:order-5 h-[100%] w-full">
+                                  <img
+                                    decoding="async"
+                                    src={rowImageUrl}
+                                    alt=""
+                                    className="w-full md:w-[140px] md:w-[calc(50%-5px)] min-h-[100px] h-[100%] rounded-sm object-cover"
+                                  />
+                                  <img
+                                    decoding="async"
+                                    src={rowImageUrl}
+                                    alt=""
+                                    className="w-full md:w-[140px] md:w-[calc(50%-5px)] min-h-[100px] h-[100%] rounded-sm object-cover"
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
                         </div>
 
-                        {/* Images (active only) */}
-                        {isActive && (
-                          <div className="flex gap-2.5 shrink-0 md:w-full md:mt-2 md:order-5">
-                            <img
-                              decoding="async"
-                              src={rowImageUrl}
-                              alt=""
-                              className="w-[140px] h-[120px] md:w-[calc(50%-5px)] md:h-[100px] rounded-sm object-cover"
-                            />
-                            <img
-                              decoding="async"
-                              src={rowImageUrl}
-                              alt=""
-                              className="w-[140px] h-[120px] md:w-[calc(50%-5px)] md:h-[100px] rounded-sm object-cover"
-                            />
-                          </div>
-                        )}
-
-                        {/* Arrow */}
-                        <span className="w-[22px] shrink-0 text-[#111] text-[22px] sm:text-[18px] leading-none md:ml-auto">
-                          →
-                        </span>
+                        {!isActive && (<span className="w-[22px] shrink-0 text-[#111] text-[22px] sm:text-[18px] leading-none md:ml-auto">
+                          <ArrowRight size={16} />
+                        </span>)}
                       </div>
                     </div>
                   );

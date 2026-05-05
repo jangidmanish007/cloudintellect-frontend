@@ -18,7 +18,7 @@ export default function AboutBridging({ bridgingData }) {
           {/* Left Section */}
           <div className="flex flex-col">
             {bridgingData.intro && (
-              <p className="font-ranade text-base md:text-[18px] text-gray-700 leading-relaxed mb-[24px] max-w-[80%]">
+              <p className="ranade-font text-base md:text-[18px] text-gray-700 leading-relaxed mb-[24px] max-w-[80%]">
                 {bridgingData.intro}
               </p>
             )}
@@ -43,7 +43,7 @@ export default function AboutBridging({ bridgingData }) {
                   </div>
                 </div>
                 {bridgingData.visionText && (
-                  <p className="font-ranade text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="ranade-font text-sm md:text-base text-gray-700 leading-relaxed">
                     {bridgingData.visionText}
                   </p>
                 )}
@@ -116,7 +116,7 @@ export default function AboutBridging({ bridgingData }) {
 
               {/* Partner Description */}
               {bridgingData.partnerDesc && (
-                <p className="font-ranade text-sm md:text-base text-gray-300 leading-relaxed mb-6">
+                <p className="ranade-font text-sm md:text-base text-gray-300 leading-relaxed mb-6">
                   {bridgingData.partnerDesc}
                 </p>
               )}
@@ -141,7 +141,7 @@ export default function AboutBridging({ bridgingData }) {
                       </span>
                     )}
                     {bridgingData.guaranteeSub && (
-                      <span className="font-ranade text-xs md:text-sm text-gray-400">{bridgingData.guaranteeSub}</span>
+                      <span className="ranade-font text-xs md:text-sm text-gray-400">{bridgingData.guaranteeSub}</span>
                     )}
                   </div>
                 </div>
