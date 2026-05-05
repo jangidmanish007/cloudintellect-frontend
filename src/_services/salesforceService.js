@@ -4,3 +4,10 @@ import { serverFetch } from "@/_utils/ApiBase";
 export const getSalesforceDeveloperPageData = async () => {
   return serverFetch(process.env.GET_SALESFORCE_DEVELOPER_PAGE);
 };
+
+
+// Get salesforce-marketing-cloud page data
+export const getSalesforceMarketingPageData = async () => {
+  return serverFetch(process.env.GET_SALESFORCE_MARKETING_CLOUD_PAGE);
+};
+

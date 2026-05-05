@@ -1,5 +1,5 @@
+import { getSalesforceDeveloperPageData } from "@/_services/salesforceService";
 import SaleForceDeveloperMain from "../../components/sale-force-developer/SaleForceDeveloperMain";
-import { getSalesforceDeveloperPageData } from "@/_services/salesforceDeveloperService";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
@@ -26,7 +26,6 @@ export default async function SalesforceDeveloper() {
 
   return (
     <>
-      {console.log('salesforceDeveloperPageData', salesforceDeveloperPageData)}
       <SaleForceDeveloperMain salesforceDeveloperPageData={salesforceDeveloperPageData} />
     </>
   );
