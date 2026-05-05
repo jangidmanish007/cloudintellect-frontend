@@ -66,10 +66,6 @@ export default function ImpactSnapshot({ impactSnapshot }) {
               {index !== metrics.length - 1 && (
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-px border-l border-[#000000] lg:block md:hidden sm:hidden" />
               )}
-              {/* Tablet divider - only show between items in the same row (odd index items) */}
-              {/* {index % 2 === 0 && index !== metrics.length - 1 && (
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-px bg-[#000000]  md:block sm:hidden hidden" />
-              )} */}
             </motion.div>
           ))}
         </div>

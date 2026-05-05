@@ -44,6 +44,10 @@
 .main-nav-item:focus-within .main-nav-dropdown {
   display: block;
 }
+/* Force close dropdowns when navigating */
+.force-close-dropdowns .main-nav-dropdown {
+  display: none !important;
+}
 .main-nav-dropdown a {
   display: block;
   padding: 9px 16px;
@@ -83,6 +87,10 @@
 .login-wrapper:hover .login-dropdown,
 .login-wrapper:focus-within .login-dropdown {
   display: block;
+}
+/* Force close dropdowns when navigating */
+.force-close-dropdowns .login-dropdown {
+  display: none !important;
 }
 .login-dropdown a {
   display: block;
@@ -124,6 +132,10 @@
 .secondary-nav-item:hover .secondary-dropdown,
 .secondary-nav-item:focus-within .secondary-dropdown {
   display: block;
+}
+/* Force close dropdowns when navigating */
+.force-close-dropdowns .secondary-dropdown {
+  display: none !important;
 }
 .secondary-dropdown a {
   display: block;
