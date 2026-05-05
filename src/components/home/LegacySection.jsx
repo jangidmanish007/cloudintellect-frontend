@@ -129,7 +129,7 @@ export default function LegacySection({ legacy }) {
 
               {/* Content */}
               <div className="relative z-20 md:p-6 p-4 flex flex-col justify-between gap-3 h-full">
-                <div className="flex-1 max-w-[307px] ml-auto lg:mt-[60px] mt-[40px]">
+                <div className="flex-1 max-w-[307px] md:ml-auto md:mt-[60px] mt-[20px]">
                   <h3 className="excon-font text-white text-[18px] sm:text-[24px] font-bold leading-snug mb-2">
                     {card.title}
                   </h3>

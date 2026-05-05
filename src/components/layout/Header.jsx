@@ -1,11 +1,12 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Slider from 'react-slick';
 import { ChevronDown, Phone, User, Menu, X } from 'lucide-react';
 import { topBar, mainNav, loginButton, helpline, secondaryNav } from './navData';
 import { getHeaderCarousel } from '@/_services/homeService';
+import { usePathname } from 'next/navigation';
 
 // ─── Custom Social Media Icons (no lucide equivalent) ─────────────────────────
 // lucide-react has no Facebook, LinkedIn, YouTube, or Instagram icons.
@@ -50,6 +51,11 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileAccordion, setOpenMobileAccordion] = useState(null);
   const [carouselSlides, setCarouselSlides] = useState([]);
+  const [openSecondaryDropdown, setOpenSecondaryDropdown] = useState(null);
+  const [forceCloseDropdowns, setForceCloseDropdowns] = useState(false);
+  const secondaryNavRefs = useRef({});
+  const mainNavRefs = useRef({});
+  const pathname = usePathname();
 
   // Sync scroll state on mount — browser scroll restoration is async so we
   // poll a few frames to catch the restored scroll position after refresh.
@@ -152,6 +158,23 @@ export default function Header() {
     setOpenMobileAccordion((prev) => (prev === label ? null : label));
   };
 
+  const handleSecondaryDropdownClick = () => {
+    setOpenSecondaryDropdown(null);
+  };
+
+  // Close all dropdowns when route changes
+  useEffect(() => {
+    // Force close all dropdowns
+    setForceCloseDropdowns(true);
+
+    // Reset after a short delay to allow hover to work again
+    const timer = setTimeout(() => {
+      setForceCloseDropdowns(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   // react-slick settings for top-bar carousel
   const slickSettings = {
     dots: false,
@@ -167,7 +190,7 @@ export default function Header() {
   };
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'} ${forceCloseDropdowns ? 'force-close-dropdowns' : ''}`}
     >
       {/* ── Top Bar ── */}
       {carouselSlides && carouselSlides.length > 0 && (
@@ -267,7 +290,11 @@ export default function Header() {
             className={`hidden lg:flex items-center gap-10 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
           >
             {mainNav.map((item) => (
-              <li key={item.label} className="main-nav-item relative">
+              <li
+                key={item.label}
+                className="main-nav-item relative"
+                ref={(el) => (mainNavRefs.current[item.label] = el)}
+              >
                 <Link
                   href={item.href}
                   className={`transition hover:opacity-80 text-xs font-normal ${isScrolled ? 'hover:text-blue' : 'hover:text-white/80'}`}
@@ -351,7 +378,11 @@ export default function Header() {
         >
           {secondaryNav.map((item, idx) => (
             <div key={item.label} className="flex items-center justify-center relative text-center min-w-[100px]">
-              <div className="secondary-nav-item relative px-3 py-2">
+              <div
+                className="secondary-nav-item relative px-3 py-2"
+                onMouseEnter={() => item.children && setOpenSecondaryDropdown(item.label)}
+                onMouseLeave={() => setOpenSecondaryDropdown(null)}
+              >
                 {item.children ? (
                   <>
                     <button className={`flex items-center gap-1 transition hover:opacity-70`}>
@@ -361,7 +392,9 @@ export default function Header() {
                     <ul className="secondary-dropdown text-start">
                       {item.children.map((child) => (
                         <li key={child.label}>
-                          <Link href={child.href}>{child.label}</Link>
+                          <Link href={child.href} onClick={handleSecondaryDropdownClick}>
+                            {child.label}
+                          </Link>
                         </li>
                       ))}
                     </ul>

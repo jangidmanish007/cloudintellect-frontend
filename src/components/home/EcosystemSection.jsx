@@ -18,13 +18,10 @@ const hoverGlass = {
   rest: {
     scale: 1,
     y: 0,
-    boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
     transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
   hover: {
-    scale: 1.01,
     y: -2,
-    boxShadow: '0 16px 40px rgba(0,0,0,0.11)',
     transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -37,7 +34,6 @@ const hoverDark = {
     transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
   hover: {
-    scale: 1.01,
     y: -2,
     transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
