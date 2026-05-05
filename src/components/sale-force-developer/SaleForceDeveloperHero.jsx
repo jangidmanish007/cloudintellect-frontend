@@ -4,9 +4,23 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 
+// Static fallback data
+const STATIC_DATA = {
+  tag: 'SPECIALIZATION PROGRAM',
+  heading: 'Salesforce Developer',
+  headingAccent: 'Cloud',
+  description: 'Master the Salesforce ecosystem from basics to advanced development and deployment.',
+  descriptionEmphasis: '',
+  primaryButtonText: 'Explore Programs',
+  primaryButtonHref: '#programs',
+  secondaryButtonText: 'Download Brochure',
+  secondaryButtonHref: '#brochure',
+};
+
 export default function SaleForceDeveloperHero({ hero }) {
-  const heroData = hero || {};
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/home/permo-section-bg.png`;
+  // Use dynamic data if available, otherwise use static data
+  const heroData = hero || STATIC_DATA;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/saleforce/salesforce-baneer-bg.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">

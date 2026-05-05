@@ -26,6 +26,7 @@ export default async function SalesforceDeveloper() {
 
   return (
     <>
+      {console.log('salesforceDeveloperPageData', salesforceDeveloperPageData)}
       <SaleForceDeveloperMain salesforceDeveloperPageData={salesforceDeveloperPageData} />
     </>
   );
