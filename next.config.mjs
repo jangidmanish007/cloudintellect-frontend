@@ -50,6 +50,11 @@ const nextConfig = {
     GET_WHY_CHOOSE_US_PAGE: "pages/slug/why-choose-us",
     GET_SALESFORCE_DEVELOPER_PAGE: "pages/slug/salesforce-developer",
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
+    GET_GALLERY_PAGE: "pages/slug/gallery",
+
+    // ─── Gallery ──────────────────────────────────────────────────
+    GET_GALLERY_CATEGORIES: "gallery/categories",
+    GET_GALLERY_IMAGES: "gallery/images",
 
     // ─── Auth ─────────────────────────────────────────────────────
     ADMIN_LOGIN: "auth/login",

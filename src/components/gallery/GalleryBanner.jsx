@@ -2,25 +2,26 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Eye } from 'lucide-react';
 
 // Static fallback data
 const STATIC_DATA = {
-  tag: 'SPECIALIZATION PROGRAM',
-  heading: 'Salesforce Marketing',
-  headingAccent: 'Cloud',
-  description: 'Master automated marketing, customer journeys, and data-driven campaigns with our SFMC curriculum.',
+  tag: 'GLIMPSE OF OUR CAMPUS',
+  heading: 'Life at Cloud Intellect',
+  headingAccent: '',
+  description:
+    'A glimpse into our vibrant learning ecosystem. From intense classroom sessions to celebratory moments, see what makes our community special.',
   descriptionEmphasis: '',
   primaryButtonText: 'Explore Programs',
   primaryButtonHref: '#programs',
-  secondaryButtonText: 'Download Brochure',
-  secondaryButtonHref: '#brochure',
+  secondaryButtonText: 'View Placements',
+  secondaryButtonHref: '#placements',
 };
 
-export default function SalesforceMarketingHero({ hero }) {
+export default function GalleryBanner({ hero }) {
   // Use dynamic data if available, otherwise use static data
   const heroData = hero || STATIC_DATA;
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/saleforce/salesforce-marketing-baneer-bg.webp`;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/gallery/gallery-banner-bg.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
@@ -66,7 +67,7 @@ export default function SalesforceMarketingHero({ hero }) {
                   {heroData.heading && (
                     <>
                       {heroData.heading}
-                      <br />
+                      {heroData.headingAccent && <br />}
                     </>
                   )}
                   {heroData.headingAccent && <span className="text-[#0CA4EB]">{heroData.headingAccent}</span>}
@@ -105,11 +106,10 @@ export default function SalesforceMarketingHero({ hero }) {
                   )}
                   {heroData.secondaryButtonText && (
                     <Link
-                      href={heroData.secondaryButtonHref || '#brochure'}
+                      href={heroData.secondaryButtonHref || '#placements'}
                       className="btn-outline inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
                     >
                       {heroData.secondaryButtonText}
-                      <Download className="w-4 h-4" />
                     </Link>
                   )}
                 </motion.div>

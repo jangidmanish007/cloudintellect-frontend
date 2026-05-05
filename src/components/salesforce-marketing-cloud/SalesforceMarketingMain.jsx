@@ -10,7 +10,7 @@ export default function SalesforceMarketingMain({ salesforceMarketingCloudPageDa
     <>
       <SalesforceMarketingHero hero={content.hero} />
       <SaleforceMarketingTopics sfmcTopics={content.sfmcTopics} />
-      <SaleforceMarketingCareer />
+      <SaleforceMarketingCareer sfmcCareerOpportunities={content.sfmcCareerOpportunities} />
     </>
   );
 }
