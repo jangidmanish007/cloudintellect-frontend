@@ -212,7 +212,7 @@ export default function Header() {
                                 {slide.text}
                               </Link>
                             ) : (
-                              <span className="block truncate text-center  md:text-[10px] text-[8px]">
+                              <span className="block truncate text-center  md:text-[14px] text-[8px]">
                                 {slide.text}
                               </span>
                             )}

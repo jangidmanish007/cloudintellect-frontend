@@ -3,6 +3,17 @@ const nextConfig = {
   // basePath: '/cloudintellect-react',
   // assetPrefix: '/cloudintellect-react',
   // trailingSlash: false,
+
+  // API Proxy Configuration - Solves CORS issues
+  async rewrites() {
+    return [
+      {
+        source: '/api-proxy/:path*',
+        destination: 'https://cloudintellect.in/api/:path*',
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {

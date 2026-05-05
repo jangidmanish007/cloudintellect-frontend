@@ -1,4 +1,5 @@
-import { serverFetch, fetchAPI } from "@/_utils/ApiBase";
+import { serverFetch } from "@/_utils/ApiBase";
+import { clientApi } from "@/_utils/clientApi";
 
 // Get gallery page data (hero section, etc.)
 export const getGalleryPageData = async () => {
@@ -23,5 +24,5 @@ export const getGalleryImagesClient = async (categoryId = null) => {
   const endpoint = categoryId && categoryId !== 'all'
     ? `${process.env.GET_GALLERY_IMAGES}?category=${categoryId}`
     : process.env.GET_GALLERY_IMAGES;
-  return fetchAPI(endpoint);
+  return clientApi(endpoint, { method: 'GET' });
 };

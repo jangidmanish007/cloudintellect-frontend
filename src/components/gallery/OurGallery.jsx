@@ -95,7 +95,7 @@ const OurGallery = ({ categories = [], initialImages = [] }) => {
                 onClick={() => handleTabChange(tab.id)}
                 disabled={loading}
                 className={[
-                  'excon-font relative text-[14px] sm:text-[18px] font-bold rounded-[8px]',
+                  'excon-font relative text-[14px] sm:text-[18px] font-medium rounded-[8px]',
                   'px-[16px] lg:px-[22px] py-[10px] lg:py-[14px]',
                   'whitespace-nowrap cursor-pointer transition-colors duration shrink-0',
                   activeTab === tab.id ? 'text-white' : 'bg-white text-[#0f172a] hover:text-[#009FFF]',
