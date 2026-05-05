@@ -16,8 +16,9 @@ export async function serverFetch(path) {
     }
     return { status: false, result: null, message: json.message };
   } catch (err) {
-    console.error('[serverFetch] error:', err.message);
-    return { status: false, result: null, message: err.message };
+    // Only log to console, don't show error to user
+    console.log('Fetch error: API not working -', err.message);
+    return { status: false, result: null, message: 'Unable to fetch data' };
   }
 }
 
