@@ -25,13 +25,17 @@ export default function SaleForceDeveloperHero({ hero }) {
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
       <motion.div
-        className="px-[16px] bg-no-repeat bg-cover lg:bg-bottom bg-center pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]"
-        style={{ backgroundImage: `url('${bgImageUrl}')` }}
+        className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]"
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <div className="max-w-[1280px] mx-auto">
+        {/* Background Image with Opacity */}
+        <div
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[70%_top] lg:opacity-100 opacity-50"
+          style={{ backgroundImage: `url('${bgImageUrl}')` }}
+        />
+        <div className="relative z-10 max-w-[1280px] mx-auto">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-10">
             {/* Content Section */}
             <motion.div
