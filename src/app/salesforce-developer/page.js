@@ -9,7 +9,7 @@ export const metadata = {
   description: "Master Salesforce development with our comprehensive training program. Learn Apex, Lightning, and more.",
 };
 
-export default async function SalesforceDeveloper() {
+export default async function SalesforceDeveloperPage() {
   let salesforceDeveloperPageData = {
     content: {}
   };

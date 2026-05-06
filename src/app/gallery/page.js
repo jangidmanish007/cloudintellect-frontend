@@ -9,7 +9,7 @@ export const metadata = {
   description: "Browse through our gallery to see moments from our training sessions, events, and celebrations.",
 };
 
-export default async function Gallery() {
+export default async function GalleryPage() {
   let galleryPageData = {
     content: {}
   };

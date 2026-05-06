@@ -2,25 +2,45 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 // Static fallback data
 const STATIC_DATA = {
-  tag: 'SPECIALIZATION PROGRAM',
-  heading: 'Salesforce Marketing',
-  headingAccent: 'Cloud',
-  description: 'Master automated marketing, customer journeys, and data-driven campaigns with our SFMC curriculum.',
-  descriptionEmphasis: '',
-  primaryButtonText: 'Explore Programs',
-  primaryButtonHref: '#programs',
-  secondaryButtonText: 'Download Brochure',
-  secondaryButtonHref: '#brochure',
+  tag: 'LIVE SESSIONS',
+  headingLine1: 'Elevate Your Career',
+  headingLine2: 'and Empower Others',
+  description: 'Join Cloud Intellect for impactful education and accelerate your tech career in the Salesforce world.',
+  primaryButtonText: 'View Open Positions',
+  primaryButtonHref: '#open-positions',
+  secondaryButtonText: 'Apply Now',
+  secondaryButtonHref: '#apply',
 };
 
-export default function SalesforceMarketingHero({ hero }) {
+export default function CareerHero({ hero }) {
   // Use dynamic data if available, otherwise use static data
   const heroData = hero || STATIC_DATA;
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/saleforce/salesforce-marketing-baneer-bg.webp`;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/gallery/career-banner-bg.webp`;
+
+  const handleApplyClick = (e) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined') {
+      const event = new CustomEvent('career-openings-apply', {
+        detail: {
+          source: 'career-hero',
+          title:
+            heroData.headingLine1 && heroData.headingLine2
+              ? `${heroData.headingLine1} ${heroData.headingLine2}`
+              : 'General Application',
+          identifier: 'career-hero-apply',
+        },
+      });
+      window.dispatchEvent(event);
+    }
+    const target = document.getElementById('open-positions');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
@@ -32,9 +52,11 @@ export default function SalesforceMarketingHero({ hero }) {
       >
         {/* Background Image with Opacity */}
         <div
-          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[70%_top] lg:opacity-100 opacity-50"
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-[50%_top] lg:opacity-100 opacity-50"
           style={{ backgroundImage: `url('${bgImageUrl}')` }}
         />
+
+        {/* Content */}
         <div className="relative z-10 max-w-[1280px] mx-auto">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-10">
             {/* Content Section */}
@@ -60,20 +82,15 @@ export default function SalesforceMarketingHero({ hero }) {
               )}
 
               {/* Heading */}
-              {(heroData.heading || heroData.headingAccent) && (
+              {(heroData.headingLine1 || heroData.headingLine2) && (
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-excon text-[32px] sm:text-[42px] md:text-[48px] lg:text-[58px] leading-[1.1] sm:leading-[1.15] font-bold text-white"
                 >
-                  {heroData.heading && (
-                    <>
-                      {heroData.heading}
-                      <br />
-                    </>
-                  )}
-                  {heroData.headingAccent && <span className="text-[#0CA4EB]">{heroData.headingAccent}</span>}
+                  {heroData.headingLine1} {'  '}
+                  {heroData.headingLine2 && <span>{heroData.headingLine2}</span>}
                 </motion.h1>
               )}
 
@@ -85,8 +102,7 @@ export default function SalesforceMarketingHero({ hero }) {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="font-ranade text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90"
                 >
-                  {heroData.description}{' '}
-                  {heroData.descriptionEmphasis && <span className="font-medium">{heroData.descriptionEmphasis}</span>}
+                  {heroData.description}
                 </motion.p>
               )}
 
@@ -100,7 +116,7 @@ export default function SalesforceMarketingHero({ hero }) {
                 >
                   {heroData.primaryButtonText && (
                     <Link
-                      href={heroData.primaryButtonHref || '#programs'}
+                      href={heroData.primaryButtonHref || '#open-positions'}
                       className="btn-primary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
                     >
                       {heroData.primaryButtonText}
@@ -108,13 +124,13 @@ export default function SalesforceMarketingHero({ hero }) {
                     </Link>
                   )}
                   {heroData.secondaryButtonText && (
-                    <Link
-                      href={heroData.secondaryButtonHref || '#brochure'}
+                    <button
+                      onClick={handleApplyClick}
                       className="btn-outline inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
                     >
                       {heroData.secondaryButtonText}
-                      <Download className="w-4 h-4" />
-                    </Link>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   )}
                 </motion.div>
               )}

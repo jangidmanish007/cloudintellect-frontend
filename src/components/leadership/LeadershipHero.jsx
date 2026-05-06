@@ -6,10 +6,10 @@ import { ArrowRight, Download } from 'lucide-react';
 
 // Static fallback data
 const STATIC_DATA = {
-  tag: 'SPECIALIZATION PROGRAM',
-  heading: 'Salesforce Marketing',
-  headingAccent: 'Cloud',
-  description: 'Master automated marketing, customer journeys, and data-driven campaigns with our SFMC curriculum.',
+  tag: 'LEADERSHIP MESSAGE',
+  heading: 'Leadership at',
+  headingAccent: 'Cloud Intellect',
+  description: 'Vision-driven leadership backed by real industry experience.',
   descriptionEmphasis: '',
   primaryButtonText: 'Explore Programs',
   primaryButtonHref: '#programs',
@@ -17,7 +17,7 @@ const STATIC_DATA = {
   secondaryButtonHref: '#brochure',
 };
 
-export default function SalesforceMarketingHero({ hero }) {
+export default function LeadershipHero({ hero }) {
   // Use dynamic data if available, otherwise use static data
   const heroData = hero || STATIC_DATA;
   const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/saleforce/salesforce-marketing-baneer-bg.webp`;
@@ -67,13 +67,13 @@ export default function SalesforceMarketingHero({ hero }) {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-excon text-[32px] sm:text-[42px] md:text-[48px] lg:text-[58px] leading-[1.1] sm:leading-[1.15] font-bold text-white"
                 >
-                  {heroData.heading && (
-                    <>
-                      {heroData.heading}
-                      <br />
-                    </>
+                  {heroData.heading && <>{heroData.heading}</>}
+                  {heroData.headingAccent && (
+                    <span className="">
+                      {'  '}
+                      {heroData.headingAccent}
+                    </span>
                   )}
-                  {heroData.headingAccent && <span className="text-[#0CA4EB]">{heroData.headingAccent}</span>}
                 </motion.h1>
               )}
 

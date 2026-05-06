@@ -9,7 +9,7 @@ export const metadata = {
   description: "Become a Salesforce Marketing Cloud expert with our industry-leading training programs.",
 };
 
-export default async function SalesforceMarketingCloud() {
+export default async function SalesforceMarketingCloudPage() {
   let salesforceMarketingCloudPageData = {
     content: {}
   };

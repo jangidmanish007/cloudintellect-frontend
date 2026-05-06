@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-const GalleryModal = ({ isOpen, onClose, images, currentIndex, onNavigate }) => {
+export default function GalleryModal({ isOpen, onClose, images, currentIndex, onNavigate }) {
   const currentImage = images?.[currentIndex];
 
   const handlePrevious = React.useCallback(
@@ -55,7 +55,7 @@ const GalleryModal = ({ isOpen, onClose, images, currentIndex, onNavigate }) => 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
         showCloseButton={false}
-        className="!max-w-[95vw] !w-[60vw] max-h-[95vh] h-[95vh] p-0 bg-white backdrop-blur-xl border-none sm:!max-w-[95vw] sm:!w-[95vw] md:!max-w-[95vw] md:!w-[95vw] lg:!max-w-[70vw] lg:!w-[95vw]"
+        className="!max-w-[95vw] !w-[96vw] max-h-[95vh] h-[95vh] p-0 bg-white backdrop-blur-xl border-none sm:!max-w-[95vw] sm:!w-[95vw] md:!max-w-[95vw] md:!w-[95vw] lg:!max-w-[70vw] lg:!w-[95vw]"
       >
         <VisuallyHidden>
           <DialogTitle>{currentImage.title || `Gallery Image ${currentIndex + 1} of ${images.length}`}</DialogTitle>
@@ -140,8 +140,4 @@ const GalleryModal = ({ isOpen, onClose, images, currentIndex, onNavigate }) => 
       </DialogContent>
     </Dialog>
   );
-};
-
-GalleryModal.displayName = 'GalleryModal';
-
-export default GalleryModal;
+}
