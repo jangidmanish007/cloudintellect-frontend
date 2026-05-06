@@ -63,6 +63,10 @@ const nextConfig = {
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
     GET_GALLERY_PAGE: "pages/slug/gallery",
 
+    // ─── Placements ───────────────────────────────────────────────
+    GET_PLACEMENTS_PAGE: "pages/slug/placements",
+    GET_PLACEMENTS: "placements",
+
     // ─── Gallery ──────────────────────────────────────────────────
     GET_GALLERY_CATEGORIES: "gallery/categories",
     GET_GALLERY_IMAGES: "gallery/images",
