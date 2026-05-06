@@ -61,6 +61,7 @@ const nextConfig = {
     GET_WHY_CHOOSE_US_PAGE: "pages/slug/why-choose-us",
     GET_SALESFORCE_DEVELOPER_PAGE: "pages/slug/salesforce-developer",
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
+    GET_LEADERSHIP_PAGE: "pages/slug/leadership",
 
     // ─── Placements ───────────────────────────────────────────────
     GET_PLACEMENTS_PAGE: "pages/slug/placements",

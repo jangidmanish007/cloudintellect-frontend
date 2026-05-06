@@ -22,7 +22,6 @@ const DEFAULT_CARDS = [
 
 export default function CareerWhyWorkWithUs({ whyWork }) {
   const data = whyWork || {};
-  console.log('whyWork', whyWork);
   const headingLine1 = data.headingLine1 ?? 'Why Work With';
   const headingStrong = data.headingStrong ?? 'Cloud Intellect?';
   const cards = Array.isArray(data.cards) && data.cards.length > 0 ? data.cards : DEFAULT_CARDS;

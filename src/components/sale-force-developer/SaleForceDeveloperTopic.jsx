@@ -127,7 +127,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                   <div className="flex items-center justify-between mb-[24px]">
                     <motion.span
                       className="text-[16px] font-bold text-[#009FFF] tracking-wider uppercase"
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0.5, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.2 + idx * 0.1 }}
@@ -136,7 +136,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                     </motion.span>
                     <motion.div
                       className="lg:w-[64px] w-[48px] lg:h-[64px] h-[48px] bg-[#0CA4EB]/10 rounded-full flex items-center justify-center"
-                      initial={{ scale: 0, rotate: -90 }}
+                      initial={{ scale: 0, rotate: -30 }}
                       whileInView={{ scale: 1, rotate: 0 }}
                       viewport={{ once: true }}
                       transition={{

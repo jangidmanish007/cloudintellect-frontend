@@ -11,3 +11,9 @@ export const getSalesforceMarketingPageData = async () => {
   return serverFetch(process.env.GET_SALESFORCE_MARKETING_CLOUD_PAGE);
 };
 
+
+// Get leadership page data
+export const getLeadershipPageData = async () => {
+  return serverFetch(process.env.GET_LEADERSHIP_PAGE);
+};
+
