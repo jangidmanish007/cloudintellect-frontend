@@ -69,48 +69,57 @@ export default function LeadershipMessage({ leadershipEdge }) {
   } = data;
 
   return (
-    <section className="w-full bg-white lg:py-[80px] py-[64px] px-[16px]">
+    <section className="w-full bg-white lg:py-[80px] md:py-[64px] py-[40px] px-[16px]">
       <div className="max-w-[1280px] mx-auto">
-        <div className="lg:flex justify-between gap-[24px]">
+        <div className="flex flex-col lg:flex-row justify-between gap-[32px] md:gap-[40px] lg:gap-[24px]">
           {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col gap-6 w-full max-w-[846px]"
+            className="flex flex-col gap-5 sm:gap-6 w-full lg:max-w-[846px]"
           >
             {/* Label */}
             <div className="inline-flex items-center gap-2 w-fit">
               <span className="w-2 h-2 bg-[#0CA4EB] rounded-full" aria-hidden="true" />
-              <span className="text-[#0CA4EB] text-xs font-semibold tracking-wider uppercase">{label}</span>
+              <span className="text-[#0CA4EB] text-[10px] sm:text-xs font-semibold tracking-wider uppercase">
+                {label}
+              </span>
             </div>
 
             {/* Quote */}
-            <blockquote className="text-[28px] sm:text-[34px]   font-bold text-[#0B1C33] leading-tight">
+            <blockquote className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[34px] font-bold text-[#0B1C33] leading-tight">
               &ldquo;
               {quote}
               &rdquo;
             </blockquote>
 
             {/* Paragraphs */}
-            <div className="flex flex-col gap-4">
-              <p className="text-[16px] font-bold  font-ranade text-dark"> {quoteMessage}</p>
+            <div className="flex flex-col gap-3.5 sm:gap-4">
+              <p className="text-[15px] sm:text-[16px] font-bold font-ranade text-dark leading-relaxed">
+                {' '}
+                {quoteMessage}
+              </p>
               {paras.map((para, index) => (
-                <p key={index} className="text-base md:text-lg text-gray-700 leading-relaxed">
+                <p key={index} className="text-[15px] sm:text-base md:text-lg text-gray-700 leading-relaxed">
                   {para}
                 </p>
               ))}
             </div>
 
             {/* Achievements */}
-            <div className="mt-4 bg-[#0B1C33] p-[24px] rounded-[14px]">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">{achievementsTitle}</h3>
-              <ul className="flex flex-col gap-3">
+            <div className="mt-3 sm:mt-4 bg-[#0B1C33] p-[20px] sm:p-[24px] md:p-[28px] lg:p-[24px] rounded-[14px]">
+              <h3 className="text-[18px] sm:text-xl md:text-2xl font-bold text-white mb-3.5 sm:mb-4">
+                {achievementsTitle}
+              </h3>
+              <ul className="flex flex-col gap-2.5 sm:gap-3">
                 {achievements.map((achievement, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                  <li key={index} className="flex items-start gap-2.5 sm:gap-3">
                     <CheckIcon />
-                    <span className="text-base text-white leading-relaxed flex-1">{achievement}</span>
+                    <span className="text-[14px] sm:text-[15px] md:text-base text-white leading-relaxed flex-1">
+                      {achievement}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -123,24 +132,26 @@ export default function LeadershipMessage({ leadershipEdge }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex w-full max-w-[410px]"
+            className="flex w-full lg:max-w-[410px] justify-center lg:justify-start"
           >
             <div className="w-full max-w-[480px]">
-              <div className=" sticky top-[140px] bg-[#0B1C33]  rounded-2xl overflow-hidden border border-gray-100">
+              <div className="lg:sticky lg:top-[140px] bg-[#0B1C33] rounded-2xl overflow-hidden border border-gray-100">
                 {/* Profile Image */}
                 <div
-                  className="relative w-full h-[260px] sm:h-[280px] bg-cover bg-center-top bg-no-repeat"
+                  className="relative w-full h-[240px] sm:h-[260px] md:h-[280px] bg-cover bg-center-top bg-no-repeat"
                   style={{ backgroundImage: `url('${profileImage}')` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C33]/90 via-[#0B1C33]/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-[24px] font-bold text-white mb-1">{profileName}</h3>
-                    <p className="text-[14px] text-[#009FFF]">{profileTitle}</p>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                    <h3 className="text-[20px] sm:text-[22px] md:text-[24px] font-bold text-white mb-1">
+                      {profileName}
+                    </h3>
+                    <p className="text-[13px] sm:text-[14px] text-[#009FFF]">{profileTitle}</p>
                   </div>
                 </div>
 
                 {/* Profile Details */}
-                <div className="p-[24px] flex flex-col gap-[24px]">
+                <div className="p-[20px] sm:p-[24px] flex flex-col gap-[20px] sm:gap-[24px]">
                   {/* Experience Block */}
                   <div className="flex items-start">
                     <Image
@@ -148,12 +159,13 @@ export default function LeadershipMessage({ leadershipEdge }) {
                       width={64}
                       height={64}
                       alt="check-icon"
+                      className="w-[56px] h-[56px] sm:w-[64px] sm:h-[64px]"
                     />
                     <div className="flex-1 ml-[10px]">
                       <div className="text-[8px] font-semibold text-[#FFFFFFBF] uppercase tracking-wider mb-1">
                         EXPERIENCE
                       </div>
-                      <div className="text-lg font-bold text-[#FFFFFF] mb-1">{experienceValue}</div>
+                      <div className="text-[16px] sm:text-lg font-bold text-[#FFFFFF] mb-1">{experienceValue}</div>
                       <div className="text-[10px] text-[#FFFFFFBF]">{experienceDetail}</div>
                     </div>
                   </div>
@@ -164,12 +176,13 @@ export default function LeadershipMessage({ leadershipEdge }) {
                       width={64}
                       height={64}
                       alt="check-icon"
+                      className="w-[56px] h-[56px] sm:w-[64px] sm:h-[64px]"
                     />
                     <div className="flex-1 ml-[10px]">
                       <div className="text-[8px] font-semibold text-[#FFFFFFBF] uppercase tracking-wider mb-1">
                         CREDENTIALS
                       </div>
-                      <div className="text-lg font-bold text-[#FFFFFF] mb-1">{credentialsValue}</div>
+                      <div className="text-[16px] sm:text-lg font-bold text-[#FFFFFF] mb-1">{credentialsValue}</div>
                       <div className="text-[10px] text-[#FFFFFFBF]">{credentialsDetail}</div>
                     </div>
                   </div>

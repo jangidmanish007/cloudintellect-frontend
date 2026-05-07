@@ -1,7 +1,9 @@
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const NAME_REGEX = /^[a-zA-Z ]+$/;
+const FULL_NAME_REGEX = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/; // Full name with proper spacing
 const MOBILE_REGEX = /^\d*[.]?\d*$/;
+const INDIAN_PHONE_REGEX = /^[6-9][0-9]{9}$/; // Indian phone number starting with 6-9 and 10 digits
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 const URL_REGEX = /^(ftp|http|https):\/\/[^ "]+$/;
 const MAP_LINK =
@@ -34,6 +36,16 @@ export function validCharacter(character) {
 // User name regex
 export function validName(name) {
   return NAME_REGEX.test(name);
+}
+
+// Full name validation (allows single or multiple words with proper spacing)
+export function validFullName(fullName) {
+  return FULL_NAME_REGEX.test(fullName);
+}
+
+// Indian phone number validation (10 digits starting with 6-9)
+export function validIndianPhone(phone) {
+  return INDIAN_PHONE_REGEX.test(phone);
 }
 
 // User email regex
@@ -83,3 +95,18 @@ export function isValidPasswordNew(password) {
   }
   return null;
 }
+
+// Export regex constants for use in validation schemas
+export const REGEX_PATTERNS = {
+  EMAIL: EMAIL_REGEX,
+  NAME: NAME_REGEX,
+  FULL_NAME: FULL_NAME_REGEX,
+  MOBILE: MOBILE_REGEX,
+  INDIAN_PHONE: INDIAN_PHONE_REGEX,
+  PASSWORD: PASSWORD_REGEX,
+  URL: URL_REGEX,
+  MAP_LINK: MAP_LINK,
+  CHARACTER: CHARACTER,
+  DECIMAL_NUMBER: DECIMALNUMBER,
+  EXPERIENCE: EXP_REGEX,
+};

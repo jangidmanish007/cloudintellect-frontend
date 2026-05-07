@@ -17,3 +17,9 @@ export const getLeadershipPageData = async () => {
   return serverFetch(process.env.GET_LEADERSHIP_PAGE);
 };
 
+
+// Get about-cloudintellect page data
+export const getAboutCloudIntellectPageData = async () => {
+  return serverFetch(process.env.GET_ABOUT_CLOUDINTELLECT_PAGE);
+};
+
