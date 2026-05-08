@@ -12,6 +12,12 @@ export const getSalesforceMarketingPageData = async () => {
 };
 
 
+// Get sfmc-sfdc page data
+export const getSfmcSfdcPageData = async () => {
+  return serverFetch(process.env.GET_SFMC_SFDC_PAGE);
+};
+
+
 // Get leadership page data
 export const getLeadershipPageData = async () => {
   return serverFetch(process.env.GET_LEADERSHIP_PAGE);
