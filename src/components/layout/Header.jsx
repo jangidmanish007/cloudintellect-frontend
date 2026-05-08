@@ -6,7 +6,8 @@ import Slider from 'react-slick';
 import { ChevronDown, Phone, User, Menu, X } from 'lucide-react';
 import { topBar, mainNav, loginButton, helpline, secondaryNav } from './navData';
 import { getHeaderCarousel } from '@/_services/homeService';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { handleHashNavigation } from '@/utils/scrollToSection';
 
 // ─── Custom Social Media Icons (no lucide equivalent) ─────────────────────────
 // lucide-react has no Facebook, LinkedIn, YouTube, or Instagram icons.
@@ -51,11 +52,10 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileAccordion, setOpenMobileAccordion] = useState(null);
   const [carouselSlides, setCarouselSlides] = useState([]);
-  const [openSecondaryDropdown, setOpenSecondaryDropdown] = useState(null);
   const [forceCloseDropdowns, setForceCloseDropdowns] = useState(false);
-  const secondaryNavRefs = useRef({});
   const mainNavRefs = useRef({});
   const pathname = usePathname();
+  const router = useRouter();
 
   // Sync scroll state on mount — browser scroll restoration is async so we
   // poll a few frames to catch the restored scroll position after refresh.
@@ -89,7 +89,7 @@ export default function Header() {
       clearTimeout(t3);
       window.removeEventListener('pageshow', syncScroll);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // Fetch top-bar carousel slides from API on mount
   useEffect(() => {
@@ -158,22 +158,51 @@ export default function Header() {
     setOpenMobileAccordion((prev) => (prev === label ? null : label));
   };
 
-  const handleSecondaryDropdownClick = () => {
-    setOpenSecondaryDropdown(null);
-  };
-
   // Close all dropdowns when route changes
   useEffect(() => {
-    // Force close all dropdowns
-    setForceCloseDropdowns(true);
-
-    // Reset after a short delay to allow hover to work again
     const timer = setTimeout(() => {
-      setForceCloseDropdowns(false);
-    }, 100);
-
+      setForceCloseDropdowns(true);
+      setTimeout(() => setForceCloseDropdowns(false), 100);
+    }, 0);
     return () => clearTimeout(timer);
   }, [pathname]);
+
+  // Handle hash navigation on mount and when hash changes
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      handleHashNavigation(hash);
+    }
+  }, [pathname]);
+
+  // Handle navigation link clicks with hash
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+
+    const url = new URL(href, window.location.origin);
+    const hash = url.hash;
+    const path = url.pathname;
+
+    // Close mobile menu if open
+    setIsMobileMenuOpen(false);
+
+    if (hash) {
+      // If we're on the home page, just scroll
+      if (pathname === '/' && path === '/') {
+        handleHashNavigation(hash);
+      } else {
+        // Navigate to home page first, then scroll
+        router.push('/');
+        // Wait for navigation to complete before scrolling
+        setTimeout(() => {
+          handleHashNavigation(hash);
+        }, 300);
+      }
+    } else {
+      // Regular navigation without hash
+      router.push(href);
+    }
+  };
 
   // react-slick settings for top-bar carousel
   const slickSettings = {
@@ -295,12 +324,13 @@ export default function Header() {
                 className="main-nav-item relative"
                 ref={(el) => (mainNavRefs.current[item.label] = el)}
               >
-                <Link
+                <a
                   href={item.href}
-                  className={`transition hover:opacity-80 text-xs font-normal ${isScrolled ? 'hover:text-blue' : 'hover:text-white/80'}`}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`transition hover:opacity-80 text-xs font-normal cursor-pointer ${isScrolled ? 'hover:text-blue' : 'hover:text-white/80'}`}
                 >
                   {item.label}
-                </Link>
+                </a>
                 {item.children && (
                   <ul className="main-nav-dropdown">
                     {item.children.map((child) => (
@@ -378,11 +408,7 @@ export default function Header() {
         >
           {secondaryNav.map((item, idx) => (
             <div key={item.label} className="flex items-center justify-center relative text-center min-w-[100px]">
-              <div
-                className="secondary-nav-item relative px-3 py-2"
-                onMouseEnter={() => item.children && setOpenSecondaryDropdown(item.label)}
-                onMouseLeave={() => setOpenSecondaryDropdown(null)}
-              >
+              <div className="secondary-nav-item relative px-3 py-2">
                 {item.children ? (
                   <>
                     <button className={`flex items-center gap-1 transition hover:opacity-70`}>
@@ -392,9 +418,7 @@ export default function Header() {
                     <ul className="secondary-dropdown text-start">
                       {item.children.map((child) => (
                         <li key={child.label}>
-                          <Link href={child.href} onClick={handleSecondaryDropdownClick}>
-                            {child.label}
-                          </Link>
+                          <Link href={child.href}>{child.label}</Link>
                         </li>
                       ))}
                     </ul>
@@ -484,13 +508,13 @@ export default function Header() {
                         </div>
                       </>
                     ) : (
-                      <Link
+                      <a
                         href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+                        onClick={(e) => handleNavClick(e, item.href)}
+                        className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded cursor-pointer"
                       >
                         {item.label}
-                      </Link>
+                      </a>
                     )}
                   </li>
                 ))}
