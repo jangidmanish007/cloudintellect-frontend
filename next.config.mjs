@@ -62,6 +62,16 @@ const nextConfig = {
     GET_SALESFORCE_DEVELOPER_PAGE: "pages/slug/salesforce-developer",
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
     GET_LEADERSHIP_PAGE: "pages/slug/leadership",
+    GET_ABOUT_CLOUDINTELLECT_PAGE: "pages/slug/about-cloudintellect",
+
+    // ─── Webinars ─────────────────────────────────────────────────
+    GET_WEBINARS_PAGE: "pages/slug/webinars",
+    GET_WEBINAR_BATCHES: "batches",
+    GET_WEBINAR_TOPICS: "webinars/topics",
+    GET_WEBINAR_WHO_SHOULD_ATTEND: "webinars/who-should-attend",
+
+    // ─── Form Submissions ─────────────────────────────────────────
+    CONTACT_FORM_SUBMIT: "contact/submit",
 
     // ─── Placements ───────────────────────────────────────────────
     GET_PLACEMENTS_PAGE: "pages/slug/placements",

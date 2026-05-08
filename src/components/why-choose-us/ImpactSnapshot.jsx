@@ -4,18 +4,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import impactSnapshotData from './static-data/impactSnapshot.json';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ImpactSnapshot({ impactSnapshot }) {
   // Use dynamic content if available, otherwise fallback to static JSON
   const data = impactSnapshot || impactSnapshotData;
-  const headingLight = data.headingLight || impactSnapshotData.headingLight;
-  const headingBold = data.headingBold || impactSnapshotData.headingBold;
-  const metrics = Array.isArray(data.metrics) && data.metrics.length > 0 ? data.metrics : impactSnapshotData.metrics;
-  const tagline = data.tagline || impactSnapshotData.tagline;
-  const ctaHeading = data.ctaHeading || impactSnapshotData.ctaHeading;
-  const ctaDescription = data.ctaDescription || impactSnapshotData.ctaDescription;
-  const ctaText = data.ctaText || impactSnapshotData.ctaText;
-  const ctaHref = data.ctaHref || impactSnapshotData.ctaHref;
+  const metrics =
+    Array.isArray(data?.metrics) && data?.metrics.length > 0 ? data?.metrics : impactSnapshotData?.metrics;
 
   return (
     <section className="w-full bg-white py-[40px] lg:py-20 md:py-16 sm:py-14">
@@ -29,8 +24,8 @@ export default function ImpactSnapshot({ impactSnapshot }) {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          {headingLight}
-          <span className="ml-1 font-bold">{headingBold}</span>
+          {data?.headingLight || impactSnapshotData?.headingLight}
+          <span className="ml-1 font-bold">{data?.headingBold || impactSnapshotData?.headingBold}</span>
         </motion.h2>
 
         {/* Metrics Grid */}
@@ -90,7 +85,7 @@ export default function ImpactSnapshot({ impactSnapshot }) {
               className="w-2 h-2 md:w-1.5 md:h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-[#009FFF] shrink-0"
               aria-hidden="true"
             />
-            <span>{tagline}</span>
+            <span>{data?.tagline || impactSnapshotData?.tagline}</span>
           </motion.div>
 
           {/* CTA Heading */}
@@ -101,7 +96,7 @@ export default function ImpactSnapshot({ impactSnapshot }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {ctaHeading}
+            {data?.ctaHeading || impactSnapshotData?.ctaHeading}
           </motion.h3>
 
           {/* CTA Description */}
@@ -112,26 +107,17 @@ export default function ImpactSnapshot({ impactSnapshot }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            {ctaDescription}
+            {data?.ctaDescription || impactSnapshotData?.ctaDescription}
           </motion.p>
 
           {/* CTA Button */}
-          <motion.a
-            href={ctaHref}
+          <Link
+            href={data?.ctaHref || impactSnapshotData?.ctaHref}
             className="inline-flex items-center gap-2 px-8 py-[14px] md:px-7 md:py-3 sm:px-6 sm:py-3 bg-[#009FFF] text-white rounded md:rounded sm:rounded font-excon text-sm md:text-sm sm:text-[13px] font-medium no-underline transition-all duration-200 hover:bg-[#008ae6] hover:-translate-y-0.5"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
-            whileTap={{ scale: 0.98 }}
           >
-            {ctaText}
+            {data?.ctaText || impactSnapshotData?.ctaText}
             <ArrowRight width={16} height={16} className="md:w-[15px] md:h-[15px] sm:w-[14px] sm:h-[14px]" />
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
     </section>

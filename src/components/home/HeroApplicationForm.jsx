@@ -1,37 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import { submitHeroApplication } from '@/_services/homeService';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
-// ── Zod schema ────────────────────────────────────────────────────────────────
-const schema = z.object({
-  name: z
-    .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(60, 'Name is too long')
-    .regex(/^[a-zA-Z\s]+$/, 'Name can only contain letters'),
-  email: z.string().email('Enter a valid email address'),
-  phone: z.string().regex(/^[6-9]\d{9}$/, 'Enter a valid 10-digit Indian mobile number'),
-  dateOfBirth: z.date({ required_error: 'Please select your date of birth' }),
-  city: z.string().min(2, 'City must be at least 2 characters').max(50, 'City is too long'),
-  product: z.string().min(1, 'Please select a course'),
-});
+import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
-// Base styles live in globals.css as `.form-field`.
-// triggerCls is only needed for Radix SelectTrigger / DOB button which require
-// the class string passed as a prop — everything else just uses className="form-field".
-const triggerCls = 'form-field flex items-center justify-between';
+const triggerCls = 'form-field flex items-center justify-between outline-0';
 
 function FieldError({ message }) {
   if (!message) return null;
@@ -40,47 +20,220 @@ function FieldError({ message }) {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function HeroApplicationForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    dateOfBirth: undefined,
+    city: '',
+    product: '',
+  });
+
   const [submitStatus, setSubmitStatus] = useState(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    dateOfBirth: '',
+    city: '',
+    product: '',
+  });
+  const [buttonClicked, setButtonClicked] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
+  // Real-time validation when buttonClicked is true
+  useEffect(() => {
+    if (buttonClicked) {
+      formValidation();
+    }
+  }, [
+    formData.name,
+    formData.email,
+    formData.phone,
+    formData.dateOfBirth,
+    formData.city,
+    formData.product,
+    buttonClicked,
+  ]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prev) => ({
+      ...prev,
+      dateOfBirth: date,
+    }));
+    setCalendarOpen(false);
+  };
+
+  const formValidation = () => {
+    let nameMsg = '';
+    let emailMsg = '';
+    let phoneMsg = '';
+    let dateOfBirthMsg = '';
+    let cityMsg = '';
+    let productMsg = '';
+    let isValid = false;
+
+    // Name validation
+    if (!formData.name.trim()) {
+      nameMsg = 'Name is required';
+    } else if (formData.name.length < 2) {
+      nameMsg = 'Name must be at least 2 characters';
+    } else if (formData.name.length > 60) {
+      nameMsg = 'Name is too long';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+      nameMsg = 'Name can only contain letters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      emailMsg = 'Email is required';
+    } else if (!validEmail(formData.email)) {
+      emailMsg = 'Enter a valid email address';
+    }
+
+    // Phone validation
+    if (!formData.phone.trim()) {
+      phoneMsg = 'Phone number is required';
+    } else if (!/^[6-9]\d{9}$/.test(formData.phone)) {
+      phoneMsg = 'Enter a valid 10-digit Indian mobile number';
+    }
+
+    // Date of Birth validation
+    if (!formData.dateOfBirth) {
+      dateOfBirthMsg = 'Please select your date of birth';
+    }
+
+    // City validation
+    if (!formData.city.trim()) {
+      cityMsg = 'City is required';
+    } else if (formData.city.length < 2) {
+      cityMsg = 'City must be at least 2 characters';
+    } else if (formData.city.length > 50) {
+      cityMsg = 'City is too long';
+    }
+
+    // Product validation
+    if (!formData.product) {
+      productMsg = 'Please select a course';
+    }
+
+    if (!nameMsg && !emailMsg && !phoneMsg && !dateOfBirthMsg && !cityMsg && !productMsg) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      setError(false);
+      setErrorMessage({
+        name: '',
+        email: '',
+        phone: '',
+        dateOfBirth: '',
+        city: '',
+        product: '',
+      });
+      return true;
+    } else {
+      setError(true);
+      setErrorMessage({
+        name: nameMsg,
+        email: emailMsg,
+        phone: phoneMsg,
+        dateOfBirth: dateOfBirthMsg,
+        city: cityMsg,
+        product: productMsg,
+      });
+      return false;
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    // Set button clicked to true to enable validation
+    if (!buttonClicked) {
+      setButtonClicked(true);
+    }
+
+    // Validate form
+    if (!formValidation()) {
+      return;
+    }
+
+    setSubmitStatus(null);
+    setIsSubmitting(true);
+
+    try {
+      const params = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        dateOfBirth: format(formData.dateOfBirth, 'yyyy-MM-dd'),
+        city: formData.city.trim(),
+        product: formData.product,
+      };
+
+      // Use the API base URL from environment
+      const apiUrl = `${process.env.API_BASE_URL}${process.env.HERO_APPLICATION_SUBMIT}`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'Failed to submit application. Please try again.');
+      }
+
+      resetForm();
+      setSubmitStatus('success');
+    } catch (err) {
+      setSubmitStatus(err.message || 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({
       name: '',
       email: '',
       phone: '',
       dateOfBirth: undefined,
       city: '',
       product: '',
-    },
-  });
-
-  const onSubmit = async (data) => {
+    });
+    setError(false);
+    setErrorMessage({
+      name: '',
+      email: '',
+      phone: '',
+      dateOfBirth: '',
+      city: '',
+      product: '',
+    });
+    setButtonClicked(false);
     setSubmitStatus(null);
-    try {
-      const response = await submitHeroApplication({
-        name: data.name.trim(),
-        email: data.email.trim(),
-        phone: data.phone.trim(),
-        dateOfBirth: format(data.dateOfBirth, 'yyyy-MM-dd'),
-        city: data.city.trim(),
-        product: data.product,
-      });
-      if (response?.status) {
-        reset();
-        setSubmitStatus('success');
-      } else {
-        setSubmitStatus(response?.message || 'error');
-      }
-    } catch (err) {
-      setSubmitStatus(err.message || 'error');
-    }
   };
 
   return (
@@ -94,27 +247,31 @@ export default function HeroApplicationForm() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-3 mt-4">
+      <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3 mt-4">
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-2 gap-2">
           <div>
             <Input
-              {...register('name')}
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               placeholder="Student Name"
               className="form-field"
-              aria-invalid={!!errors.name}
+              aria-invalid={!!errorMessage.name}
             />
-            <FieldError message={errors.name?.message} />
+            <FieldError message={errorMessage.name} />
           </div>
           <div>
             <Input
-              {...register('email')}
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               type="email"
               placeholder="E Mail"
               className="form-field"
-              aria-invalid={!!errors.email}
+              aria-invalid={!!errorMessage.email}
             />
-            <FieldError message={errors.email?.message} />
+            <FieldError message={errorMessage.email} />
           </div>
         </div>
 
@@ -125,97 +282,90 @@ export default function HeroApplicationForm() {
               +91
             </span>
             <input
-              {...register('phone')}
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
               type="tel"
               placeholder="Student Mobile Number"
               maxLength={10}
               className="flex-1 px-3 text-sm text-gray-700 placeholder:text-gray-400 outline-none bg-transparent"
-              aria-invalid={!!errors.phone}
+              aria-invalid={!!errorMessage.phone}
             />
           </div>
-          <FieldError message={errors.phone?.message} />
+          <FieldError message={errorMessage.phone} />
         </div>
 
         {/* Row 3: DOB date picker + City */}
         <div className="grid grid-cols-2 gap-2">
           {/* Date picker */}
           <div>
-            <Controller
-              name="dateOfBirth"
-              control={control}
-              render={({ field }) => (
-                <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
-                  <PopoverTrigger asChild>
-                    <button
-                      type="button"
-                      className={cn(
-                        triggerCls,
-                        'flex items-center justify-between gap-2',
-                        !field.value ? 'text-gray-400' : 'text-gray-700',
-                      )}
-                    >
-                      <span className="truncate text-sm">
-                        {field.value ? format(field.value, 'dd MMM yyyy') : 'Select DOB'}
-                      </span>
-                      <CalendarIcon className="size-4 shrink-0 text-gray-400" />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={(date) => {
-                        field.onChange(date);
-                        setCalendarOpen(false);
-                      }}
-                      captionLayout="dropdown"
-                      defaultMonth={new Date(2000, 0)}
-                      startMonth={new Date(1950, 0)}
-                      endMonth={new Date(new Date().getFullYear() - 5, 11)}
-                      disabled={(date) => date > new Date()}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              )}
-            />
-            <FieldError message={errors.dateOfBirth?.message} />
+            <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  className={cn(
+                    triggerCls,
+                    'flex items-center justify-between gap-2',
+                    !formData.dateOfBirth ? 'text-gray-400' : 'text-gray-700',
+                  )}
+                >
+                  <span className="truncate text-sm">
+                    {formData.dateOfBirth ? format(formData.dateOfBirth, 'dd MMM yyyy') : 'Select DOB'}
+                  </span>
+                  <CalendarIcon className="size-4 shrink-0 text-gray-400" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={formData.dateOfBirth}
+                  onSelect={handleDateChange}
+                  captionLayout="dropdown"
+                  defaultMonth={new Date(2000, 0)}
+                  startMonth={new Date(1950, 0)}
+                  endMonth={new Date(new Date().getFullYear() - 5, 11)}
+                  disabled={(date) => date > new Date()}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+            <FieldError message={errorMessage.dateOfBirth} />
           </div>
 
           {/* City */}
           <div>
             <Input
-              {...register('city')}
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
               placeholder="Student City"
-              className="form-field"
-              aria-invalid={!!errors.city}
+              className="form-field outline-0"
+              aria-invalid={!!errorMessage.city}
             />
-            <FieldError message={errors.city?.message} />
+            <FieldError message={errorMessage.city} />
           </div>
         </div>
 
         {/* Row 4: Course */}
         <div>
-          <Controller
-            name="product"
-            control={control}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value} modal={false}>
-                <SelectTrigger className={triggerCls} aria-invalid={!!errors.product}>
-                  <SelectValue placeholder="Select Course" />
-                </SelectTrigger>
-                <SelectContent position="popper" sideOffset={2} className={'rounded-xs'}>
-                  <SelectItem value="SFDC" className={'hover:rounded-none'}>
-                    SFDC — Salesforce Developer / Admin
-                  </SelectItem>
-                  <SelectItem value="SFMC" className={'hover:rounded-none'}>
-                    SFMC — Salesforce Marketing Cloud
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-          />
-          <FieldError message={errors.product?.message} />
+          <Select
+            onValueChange={(value) => handleSelectChange('product', value)}
+            value={formData.product}
+            modal={false}
+          >
+            <SelectTrigger className={triggerCls} aria-invalid={!!errorMessage.product}>
+              <SelectValue placeholder="Select Course" />
+            </SelectTrigger>
+            <SelectContent position="popper" sideOffset={2} className={'rounded-xs'}>
+              <SelectItem value="SFDC" className={'hover:rounded-none'}>
+                SFDC — Salesforce Developer / Admin
+              </SelectItem>
+              <SelectItem value="SFMC" className={'hover:rounded-none'}>
+                SFMC — Salesforce Marketing Cloud
+              </SelectItem>
+            </SelectContent>
+          </Select>
+          <FieldError message={errorMessage.product} />
         </div>
 
         {/* API status */}

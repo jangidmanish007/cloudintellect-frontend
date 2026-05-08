@@ -7,11 +7,7 @@ import { motion } from 'framer-motion';
 export default function SaleForceDeveloperTopic({ sfdcTopics }) {
   // Use dynamic data if available, otherwise use static data
   const data = sfdcTopics;
-  const headingLine1 = data.headingLine1;
-  const headingStrong = data.headingStrong;
-  const modules = data.modules;
-  const career = data.careerCard;
-  const metrics = career.metrics;
+  const metrics = data?.careerCard?.metrics;
 
   // Track scroll direction for dynamic sticky positioning
   const [scrollDirection, setScrollDirection] = useState('down');
@@ -66,12 +62,12 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
   const careerCardVariants = {
     hidden: {
       opacity: 0,
-      x: 20,
+      y: 20,
       scale: 1,
     },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       scale: 1,
       transition: {
         duration: 0.4,
@@ -93,7 +89,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
   };
 
   return (
-    <section className="lg:py-[80px] py-[64px] bg-white px-[16px]  overflow-hidden">
+    <section className="lg:py-[80px] py-[64px] bg-white px-[16px]">
       <div className="max-w-[1280px] mx-auto">
         <motion.h2
           className="text-[28px] sm:text-[32px] md:text-[48px] font-excon font-light text-[#0B1C33] lg:mb-[64px] mb-[24px] text-center"
@@ -102,7 +98,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
           viewport={{ once: true, amount: 0.3 }}
           variants={headingVariants}
         >
-          {headingLine1} <span className="font-bold">{headingStrong}</span>
+          {data?.headingLine1} <span className="font-bold">{data?.headingStrong}</span>
         </motion.h2>
 
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
@@ -114,7 +110,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
             variants={containerVariants}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {modules.map((mod, idx) => (
+              {data?.modules?.map((mod, idx) => (
                 <motion.div
                   key={mod.id || idx}
                   className="bg-white border border-gray-200 rounded-[24px] p-[34px] transition-shadow duration-300"
@@ -194,7 +190,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                {career.brand}
+                {data?.careerCard?.brand}
               </motion.div>
               <motion.h3
                 className="text-[24px] font-excon font-bold mb-[20px]"
@@ -203,7 +199,7 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                {career.title}
+                {data?.careerCard?.title}
               </motion.h3>
               <div className="space-y-[16px] mb-6">
                 {metrics.map((m, i) => (
@@ -232,10 +228,10 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href={career.applyHref || '#apply'}
+                  href={data?.careerCard?.applyHref || '#apply'}
                   className="btn-primary block gap-2 px-5 py-2.5 text-sm font-semibold tracking-wide mb-[24px]"
                 >
-                  {career.applyText || 'APPLY NOW'}
+                  {data?.careerCard?.applyText || 'APPLY NOW'}
                 </Link>
               </motion.div>
               <motion.div
@@ -255,8 +251,8 @@ export default function SaleForceDeveloperTopic({ sfdcTopics }) {
                   />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold">{career.batchDate}</div>
-                  <div className="text-xs text-gray-300">{career.batchType}</div>
+                  <div className="text-sm font-semibold">{data?.careerCard?.batchDate}</div>
+                  <div className="text-xs text-gray-300">{data?.careerCard?.batchType}</div>
                 </div>
               </motion.div>
             </motion.div>

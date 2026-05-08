@@ -20,22 +20,34 @@ export default function MainHome({ homePageData }) {
     <>
       <HomeBanner pageData={homePageData?.pageData} />
       <PromoCarousel />
-      <EcosystemSection ecosystem={homePageData?.pageData?.content?.ecosystem} />
-      <CoursesSection courses={homePageData?.pageData?.content?.courses} />
+      <div id="ecosystem">
+        <EcosystemSection ecosystem={homePageData?.pageData?.content?.ecosystem} />
+      </div>
+      <div id="course">
+        <CoursesSection courses={homePageData?.pageData?.content?.courses} />
+      </div>
       <LegacySection legacy={homePageData?.pageData?.content?.legacy} />
       <RecognitionSection />
-      <PlacementOverview overview={homePageData?.pageData?.content?.placementsOverview} />
-      <PlacementNetwork placementData={homePageData?.pageData?.content?.placementNetwork} />
-      <IndustryExperience industryExperience={homePageData?.pageData?.content?.industryExperience} />
+      <div id="placement">
+        <PlacementOverview overview={homePageData?.pageData?.content?.placementsOverview} />
+        <PlacementNetwork placementData={homePageData?.pageData?.content?.placementNetwork} />
+        <IndustryExperience industryExperience={homePageData?.pageData?.content?.industryExperience} />
+      </div>
       <CommunityImage />
       <WhyChooseUs whyChoose={homePageData?.pageData?.content?.whyChoose} />
-      <StudentSuccess
-        successStories={homePageData?.successStories}
-        sectionContent={homePageData?.pageData?.content?.studentSuccess}
-      />
-      <StudentReviews />
+      <div id="success-stories">
+        <StudentSuccess
+          successStories={homePageData?.successStories}
+          sectionContent={homePageData?.pageData?.content?.studentSuccess}
+        />
+      </div>
+      <div id="reviews">
+        <StudentReviews />
+      </div>
       <AchievementHighlights />
-      <NewsAndEvents newsAndEventsData={homePageData?.pageData?.content?.newsAndEvents} />
+      <div id="news">
+        <NewsAndEvents newsAndEventsData={homePageData?.pageData?.content?.newsAndEvents} />
+      </div>
     </>
   );
 }

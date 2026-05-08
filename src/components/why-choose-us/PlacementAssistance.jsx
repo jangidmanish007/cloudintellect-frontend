@@ -34,7 +34,7 @@ const fadeInRight = {
 
 export default function PlacementAssistance() {
   return (
-    <section className="lg:pb-20 lg:pt-10 py-12 px-4 overflow-hidden">
+    <section className="px-[16px] lg:py-[80px] py-[64px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         <div className="bg-[#0F2137] rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
           <div className="flex flex-col lg:flex-row gap-0 items-end">

@@ -7,10 +7,7 @@ import Image from 'next/image';
 export default function SaleforceMarketingTopics({ sfmcTopics }) {
   // Use dynamic data if available, otherwise use static data
   const section = sfmcTopics && typeof sfmcTopics === 'object' ? sfmcTopics : {};
-  const headingLine1 = section.headingLine1 ?? 'Topics';
-  const headingStrong = section.headingStrong ?? 'Covered';
   const modules = Array.isArray(section.modules) && section.modules.length > 0 ? section.modules : '';
-  const toolsHeading = section.toolsHeading ?? 'Tools Commonly Used';
   const toolsTable = Array.isArray(section.toolsTable) && section.toolsTable.length > 0 ? section.toolsTable : '';
   const career = section.careerCard && typeof section.careerCard === 'object' ? { ...section.careerCard } : '';
   const metrics = Array.isArray(career.metrics) ? career.metrics : '';
@@ -73,8 +70,8 @@ export default function SaleforceMarketingTopics({ sfmcTopics }) {
   };
 
   return (
-    <section className="w-full bg-[#F8FAFC] py-20 sm:py-14 overflow-visible">
-      <div className="max-w-[1280px] mx-auto px-6 sm:px-4 overflow-visible">
+    <section className="w-full bg-[#F8FAFC] lg:py-[80px] py-[64px] px-[16px]">
+      <div className="max-w-[1280px] mx-auto overflow-visible">
         <motion.h2
           className="text-[28px] sm:text-[32px] md:text-[48px] font-excon font-light text-[#0B1C33] lg:mb-[64px] mb-[24px] text-center"
           initial="hidden"
@@ -82,7 +79,7 @@ export default function SaleforceMarketingTopics({ sfmcTopics }) {
           viewport={{ once: true, amount: 0.3 }}
           variants={headingVariants}
         >
-          {headingLine1} <span className="font-bold">{headingStrong}</span>
+          {section.headingLine1} <span className="font-bold">{section.headingStrong || 'Covered'}</span>
         </motion.h2>
 
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
@@ -214,10 +211,10 @@ export default function SaleforceMarketingTopics({ sfmcTopics }) {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={{
-                hidden: { opacity: 0, x: 20 },
+                hidden: { opacity: 0, y: 20 },
                 visible: {
                   opacity: 1,
-                  x: 0,
+                  y: 0,
                   transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
                 },
               }}

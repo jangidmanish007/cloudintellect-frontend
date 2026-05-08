@@ -23,7 +23,7 @@ export default function TrustRecognition({ trustRecognition }) {
   });
 
   return (
-    <section className="w-full bg-[#F8FAFC] lg:py-[80px] md:py-[60px] py-[50px]">
+    <section className="w-full bg-[#F8FAFC] lg:py-[80px] md:py-[64px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto lg:px-6 md:px-6 px-4">
         {/* Title */}
         <motion.h2
