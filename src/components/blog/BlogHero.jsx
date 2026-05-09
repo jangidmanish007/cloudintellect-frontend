@@ -1,24 +1,27 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 
-export default function ContactHeroSection({ pageData }) {
-  const hero = pageData?.content?.hero || {};
+// Static fallback data
+const STATIC_DATA = {
+  tag: 'KNOWLEDGE HUB',
+  heading: 'Insights & Updates ',
+  description:
+    'Stay ahead in the Salesforce ecosystem with our expert guides, industry trends, and career advice updated for 2025.',
+  descriptionEmphasis: '',
+  primaryButtonText: 'Explore Programs',
+  primaryButtonHref: '/salesforce-developer',
+  secondaryButtonText: 'View Placements',
+  secondaryButtonHref: '/placements',
+};
 
-  const backgroundImage = hero.backgroundImage || hero.bgImage || '/images/BG (2).webp';
-  const tag = hero.tag || hero.label || 'SPECIALIZATION PROGRAM';
-  const heading = hero.heading || hero.title || 'Real Stories. Real Careers.';
-  const description =
-    hero.description ||
-    hero.subtitle ||
-    'These are real students from Cloud Intellect who started from different backgrounds and built their careers in Salesforce.';
-  const primaryButtonText = hero.primaryButtonText || hero.primaryBtnText || 'Explore Programs';
-  const primaryButtonHref = hero.primaryButtonHref || hero.primaryBtnHref || '#programs';
-  const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || 'View Placements';
-  const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || '#placements';
-
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/contact/BG.webp`;
+export default function BlogHero({ hero }) {
+  // Use dynamic data if available, otherwise use static data
+  const heroData = hero || STATIC_DATA;
+  // Use gallery background as fallback for blog
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/gallery/blog-page-bg.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
@@ -30,11 +33,9 @@ export default function ContactHeroSection({ pageData }) {
       >
         {/* Background Image with Opacity */}
         <div
-          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-[50%_top] lg:opacity-100 opacity-50"
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[70%_top] lg:opacity-100 opacity-50"
           style={{ backgroundImage: `url('${bgImageUrl}')` }}
         />
-
-        {/* Content */}
         <div className="relative z-10 max-w-[1280px] mx-auto">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-10">
             {/* Content Section */}
@@ -45,7 +46,7 @@ export default function ContactHeroSection({ pageData }) {
               className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-full lg:max-w-[656px]"
             >
               {/* Tag */}
-              {tag && (
+              {heroData.tag && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -54,59 +55,65 @@ export default function ContactHeroSection({ pageData }) {
                 >
                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#0CA4EB] rounded-full" aria-hidden="true" />
                   <span className="text-dark text-[9px] sm:text-[10px] font-medium tracking-wider uppercase">
-                    {tag}
+                    {heroData.tag}
                   </span>
                 </motion.div>
               )}
 
               {/* Heading */}
-              {heading && (
+              {(heroData.heading || heroData.headingAccent) && (
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-excon text-[32px] sm:text-[42px] md:text-[48px] lg:text-[58px] leading-[1.1] sm:leading-[1.15] font-bold text-white"
                 >
-                  {heading}
+                  {heroData.heading && (
+                    <>
+                      {heroData.heading}
+                      <br />
+                    </>
+                  )}
+                  {heroData.headingAccent && <span className="text-[#0CA4EB]">{heroData.headingAccent}</span>}
                 </motion.h1>
               )}
 
               {/* Description */}
-              {description && (
+              {heroData.description && (
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="font-ranade text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90"
                 >
-                  {description}
+                  {heroData.description}{' '}
+                  {heroData.descriptionEmphasis && <span className="font-medium">{heroData.descriptionEmphasis}</span>}
                 </motion.p>
               )}
 
               {/* Buttons */}
-              {(primaryButtonText || secondaryButtonText) && (
+              {(heroData.primaryButtonText || heroData.secondaryButtonText) && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2"
                 >
-                  {primaryButtonText && (
+                  {heroData.primaryButtonText && (
                     <Link
-                      href={primaryButtonHref}
+                      href={heroData.primaryButtonHref}
                       className="btn-primary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
                     >
-                      {primaryButtonText}
+                      {heroData.primaryButtonText}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   )}
-                  {secondaryButtonText && (
+                  {heroData.secondaryButtonText && (
                     <Link
-                      href={secondaryButtonHref}
+                      href={heroData.secondaryButtonHref}
                       className="btn-outline inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
                     >
-                      {secondaryButtonText}
-                      <ArrowRight className="w-4 h-4" />
+                      {heroData.secondaryButtonText}
                     </Link>
                   )}
                 </motion.div>

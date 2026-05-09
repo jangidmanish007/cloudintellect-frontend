@@ -12,6 +12,12 @@ export const getSalesforceMarketingPageData = async () => {
 };
 
 
+// Get sfmc-sfdc page data
+export const getSfmcSfdcPageData = async () => {
+  return serverFetch(process.env.GET_SFMC_SFDC_PAGE);
+};
+
+
 // Get leadership page data
 export const getLeadershipPageData = async () => {
   return serverFetch(process.env.GET_LEADERSHIP_PAGE);
@@ -21,5 +27,11 @@ export const getLeadershipPageData = async () => {
 // Get about-cloudintellect page data
 export const getAboutCloudIntellectPageData = async () => {
   return serverFetch(process.env.GET_ABOUT_CLOUDINTELLECT_PAGE);
+};
+
+
+// Get SFMC SFDC batches
+export const getSfmcSfdcBatches = async () => {
+  return serverFetch(process.env.GET_SFMC_SFDC_BATCHES);
 };
 

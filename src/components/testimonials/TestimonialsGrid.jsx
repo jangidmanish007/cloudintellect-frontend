@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 // ─── YouTube helpers ──────────────────────────────────────────────────────────
 
 const getYouTubeVideoId = (url) => {
-  if (!url || typeof url !== "string") return null;
+  if (!url || typeof url !== 'string') return null;
   const trimmed = url.trim();
   if (!trimmed) return null;
 
@@ -20,25 +20,24 @@ const getYouTubeVideoId = (url) => {
 
   try {
     const u = new URL(trimmed);
-    if (u.hostname.replace(/^www\./, "") === "youtube.com" && u.searchParams.get("v")) {
-      return u.searchParams.get("v");
+    if (u.hostname.replace(/^www\./, '') === 'youtube.com' && u.searchParams.get('v')) {
+      return u.searchParams.get('v');
     }
-    if (u.hostname === "youtu.be" && u.pathname.slice(1)) {
+    if (u.hostname === 'youtu.be' && u.pathname.slice(1)) {
       return u.pathname.slice(1).split(/[?#&]/)[0];
     }
-  } catch (_) { }
+  } catch (_) {}
 
   return null;
 };
 
-const getYouTubeThumbnail = (videoId) =>
-  videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
+const getYouTubeThumbnail = (videoId) => (videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null);
 
 // ─── Image URL resolver ───────────────────────────────────────────────────────
 
 // ─── Card background colours (cycling) ───────────────────────────────────────
 
-const BG_COLORS = ["#E5E7EB", "#BFDBFE", "#FBCFE8", "#FDE68A", "#C7D2FE", "#A7F3D0"];
+const BG_COLORS = ['#E5E7EB', '#BFDBFE', '#FBCFE8', '#FDE68A', '#C7D2FE', '#A7F3D0'];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -47,7 +46,7 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
 
   // Section heading from CMS
   const sectionContent = pageData?.content?.testimonialsSection || {};
-  const sectionTitle = sectionContent.heading || sectionContent.title || "Alumni Spotlights";
+  const sectionTitle = sectionContent.heading || sectionContent.title || 'Alumni Spotlights';
 
   // ── Video modal handlers ──────────────────────────────────────────────────
 
@@ -57,21 +56,17 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
     if (!testimonial.videoUrl) return;
     const videoId = getYouTubeVideoId(testimonial.videoUrl);
     if (videoId) {
-      setSelectedVideo({ type: "youtube", id: videoId });
+      setSelectedVideo({ type: 'youtube', id: videoId });
     } else {
       const isYoutube = /youtube\.com|youtu\.be/i.test(testimonial.videoUrl);
       if (isYoutube) {
-        const fallbackId = (
-          testimonial.videoUrl.match(/[?&]v=([a-zA-Z0-9_-]{10,12})/) ||
-          testimonial.videoUrl.match(/youtu\.be\/([a-zA-Z0-9_-]{10,12})/)
-        )?.[1];
+        const fallbackId = (testimonial.videoUrl.match(/[?&]v=([a-zA-Z0-9_-]{10,12})/) ||
+          testimonial.videoUrl.match(/youtu\.be\/([a-zA-Z0-9_-]{10,12})/))?.[1];
         setSelectedVideo(
-          fallbackId
-            ? { type: "youtube", id: fallbackId }
-            : { type: "embed", url: testimonial.videoUrl }
+          fallbackId ? { type: 'youtube', id: fallbackId } : { type: 'embed', url: testimonial.videoUrl },
         );
       } else {
-        setSelectedVideo({ type: "embed", url: testimonial.videoUrl });
+        setSelectedVideo({ type: 'embed', url: testimonial.videoUrl });
       }
     }
   };
@@ -80,12 +75,14 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
   useEffect(() => {
     if (!selectedVideo) return;
     const origOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKeyDown = (e) => { if (e.key === "Escape") closeVideoModal(); };
-    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    };
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = origOverflow;
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [selectedVideo, closeVideoModal]);
 
@@ -95,9 +92,7 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
     return (
       <section className="py-20 px-6 bg-white">
         <div className="max-w-[1280px] mx-auto">
-          <p className="text-center py-16 px-5 text-[#64748b] text-lg">
-            No testimonials available at the moment.
-          </p>
+          <p className="text-center py-16 px-5 text-[#64748b] text-lg">No testimonials available at the moment.</p>
         </div>
       </section>
     );
@@ -110,16 +105,13 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
       {/* ── Section ── */}
       <section className="py-20 px-6 bg-white md:py-[60px] md:px-5">
         <div className="max-w-[1280px] mx-auto">
-
           {/* Section title */}
           <h2 className="text-[#1E1E1E] lg:text-[48px] md:text-[36px] sm:text-[28px] text-[28px] font-bold mb-4 md:mb-[60px] md:mb-10 leading-tight">
             {sectionTitle}
           </h2>
           <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6 md:gap-5 mt-10">
             {testimonials.map((testimonial, index) => {
-              const videoId = testimonial.videoUrl
-                ? getYouTubeVideoId(testimonial.videoUrl)
-                : null;
+              const videoId = testimonial.videoUrl ? getYouTubeVideoId(testimonial.videoUrl) : null;
               const thumbnailUrl = testimonial.coverPhoto
                 ? testimonial.coverPhoto
                 : videoId
@@ -138,9 +130,9 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
                   {/* Image wrapper */}
                   <div
                     className={[
-                      "relative w-full h-full min-h-[450px] md:min-h-[500px] max-h-[540px] overflow-hidden flex flex-col group",
-                      hasVideo ? "cursor-pointer" : "cursor-default",
-                    ].join(" ")}
+                      'relative w-full h-full min-h-[450px] md:min-h-[500px] max-h-[540px] overflow-hidden flex flex-col group',
+                      hasVideo ? 'cursor-pointer' : 'cursor-default',
+                    ].join(' ')}
                     onClick={() => hasVideo && handleVideoClick(testimonial)}
                     style={{ backgroundColor: bgColor }}
                   >
@@ -152,7 +144,9 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
                         alt={testimonial.name}
                         loading="lazy"
                         className="w-full h-full object-cover object-bottom block"
-                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
                       />
                     )}
 
@@ -184,9 +178,9 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
 
                     {/* Gradient overlay with name / role / company */}
                     <div
-                      className="absolute bottom-0 left-0 right-0 h-[30%] z-[2] flex items-end p-6"
+                      className="absolute bottom-0 left-0 right-0 h-full z-2 flex items-end p-6"
                       style={{
-                        background: "linear-gradient(180deg, rgba(11,28,51,0.00) 50%, #0B1C33 100%)",
+                        background: 'linear-gradient(180deg, rgba(11,28,51,0.00) 50%, #0B1C33 100%)',
                       }}
                     >
                       <div className="w-full flex flex-col gap-2">
@@ -194,9 +188,7 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
                           {testimonial.name}
                         </h3>
                         {testimonial.role && (
-                          <p className="text-white text-[14px] sm:text-[10px] font-normal m-0">
-                            {testimonial.role}
-                          </p>
+                          <p className="text-white text-[14px] sm:text-[10px] font-normal m-0">{testimonial.role}</p>
                         )}
                         {testimonial.company && (
                           <span className="inline-block bg-white text-[#1E1E1E] py-2 px-3 rounded-sm text-[12px] leading-[14px] font-medium uppercase tracking-[0.5px] w-fit shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
@@ -210,7 +202,6 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
               );
             })}
           </div>
-
         </div>
       </section>
 
@@ -238,7 +229,7 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
 
             {/* Embed */}
             <div className="w-full h-full">
-              {selectedVideo.type === "youtube" ? (
+              {selectedVideo.type === 'youtube' ? (
                 <iframe
                   width="100%"
                   height="100%"
@@ -259,8 +250,8 @@ export default function TestimonialsGrid({ testimonials = [], pageData }) {
               ) : (
                 <div className="flex items-center justify-center w-full h-full p-6 text-center text-[#94a3b8] text-base">
                   <p>
-                    This video could not be loaded. Please check the video link
-                    format (use a standard YouTube or youtu.be URL).
+                    This video could not be loaded. Please check the video link format (use a standard YouTube or
+                    youtu.be URL).
                   </p>
                 </div>
               )}

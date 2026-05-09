@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
+import { validEmail } from '@/_helper/Regex';
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const triggerCls = 'form-field flex items-center justify-between outline-0';
@@ -32,7 +32,6 @@ export default function HeroApplicationForm() {
   const [submitStatus, setSubmitStatus] = useState(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     name: '',
     email: '',
@@ -43,45 +42,8 @@ export default function HeroApplicationForm() {
   });
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  // Real-time validation when buttonClicked is true
-  useEffect(() => {
-    if (buttonClicked) {
-      formValidation();
-    }
-  }, [
-    formData.name,
-    formData.email,
-    formData.phone,
-    formData.dateOfBirth,
-    formData.city,
-    formData.product,
-    buttonClicked,
-  ]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSelectChange = (name, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleDateChange = (date) => {
-    setFormData((prev) => ({
-      ...prev,
-      dateOfBirth: date,
-    }));
-    setCalendarOpen(false);
-  };
-
-  const formValidation = () => {
+  // Form validation function
+  const formValidation = useCallback(() => {
     let nameMsg = '';
     let emailMsg = '';
     let phoneMsg = '';
@@ -139,7 +101,6 @@ export default function HeroApplicationForm() {
     }
 
     if (isValid) {
-      setError(false);
       setErrorMessage({
         name: '',
         email: '',
@@ -150,16 +111,52 @@ export default function HeroApplicationForm() {
       });
       return true;
     } else {
-      setError(true);
-      setErrorMessage({
-        name: nameMsg,
-        email: emailMsg,
-        phone: phoneMsg,
-        dateOfBirth: dateOfBirthMsg,
-        city: cityMsg,
-        product: productMsg,
-      });
+      if (buttonClicked) {
+        setErrorMessage({
+          name: nameMsg,
+          email: emailMsg,
+          phone: phoneMsg,
+          dateOfBirth: dateOfBirthMsg,
+          city: cityMsg,
+          product: productMsg,
+        });
+      }
       return false;
+    }
+  }, [formData, buttonClicked]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // Validate in real-time if button was clicked
+    if (buttonClicked) {
+      setTimeout(() => formValidation(), 0);
+    }
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // Validate in real-time if button was clicked
+    if (buttonClicked) {
+      setTimeout(() => formValidation(), 0);
+    }
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prev) => ({
+      ...prev,
+      dateOfBirth: date,
+    }));
+    setCalendarOpen(false);
+    // Validate in real-time if button was clicked
+    if (buttonClicked) {
+      setTimeout(() => formValidation(), 0);
     }
   };
 
@@ -223,7 +220,6 @@ export default function HeroApplicationForm() {
       city: '',
       product: '',
     });
-    setError(false);
     setErrorMessage({
       name: '',
       email: '',
@@ -277,7 +273,10 @@ export default function HeroApplicationForm() {
 
         {/* Row 2: Phone with +91 prefix */}
         <div>
-          <div className="form-field flex p-0 overflow-hidden focus-within:border-[#009DE3] focus-within:ring-2 focus-within:ring-[#009DE3]/20 transition">
+          <div
+            className="form-field flex p-0 overflow-hidden focus-within:border-[#009DE3] focus-within:ring-2 focus-within:ring-[#009DE3]/20 transition"
+            style={{ paddingLeft: '0px' }}
+          >
             <span className="flex items-center px-3 text-sm text-gray-500 border-r border-gray-200 bg-gray-50 shrink-0 select-none">
               +91
             </span>
@@ -315,16 +314,16 @@ export default function HeroApplicationForm() {
                   <CalendarIcon className="size-4 shrink-0 text-gray-400" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0 z-49" align="start">
                 <Calendar
                   mode="single"
                   selected={formData.dateOfBirth}
                   onSelect={handleDateChange}
                   captionLayout="dropdown"
-                  defaultMonth={new Date(2000, 0)}
+                  defaultMonth={formData.dateOfBirth || new Date()}
                   startMonth={new Date(1950, 0)}
-                  endMonth={new Date(new Date().getFullYear() - 5, 11)}
-                  disabled={(date) => date > new Date()}
+                  endMonth={new Date()}
+                  disabled={(date) => date > new Date() || date.getFullYear() > new Date().getFullYear()}
                   initialFocus
                 />
               </PopoverContent>

@@ -25,6 +25,7 @@ const nextConfig = {
         hostname: "cloudintellect.in",
       },
     ],
+    qualities: [100, 75],
   },
 
   env: {
@@ -61,6 +62,8 @@ const nextConfig = {
     GET_WHY_CHOOSE_US_PAGE: "pages/slug/why-choose-us",
     GET_SALESFORCE_DEVELOPER_PAGE: "pages/slug/salesforce-developer",
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
+    GET_SFMC_SFDC_PAGE: "pages/slug/sfmc-sfdc",
+    GET_SFMC_SFDC_BATCHES: "batches",
     GET_LEADERSHIP_PAGE: "pages/slug/leadership",
     GET_ABOUT_CLOUDINTELLECT_PAGE: "pages/slug/about-cloudintellect",
 
@@ -85,6 +88,12 @@ const nextConfig = {
     // ─── Career ───────────────────────────────────────────────────
     GET_CAREER_PAGE: "pages/slug/career",
     CAREER_LEADS_SUBMIT: "career-leads/submit",
+
+    // ─── Blog ─────────────────────────────────────────────────────
+    GET_BLOG_PAGE: "pages/slug/blog",
+    GET_BLOG_POSTS: "blog-posts",
+    GET_BLOG_CATEGORIES: "blog-posts/meta/categories",
+    GET_BLOG_POST_BY_SLUG: "blog-posts/slug/",
 
     // ─── Auth ─────────────────────────────────────────────────────
     ADMIN_LOGIN: "auth/login",

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Slider from 'react-slick';
-import { ChevronDown, Phone, User, Menu, X } from 'lucide-react';
+import { ChevronDown, Phone, User, Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { topBar, mainNav, loginButton, helpline, secondaryNav } from './navData';
 import { getHeaderCarousel } from '@/_services/homeService';
 import { usePathname, useRouter } from 'next/navigation';
@@ -43,6 +43,27 @@ const SOCIAL_ICONS = {
     </svg>
   ),
 };
+
+// ─── Custom Arrow Components for Slider ───────────────────────────────────────
+const CustomPrevArrow = ({ onClick, isScrolled }) => (
+  <button
+    onClick={onClick}
+    className={`lg:block hidden cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 z-10 transition-opacity hover:opacity-70 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+    aria-label="Previous slide"
+  >
+    <ChevronLeft size={20} />
+  </button>
+);
+
+const CustomNextArrow = ({ onClick, isScrolled }) => (
+  <button
+    onClick={onClick}
+    className={`lg:block hidden cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 z-10 transition-opacity hover:opacity-70 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+    aria-label="Next slide"
+  >
+    <ChevronRight size={20} />
+  </button>
+);
 
 // ─── Header Component ─────────────────────────────────────────────────────────
 export default function Header() {
@@ -207,7 +228,7 @@ export default function Header() {
   // react-slick settings for top-bar carousel
   const slickSettings = {
     dots: false,
-    arrows: false,
+    arrows: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -216,6 +237,8 @@ export default function Header() {
     slidesToScroll: 1,
     fade: true,
     pauseOnHover: true,
+    prevArrow: <CustomPrevArrow isScrolled={isScrolled} />,
+    nextArrow: <CustomNextArrow isScrolled={isScrolled} />,
   };
   return (
     <header
@@ -231,7 +254,7 @@ export default function Header() {
               <div className="mx-auto max-w-[1522px] px-4 flex items-center justify-between h-full">
                 {/* Slick Carousel */}
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <div className="flex-1 min-w-0 overflow-hidden">
+                  <div className="flex-1 min-w-0 overflow-hidden relative">
                     <Slider {...slickSettings}>
                       {carouselSlides.map((slide, idx) => (
                         <div key={idx} className="outline-none text-center">
@@ -311,6 +334,9 @@ export default function Header() {
               width={isScrolled ? 140 : 160}
               height={isScrolled ? 40 : 50}
               className="transition-all"
+              loading="eager"
+              priority
+              style={{ width: isScrolled ? '140px' : '160px', height: 'auto' }}
             />
           </Link>
 
@@ -450,6 +476,7 @@ export default function Header() {
               alt="Cloud Intellect"
               width={120}
               height={40}
+              style={{ width: '120px', height: 'auto' }}
             />
             <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close">
               <X size={24} />

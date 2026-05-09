@@ -27,7 +27,7 @@ const timelineItem = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -128,7 +128,7 @@ export default function NewsAndEvents({ newsAndEventsData }) {
                     alt={mainFeature?.title || ''}
                     fill
                     unoptimized
-                    quality={100}
+                    quality={75}
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />

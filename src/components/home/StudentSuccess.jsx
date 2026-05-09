@@ -54,8 +54,8 @@ const fadeUp = {
 
 const testimonialVariants = {
   enter: { opacity: 0, y: 16 },
-  center: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-  exit: { opacity: 0, y: -12, transition: { duration: 0.25 } },
+  center: { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.15 } },
 };
 
 /* ─────────────────────────────────────────────
@@ -109,6 +109,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
   const cardRefs = useRef([]);
+  const [imageLoaded, setImageLoaded] = useState({});
 
   /* ── Build learners list ──────────────────────────────────────
      Priority:
@@ -134,6 +135,20 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
           r.headline),
     )
     .map((r, idx) => mapStory(r, idx));
+
+  /* ── Preload all images ── */
+  useEffect(() => {
+    learners.forEach((learner) => {
+      const imgSrc = learner.mainImage || learner.thumbnailImage;
+      if (imgSrc && !imageLoaded[learner._id]) {
+        const img = new Image();
+        img.onload = () => {
+          setImageLoaded((prev) => ({ ...prev, [learner._id]: true }));
+        };
+        img.src = imgSrc;
+      }
+    });
+  }, [learners]);
 
   /* ── Keep activeIndex in bounds (derived, no effect needed) ── */
   const safeIndex = learners.length > 0 ? Math.min(activeIndex, learners.length - 1) : 0;
@@ -236,18 +251,18 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
           viewport={{ once: true, amount: 0.2 }}
           custom={0.1}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeLearner._id}
-              variants={testimonialVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className=" bg-[#FAFAFA] overflow-hidden"
-            >
-              <div className="flex flex-col sm:flex-row gap-0  min-h-[468px]">
-                {/* Text side */}
-                <div className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+          <div className="bg-[#FAFAFA] overflow-hidden">
+            <div className="flex flex-col sm:flex-row gap-0 min-h-[468px]">
+              {/* Text side with animation */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeLearner._id}
+                  variants={testimonialVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center"
+                >
                   {/* Quote icon */}
                   <div className="text-[#009FFF] mb-4" aria-hidden>
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
@@ -266,25 +281,35 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
                       {activeLearner.testimonial}
                     </p>
                   )}
-                </div>
+                </motion.div>
+              </AnimatePresence>
 
-                {/* Photo side */}
-                {(activeLearner.mainImage || activeLearner.thumbnailImage) && (
-                  <div className="sm:w-[220px] lg:w-[320px] shrink-0 relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={activeLearner.mainImage || activeLearner.thumbnailImage}
-                      alt=""
-                      aria-hidden
-                      className="w-full h-[416px] sm:h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              {/* Photo side - No animation wrapper, instant display */}
+              {(activeLearner.mainImage || activeLearner.thumbnailImage) && (
+                <div className="sm:w-[220px] lg:w-[320px] shrink-0 relative overflow-hidden">
+                  {/* Render all images but only show active one */}
+                  {learners.map((learner) => (
+                    <div
+                      key={learner._id}
+                      className="absolute inset-0 transition-opacity duration-0"
+                      style={{
+                        opacity: learner._id === activeLearner._id ? 1 : 0,
+                        pointerEvents: learner._id === activeLearner._id ? 'auto' : 'none',
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={learner.mainImage || learner.thumbnailImage}
+                        alt=""
+                        aria-hidden
+                        className="w-full h-[416px] sm:h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
