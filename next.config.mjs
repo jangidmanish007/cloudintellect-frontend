@@ -18,6 +18,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "deen3evddmddt.cloudfront.net",
+      },
+      {
+        protocol: "https",
         hostname: "cloudintellect.in",
       },
     ],
@@ -32,13 +36,14 @@ const nextConfig = {
     // ─── Local URLs ───────────────────────────────────────────────
     PUBLIC_SITE_URL: "http://localhost:3000/",
     NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
-    // Use /api-proxy/ for Vercel/local to avoid CORS, direct URL for production
-    API_BASE_URL: "/api-proxy/",
+    BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/staging/",
+    API_BASE_URL: "https://cloudintellect.in/api/",
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Production URLs (uncomment when deploying to production) ─
     // PUBLIC_SITE_URL: "https://www.cloudintellect.com/",
     // NEXT_PUBLIC_SITE_URL: "https://www.cloudintellect.com",
+    // BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/production/",
     // API_BASE_URL: "https://cloudintellect.in/api/",
     // DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
