@@ -4,12 +4,7 @@ import Cookies from 'js-cookie';
 // ─── Server-side fetch (Next.js Server Components) ────────────────────────────
 // Uses native fetch — safe on the server (no Axios / js-cookie / location).
 export async function serverFetch(path) {
-  // Use absolute URL for server-side fetches
-  const isServer = typeof window === 'undefined';
-  const base = isServer
-    ? 'https://cloudintellect.in/api/'
-    : process.env.API_BASE_URL;
-
+  const base = process.env.API_BASE_URL;
   try {
     const res = await fetch(`${base}${path}`, {
       headers: { 'Content-Type': 'application/json' },

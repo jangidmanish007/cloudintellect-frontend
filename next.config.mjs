@@ -14,21 +14,6 @@ const nextConfig = {
     ];
   },
 
-  // Add headers for CORS support
-  async headers() {
-    return [
-      {
-        source: '/api-proxy/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS' },
-          { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization' },
-        ],
-      },
-    ];
-  },
-
   images: {
     remotePatterns: [
       {
@@ -52,15 +37,14 @@ const nextConfig = {
     PUBLIC_SITE_URL: "http://localhost:3000/",
     NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
     BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/staging/",
-    // Use proxy route to avoid CORS issues
-    API_BASE_URL: "/api-proxy/",
+    API_BASE_URL: "https://cloudintellect.in/api/",
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Production URLs (uncomment when deploying to production) ─
     // PUBLIC_SITE_URL: "https://www.cloudintellect.com/",
     // NEXT_PUBLIC_SITE_URL: "https://www.cloudintellect.com",
     // BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/production/",
-    // API_BASE_URL: "/api-proxy/",
+    // API_BASE_URL: "https://www.cloudintellect.com/api/",
     // DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Pages / Hero ─────────────────────────────────────────────
