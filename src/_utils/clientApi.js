@@ -1,7 +1,7 @@
 /**
  * Client-side API utility
- * Uses API_BASE_URL from environment configuration
- * Supports both proxy route (/api-proxy/) and direct URL
+ * Uses Next.js rewrites proxy to avoid CORS issues
+ * Configured in next.config.mjs based on NODE_ENV
  */
 
 export async function clientApi(endpoint, options = {}) {
@@ -11,8 +11,8 @@ export async function clientApi(endpoint, options = {}) {
     // Remove leading slash if present
     const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
 
-    // Use API_BASE_URL from environment (can be proxy or direct URL)
-    const url = `${process.env.API_BASE_URL}${cleanEndpoint}`;
+    // Use the proxy path configured in next.config.mjs
+    const url = `/api-proxy/${cleanEndpoint}`;
 
     const fetchOptions = {
       method,

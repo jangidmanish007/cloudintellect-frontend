@@ -5,21 +5,28 @@ const nextConfig = {
   // trailingSlash: false,
 
   // API Proxy Configuration - Solves CORS issues
+  // Automatically switches based on NODE_ENV
   async rewrites() {
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const isStaging = process.env.NODE_ENV === 'staging';
+
+    // Configure API URL based on environment
+    const apiBaseUrl = isDevelopment
+      ? 'https://cloudintellect.in/api/' // Development API
+      : isStaging
+        ? 'https://cloudintellect.in/api/' // Staging API
+        : 'https://cloudintellect.in/api/'; // Production API
+
     return [
       {
         source: '/api-proxy/:path*',
-        destination: 'https://cloudintellect.in/api/:path*',
+        destination: `${apiBaseUrl}:path*`,
       },
     ];
   },
 
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "deen3evddmddt.cloudfront.net",
-      },
       {
         protocol: "https",
         hostname: "cloudintellect.in",
@@ -36,14 +43,12 @@ const nextConfig = {
     // ─── Local URLs ───────────────────────────────────────────────
     PUBLIC_SITE_URL: "http://localhost:3000/",
     NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
-    BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/staging/",
     API_BASE_URL: "https://cloudintellect.in/api/",
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
     // ─── Production URLs (uncomment when deploying to production) ─
     // PUBLIC_SITE_URL: "https://www.cloudintellect.com/",
     // NEXT_PUBLIC_SITE_URL: "https://www.cloudintellect.com",
-    // BASE_URL_PATH: "https://deen3evddmddt.cloudfront.net/production/",
     // API_BASE_URL: "https://cloudintellect.in/api/",
     // DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 
