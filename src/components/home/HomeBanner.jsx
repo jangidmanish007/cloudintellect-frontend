@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroApplicationForm from './HeroApplicationForm';
 import { ArrowBigRight, ArrowBigRightDashIcon, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const SLIDES = [
   {
@@ -15,6 +16,7 @@ const SLIDES = [
     image: 'images/home/shubhum-img.png',
     logo: 'metacube',
     logoColor: '#009FFF',
+    logoImg: 'images/home/meta-cube-logo.svg',
   },
   {
     name: 'Shivam',
@@ -24,6 +26,7 @@ const SLIDES = [
     image: 'images/home/shivam-img.webp',
     logo: 'cognizant',
     logoColor: '#1A73E8',
+    logoImg: 'images/home/configant-logo.svg',
   },
   {
     name: 'Vaibhav',
@@ -33,6 +36,7 @@ const SLIDES = [
     image: 'images/home/vaibhav-img.webp',
     logo: 'Deloitte.',
     logoColor: '#86BC25',
+    logoImg: 'images/home/deloitt-logo.svg',
   },
   {
     name: 'Vinay',
@@ -42,6 +46,7 @@ const SLIDES = [
     image: 'images/home/vinay.webp',
     logo: 'mindsay',
     logoColor: '#ffffff',
+    logoImg: 'images/home/xnibhav-logo.svg',
   },
 ];
 
@@ -148,9 +153,13 @@ export default function HomeBanner() {
                               className="font-bold text-base tracking-tight max-w-[100px]"
                               style={{ color: slide.logoColor }}
                             >
-                              <img
-                                src={`${process.env.NEXT_PUBLIC_IMG_PATH}images/home/meta-cube-logo.svg`}
-                                className="img-fluid max-w-[100px]"
+                              <Image
+                                width={120}
+                                height={50}
+                                alt="logo"
+                                src={`${process.env.NEXT_PUBLIC_IMG_PATH}${slide.logoImg}`}
+                                className="img-fluid max-w-[120px]"
+                                style={{ width: '120px', height: 'auto' }}
                               />
                             </span>
                           </div>

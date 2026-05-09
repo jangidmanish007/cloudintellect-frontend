@@ -1,87 +1,120 @@
-import Link from "next/link";
+'use client';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 export default function ContactHeroSection({ pageData }) {
-    const hero = pageData?.content?.hero || {};
+  const hero = pageData?.content?.hero || {};
 
-    const backgroundImage =
-        hero.backgroundImage || hero.bgImage || "/images/BG (2).webp";
-    const tag =
-        hero.tag || hero.label || "SPECIALIZATION PROGRAM";
-    const heading =
-        hero.heading || hero.title || "Real Stories. Real Careers.";
-    const description =
-        hero.description ||
-        hero.subtitle ||
-        "These are real students from Cloud Intellect who started from different backgrounds and built their careers in Salesforce.";
-    const primaryButtonText =
-        hero.primaryButtonText || hero.primaryBtnText || "Explore Programs";
-    const primaryButtonHref =
-        hero.primaryButtonHref || hero.primaryBtnHref || "#programs";
-    const secondaryButtonText =
-        hero.secondaryButtonText || hero.secondaryBtnText || "View Placements";
-    const secondaryButtonHref =
-        hero.secondaryButtonHref || hero.secondaryBtnHref || "#placements";
+  const backgroundImage = hero.backgroundImage || hero.bgImage || '/images/BG (2).webp';
+  const tag = hero.tag || hero.label || 'SPECIALIZATION PROGRAM';
+  const heading = hero.heading || hero.title || 'Real Stories. Real Careers.';
+  const description =
+    hero.description ||
+    hero.subtitle ||
+    'These are real students from Cloud Intellect who started from different backgrounds and built their careers in Salesforce.';
+  const primaryButtonText = hero.primaryButtonText || hero.primaryBtnText || 'Explore Programs';
+  const primaryButtonHref = hero.primaryButtonHref || hero.primaryBtnHref || '#programs';
+  const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || 'View Placements';
+  const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || '#placements';
 
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/contact/BG.webp`;
 
-    return (
-        <section
-            className="relative w-full min-h-[600px] flex items-center pt-[130px] md:pt-[160px] overflow-hidden"
-        >
-            <div
-                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: `url('${process.env.NEXT_PUBLIC_IMG_PATH}images/contact/BG.webp')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-                aria-hidden="true"
-            />
+  return (
+    <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
+      <motion.div
+        className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]"
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        {/* Background Image with Opacity */}
+        <div
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-[50%_top] lg:opacity-100 opacity-50"
+          style={{ backgroundImage: `url('${bgImageUrl}')` }}
+        />
 
+        {/* Content */}
+        <div className="relative z-10 max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-10">
+            {/* Content Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-full lg:max-w-[656px]"
+            >
+              {/* Tag */}
+              {tag && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="inline-flex items-center gap-2 bg-[#FFF] backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 w-fit"
+                >
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#0CA4EB] rounded-full" aria-hidden="true" />
+                  <span className="text-dark text-[9px] sm:text-[10px] font-medium tracking-wider uppercase">
+                    {tag}
+                  </span>
+                </motion.div>
+              )}
 
-            {/* Content container */}
-            <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-6 py-14 md:py-20">
-                <div className="flex flex-col gap-6 max-w-[750px]">
+              {/* Heading */}
+              {heading && (
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="font-excon text-[32px] sm:text-[42px] md:text-[48px] lg:text-[58px] leading-[1.1] sm:leading-[1.15] font-bold text-white"
+                >
+                  {heading}
+                </motion.h1>
+              )}
 
-                    {/* Tag pill */}
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/95 rounded-full w-fit">
-                        <span
-                            className="w-2 h-2 rounded-full bg-[#009FFF] shrink-0"
-                            aria-hidden="true"
-                        />
-                        <span className="text-[#1E1E1E] text-[11px] font-semibold tracking-[0.5px] uppercase font-sans">
-                            {tag}
-                        </span>
-                    </div>
+              {/* Description */}
+              {description && (
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="font-ranade text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90"
+                >
+                  {description}
+                </motion.p>
+              )}
 
-                    {/* Heading */}
-                    <h1 className="text-white text-[36px] sm:text-[48px] lg:text-[58px] font-bold leading-[1.2] m-0">
-                        {heading}
-                    </h1>
-
-                    {/* Description */}
-                    <p className="ranade-font text-white text-lg sm:text-xl lg:text-2xl font-light leading-relaxed m-0">
-                        {description}
-                    </p>
-
-                    {/* Buttons */}
-                    <div className="flex flex-wrap gap-4 mt-2">
-                        <Link
-                            href={primaryButtonHref}
-                            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-[#009FFF] text-white text-base font-semibold no-underline transition-all duration-200 hover:bg-[#0088e6] hover:-translate-y-0.5"
-                        >
-                            {primaryButtonText}
-                            <span aria-hidden="true">→</span>
-                        </Link>
-                        <Link
-                            href={secondaryButtonHref}
-                            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-white text-[#000000] text-base font-semibold no-underline transition-all duration-200 hover:bg-white/90 hover:-translate-y-0.5"
-                        >
-                            {secondaryButtonText}
-                        </Link>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    );
+              {/* Buttons */}
+              {(primaryButtonText || secondaryButtonText) && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2"
+                >
+                  {primaryButtonText && (
+                    <Link
+                      href={primaryButtonHref}
+                      className="btn-primary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
+                    >
+                      {primaryButtonText}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {secondaryButtonText && (
+                    <Link
+                      href={secondaryButtonHref}
+                      className="btn-outline inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium no-underline"
+                    >
+                      {secondaryButtonText}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
 }

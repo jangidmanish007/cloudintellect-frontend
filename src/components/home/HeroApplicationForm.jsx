@@ -277,7 +277,10 @@ export default function HeroApplicationForm() {
 
         {/* Row 2: Phone with +91 prefix */}
         <div>
-          <div className="form-field flex p-0 overflow-hidden focus-within:border-[#009DE3] focus-within:ring-2 focus-within:ring-[#009DE3]/20 transition">
+          <div
+            className="form-field flex p-0 overflow-hidden focus-within:border-[#009DE3] focus-within:ring-2 focus-within:ring-[#009DE3]/20 transition"
+            style={{ paddingLeft: '0px' }}
+          >
             <span className="flex items-center px-3 text-sm text-gray-500 border-r border-gray-200 bg-gray-50 shrink-0 select-none">
               +91
             </span>

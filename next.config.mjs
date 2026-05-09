@@ -25,6 +25,7 @@ const nextConfig = {
         hostname: "cloudintellect.in",
       },
     ],
+    qualities: [100, 75],
   },
 
   env: {

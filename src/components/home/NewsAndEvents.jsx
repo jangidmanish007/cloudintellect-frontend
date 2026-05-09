@@ -128,7 +128,7 @@ export default function NewsAndEvents({ newsAndEventsData }) {
                     alt={mainFeature?.title || ''}
                     fill
                     unoptimized
-                    quality={100}
+                    quality={75}
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
