@@ -29,3 +29,9 @@ export const getAboutCloudIntellectPageData = async () => {
   return serverFetch(process.env.GET_ABOUT_CLOUDINTELLECT_PAGE);
 };
 
+
+// Get SFMC SFDC batches
+export const getSfmcSfdcBatches = async () => {
+  return serverFetch(process.env.GET_SFMC_SFDC_BATCHES);
+};
+

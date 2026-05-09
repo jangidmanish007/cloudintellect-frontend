@@ -1,4 +1,4 @@
-import { getSfmcSfdcPageData } from "@/_services/salesforceService";
+import { getSfmcSfdcPageData, getSfmcSfdcBatches } from "@/_services/salesforceService";
 import MainSfmSfdCloud from "@/components/sfmc-sfdc-course/MainSfmSfdCloud";
 
 // Enable dynamic rendering for this page
@@ -13,14 +13,20 @@ export default async function SFMCSFDCPage() {
   let pageData = {
     content: {}
   };
+  let batchesData = [];
 
   try {
     // Fetch SFMC SFDC page data from API
     const pageRes = await getSfmcSfdcPageData();
 
-    console.log('pageRes', pageRes)
     if (pageRes?.status) {
       pageData = pageRes.result;
+    }
+
+    // Fetch batches data
+    const batchesRes = await getSfmcSfdcBatches();
+    if (batchesRes?.status) {
+      batchesData = batchesRes.result || [];
     }
   } catch (error) {
     console.error('Error fetching SFMC SFDC page data:', error);
@@ -28,7 +34,7 @@ export default async function SFMCSFDCPage() {
 
   return (
     <>
-      <MainSfmSfdCloud pageData={pageData} />
+      <MainSfmSfdCloud pageData={pageData} batchesData={batchesData} />
     </>
   );
 }

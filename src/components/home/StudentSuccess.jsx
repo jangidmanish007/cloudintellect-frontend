@@ -271,14 +271,11 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
                 {/* Photo side */}
                 {(activeLearner.mainImage || activeLearner.thumbnailImage) && (
                   <div className="sm:w-[220px] lg:w-[320px] shrink-0 relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={activeLearner.mainImage || activeLearner.thumbnailImage}
                       alt=""
                       aria-hidden
                       className="w-full h-[416px] sm:h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 )}

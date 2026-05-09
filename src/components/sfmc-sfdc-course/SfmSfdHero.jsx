@@ -6,11 +6,10 @@ import { ArrowRight, Download } from 'lucide-react';
 
 // Static fallback data
 const STATIC_DATA = {
-  tag: 'SPECIALIZATION PROGRAM',
-  heading: 'SFMC & SFDC',
-  headingAccent: 'Dual Certification',
+  tag: 'PROGRAM OVERVIEW',
+  heading: 'Master the Salesforce Ecosystem',
   description:
-    'Master both Salesforce Marketing Cloud and Salesforce Developer Cloud with comprehensive training and certification.',
+    'Salesforce is a global cloud CRM for sales, marketing, and support. Cloud Intellect offers Salesforce course with certification across SFDC & SFMC domains.',
   descriptionEmphasis: '',
   primaryButtonText: 'Explore Programs',
   primaryButtonHref: '#programs',
@@ -21,7 +20,7 @@ const STATIC_DATA = {
 export default function SfmSfdHero({ hero }) {
   // Use dynamic data if available, otherwise use static data
   const heroData = hero || STATIC_DATA;
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/saleforce/salesforce-baneer-bg.webp`;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/webinar/sfdc-sfmc-bg-img.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
@@ -43,7 +42,7 @@ export default function SfmSfdHero({ hero }) {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-full lg:max-w-[656px]"
+              className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-full lg:max-w-[747px]"
             >
               {/* Tag */}
               {heroData.tag && (

@@ -62,6 +62,7 @@ const nextConfig = {
     GET_SALESFORCE_DEVELOPER_PAGE: "pages/slug/salesforce-developer",
     GET_SALESFORCE_MARKETING_CLOUD_PAGE: "pages/slug/salesforce-marketing-cloud",
     GET_SFMC_SFDC_PAGE: "pages/slug/sfmc-sfdc",
+    GET_SFMC_SFDC_BATCHES: "batches",
     GET_LEADERSHIP_PAGE: "pages/slug/leadership",
     GET_ABOUT_CLOUDINTELLECT_PAGE: "pages/slug/about-cloudintellect",
 

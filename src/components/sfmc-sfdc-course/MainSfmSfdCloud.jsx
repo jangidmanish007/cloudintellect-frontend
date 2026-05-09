@@ -6,14 +6,13 @@ import SfmSfdCloudAdvantage from './SfmSfdCloudAdvantage';
 import CompleteSupportEcoSystem from './CompleteSupportEcoSystem';
 import BecomeJobReady from './BecomeJobReady';
 
-export default function MainSfmSfdCloud({ pageData }) {
-  const content = pageData?.content || {};
+export default function MainSfmSfdCloud({ pageData, batchesData }) {
+  const content = pageData || {};
 
-  console.log('content', pageData);
   return (
     <>
       <SfmSfdHero hero={content.hero} />
-      <SelectPath pathsData={content.selectPath?.paths} />
+      <SelectPath batchesData={batchesData} />
       <WhoCanApply whoCanApplyData={content.whoCanApply} />
       <SfmSfdCloudAdvantage advantagesData={content.keyAdvantages} />
       <CompleteSupportEcoSystem ecosystemData={content.completeSupportEcosystem} />
