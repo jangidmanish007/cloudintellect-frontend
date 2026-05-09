@@ -189,9 +189,9 @@ export default function ApplyModal({ isOpen, onClose, selectedJob }) {
       formDataToSend.append('source', 'career-page');
       formDataToSend.append('resume', resumeFile);
 
-      // Use the API base URL from environment
-      const apiUrl = `${process.env.API_BASE_URL}${process.env.CAREER_LEADS_SUBMIT}`;
-      const response = await fetch(apiUrl, {
+      // Note: For file uploads, we still need to use fetch directly with FormData
+      // But we use the /api-proxy path to avoid CORS issues
+      const response = await fetch(`/api-proxy/${process.env.CAREER_LEADS_SUBMIT}`, {
         method: 'POST',
         body: formDataToSend,
       });

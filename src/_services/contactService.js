@@ -3,6 +3,8 @@
  * Handles contact form submissions to the backend API
  */
 
+import { clientApi } from '@/_utils/clientApi';
+
 /**
  * Submit contact form data
  * @param {Object} data - Form data
@@ -16,26 +18,19 @@
  */
 export const submitContactForm = async (data) => {
   try {
-    const apiUrl = `${process.env.API_BASE_URL}${process.env.CONTACT_FORM_SUBMIT}`;
-
-    const response = await fetch(apiUrl, {
+    const result = await clientApi(process.env.CONTACT_FORM_SUBMIT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+      body: data,
     });
 
-    const result = await response.json().catch(() => ({}));
-
-    if (!response.ok || result.success === false) {
+    if (!result.status) {
       throw new Error(result.message || 'Failed to submit form. Please try again.');
     }
 
     return {
       status: true,
       message: result.message || 'Form submitted successfully!',
-      data: result.data || null,
+      data: result.result || null,
     };
   } catch (error) {
     console.error('Contact form submission error:', error);

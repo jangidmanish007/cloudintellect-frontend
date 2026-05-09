@@ -147,9 +147,8 @@ export default function ContactFormSection() {
         consent: true,
       };
 
-      // Use the API base URL from environment
-      const apiUrl = `${process.env.API_BASE_URL}${process.env.CONTACT_FORM_SUBMIT}`;
-      const response = await fetch(apiUrl, {
+      // Use the /api-proxy path to avoid CORS issues
+      const response = await fetch(`/api-proxy/${process.env.CONTACT_FORM_SUBMIT}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -12,7 +12,9 @@ export async function clientApi(endpoint, options = {}) {
     const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
 
     // Use the proxy path configured in next.config.mjs
-    const url = `/api-proxy/${cleanEndpoint}`;
+    // This path is rewritten by Next.js based on environment (see next.config.mjs)
+    const proxyPath = '/api-proxy'; // This stays same for all environments
+    const url = `${proxyPath}/${cleanEndpoint}`;
 
     const fetchOptions = {
       method,
