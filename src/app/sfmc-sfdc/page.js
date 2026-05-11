@@ -1,13 +1,19 @@
 import { getSfmcSfdcPageData, getSfmcSfdcBatches } from "@/_services/salesforceService";
+import { getMetaDataStatic } from "@/_services/seoService";
 import MainSfmSfdCloud from "@/components/sfmc-sfdc-course/MainSfmSfdCloud";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: "SFMC + SFDC Integration - CloudIntellect",
-  description: "Learn to integrate Salesforce Marketing Cloud with Salesforce CRM for powerful marketing automation.",
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "SFMC + SFDC Integration - CloudIntellect",
+    description: "Learn to integrate Salesforce Marketing Cloud with Salesforce CRM for powerful marketing automation.",
+    meta_keywords: "SFMC SFDC integration, marketing cloud integration, salesforce CRM, marketing automation, cloud integration",
+    slug: "sfmc-sfdc",
+  });
+}
 
 export default async function SFMCSFDCPage() {
   let pageData = {

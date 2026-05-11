@@ -1,11 +1,16 @@
 import { getPageBySlug } from "@/_services/homeService";
 import MainContactUs from "@/components/contact-us/MainContactUs";
+import { getMetaDataStatic } from "@/_services/seoService";
 
-export const metadata = {
-  title: "Contact Us - CloudIntellect",
-  description:
-    "Get in touch with our team of cloud experts. We're here to help you transform your business with intelligent cloud solutions.",
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "Contact Us - Cloud Intellect",
+    description: "Get in touch with our team of cloud experts. We're here to help you transform your business with intelligent cloud solutions.",
+    meta_keywords: "contact cloud intellect, salesforce training contact, get in touch, cloud computing support",
+    slug: "contact",
+  });
+}
 
 export default async function ContactUsPage() {
   let contactPageData = {

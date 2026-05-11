@@ -5,15 +5,21 @@ import {
   getWebinarWhoShouldAttend
 } from "@/_services/webinarService";
 import { getSuccessStories } from "@/_services/homeService";
+import { getMetaDataStatic } from "@/_services/seoService";
 import MainWebinar from "@/components/webinar/MainWebinar";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: "Webinars - CloudIntellect",
-  description: "Join our free webinars and learn from industry experts about Salesforce and cloud technologies.",
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "Webinars - CloudIntellect",
+    description: "Join our free webinars and learn from industry experts about Salesforce and cloud technologies.",
+    meta_keywords: "salesforce webinars, cloud computing webinars, free salesforce training, salesforce events, online webinars",
+    slug: "webinars",
+  });
+}
 
 export default async function WebinarsPage() {
   let webinarsPageData = {

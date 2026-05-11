@@ -1,13 +1,19 @@
 import { getGalleryPageData, getGalleryCategories, getGalleryImages } from "@/_services/galleryService";
+import { getMetaDataStatic } from "@/_services/seoService";
 import MainGallery from "@/components/gallery/MainGallery";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: "Gallery - CloudIntellect",
-  description: "Browse through our gallery to see moments from our training sessions, events, and celebrations.",
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "Gallery - CloudIntellect",
+    description: "Browse through our gallery to see moments from our training sessions, events, and celebrations.",
+    meta_keywords: "cloudintellect gallery, training photos, events gallery, student celebrations, training sessions",
+    slug: "gallery",
+  });
+}
 
 export default async function GalleryPage() {
   let galleryPageData = {

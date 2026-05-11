@@ -1,14 +1,20 @@
 import PlacementMain from "@/components/placement/PlacementMain";
 import { getPlacementsPage, getPlacements } from "@/_services/placementService";
 import { getPageBySlug } from "@/_services/homeService";
+import { getMetaDataStatic } from "@/_services/seoService";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Placements - CloudIntellect',
-  description: 'Our Students Work at Top Companies. Meet our recent students now working in real Salesforce roles at leading companies.',
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: 'Placements - CloudIntellect',
+    description: 'Our Students Work at Top Companies. Meet our recent students now working in real Salesforce roles at leading companies.',
+    meta_keywords: "salesforce placements, student success stories, salesforce jobs, career placement, top companies",
+    slug: "placements",
+  });
+}
 
 export default async function PlacementsPage() {
   let placementsData = {
