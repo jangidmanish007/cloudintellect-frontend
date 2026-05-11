@@ -302,7 +302,7 @@ export default function Header() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`transition hover:text-white ${isScrolled ? 'text-gray-500' : 'text-white/70'}`}
+                        className={`transition  ${isScrolled ? 'text-gray-500 hover:text-gray' : 'text-white/70 hover:text-white'}`}
                         aria-label={social.platform}
                       >
                         {SOCIAL_ICONS[social.platform]}
