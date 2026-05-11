@@ -41,8 +41,8 @@ const nextConfig = {
     NEXT_PUBLIC_IMG_PATH: "/",
 
     // ─── Local URLs ───────────────────────────────────────────────
-    PUBLIC_SITE_URL: "http://localhost:3000/",
-    NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
+    PUBLIC_SITE_URL: "https://www.cloudintellect.com/",
+    NEXT_PUBLIC_SITE_URL: "https://www.cloudintellect.com",
     API_BASE_URL: "https://cloudintellect.in/api/",
     DYNAMIC_IMG_BASE_PATH: "https://cloudintellect.in",
 

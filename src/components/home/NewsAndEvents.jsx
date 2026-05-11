@@ -155,14 +155,14 @@ export default function NewsAndEvents({ newsAndEventsData }) {
                 <p className="ranade-font text-[#475569] text-[14px] sm:text-[16px] font-normal leading-relaxed flex-1">
                   {mainFeature.description}
                 </p>
-                {mainFeature.readMoreHref && (
+                {/* {mainFeature.readMoreHref && (
                   <Link
                     href={mainFeature.readMoreHref}
                     className="inline-flex justify-center max-w-[190px] gap-2 px-4 py-2 rounded btn-primary border-0  transition text-sm font-medium underline-none"
                   >
                     {mainFeature.readMoreLabel || 'READ MORE'} <ArrowRight width={16} height={16} />
                   </Link>
-                )}
+                )} */}
               </div>
             </article>
           </motion.div>
