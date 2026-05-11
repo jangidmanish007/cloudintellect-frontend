@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-export default function ContactHeroSection({ pageData }) {
+export default function TestimonialsHero({ pageData }) {
   const hero = pageData?.content?.hero || {};
 
-  const backgroundImage = hero.backgroundImage || hero.bgImage || '/images/BG (2).webp';
   const tag = hero.tag || hero.label || 'SPECIALIZATION PROGRAM';
   const heading = hero.heading || hero.title || 'Real Stories. Real Careers.';
   const description =
@@ -18,7 +17,7 @@ export default function ContactHeroSection({ pageData }) {
   const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || 'View Placements';
   const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || '#placements';
 
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/contact/BG.webp`;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/testimonals/testimonial-hero-bg.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">

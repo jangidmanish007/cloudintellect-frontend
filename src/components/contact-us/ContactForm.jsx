@@ -6,7 +6,7 @@ import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
 
 const PROGRAMS = ['SFDC', 'SFMC'];
 
-export default function ContactFormSection() {
+export default function ContactForm() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',

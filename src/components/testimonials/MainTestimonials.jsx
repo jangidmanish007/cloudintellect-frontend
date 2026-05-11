@@ -1,19 +1,22 @@
-"use client";
-import TestimonialsHeroSection from "./TestimonialsHeroSection";
-import TestimonialsGrid from "./TestimonialsGrid";
-import MoreSuccessStoriesSection from "./MoreSuccessStoriesSection";
-import BeNextSuccessStorySection from "./BeNextSuccessStorySection";
+'use client';
+import TestimonialsGrid from './TestimonialsGrid';
+import TestimonialsHero from './TestimonialsHero';
+import MoreSuccessStories from './MoreSuccessStories';
+import BeNextSuccessStory from './BeNextSuccessStory';
 
-export default function MainTestimonials({ testimonialsPageData }) { 
+export default function MainTestimonials({ testimonialsPageData }) {
   return (
     <>
-      <TestimonialsHeroSection pageData={testimonialsPageData?.pageData} />
+      <TestimonialsHero pageData={testimonialsPageData?.pageData} />
       <TestimonialsGrid
         testimonials={testimonialsPageData?.testimonials || []}
         pageData={testimonialsPageData?.pageData}
       />
-      <MoreSuccessStoriesSection pageData={testimonialsPageData?.pageData} successStories={testimonialsPageData?.successtoriesData}/>
-      <BeNextSuccessStorySection pageData={testimonialsPageData?.pageData} />
+      <MoreSuccessStories
+        pageData={testimonialsPageData?.pageData}
+        successStories={testimonialsPageData?.successtoriesData}
+      />
+      <BeNextSuccessStory pageData={testimonialsPageData?.pageData} />
     </>
   );
 }

@@ -1,13 +1,13 @@
 'use client';
 
-import ContactFormSection from './ContactFormSection';
-import ContactHeroSection from './ContactHeroSection';
+import ContactForm from './ContactForm';
+import ContactHero from './ContactHero';
 
 export default function MainContactUs({ contactPageData }) {
   return (
     <>
-      <ContactHeroSection pageData={contactPageData?.pageData} />
-      <ContactFormSection pageData={contactPageData?.pageData} />
+      <ContactHero pageData={contactPageData?.pageData} />
+      <ContactForm pageData={contactPageData?.pageData} />
     </>
   );
 }

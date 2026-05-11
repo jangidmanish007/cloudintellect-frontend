@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-export default function TestimonialsHeroSection({ pageData }) {
+export default function ContactHero({ pageData }) {
   const hero = pageData?.content?.hero || {};
 
   const backgroundImage = hero.backgroundImage || hero.bgImage || '/images/BG (2).webp';
@@ -18,7 +18,7 @@ export default function TestimonialsHeroSection({ pageData }) {
   const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || 'View Placements';
   const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || '#placements';
 
-  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/testimonals/BG.webp`;
+  const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/contact/contact-us-bg.webp`;
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">

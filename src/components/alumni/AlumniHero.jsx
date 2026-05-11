@@ -1,28 +1,26 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-
-export default function AlumniHeroSection({ pageData }) {
+export default function AlumniHero({ pageData }) {
   const hero = pageData?.content?.hero || {};
 
-  const backgroundImage = hero.backgroundImage || hero.bgImage || "images/BG (2).webp";
-  const heading = hero.heading || hero.title || "Our Alumni Are Building Real Careers in Salesforce";
-  const description = hero.description || hero.subtitle || "Different starts, one choice to learn Salesforce right. Now working on real projects.";
-  const primaryButtonText = hero.primaryButtonText || hero.primaryBtnText || "Explore Program";
-  const primaryButtonHref = hero.primaryButtonHref || hero.primaryBtnHref || "#";
-  const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || "View Placement";
-  const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || "#";
+  const heading = hero.heading || hero.title || 'Our Alumni Are Building Real Careers in Salesforce';
+  const description =
+    hero.description ||
+    hero.subtitle ||
+    'Different starts, one choice to learn Salesforce right. Now working on real projects.';
+  const primaryButtonText = hero.primaryButtonText || hero.primaryBtnText || 'Explore Program';
+  const primaryButtonHref = hero.primaryButtonHref || hero.primaryBtnHref || '#';
+  const secondaryButtonText = hero.secondaryButtonText || hero.secondaryBtnText || 'View Placement';
+  const secondaryButtonHref = hero.secondaryButtonHref || hero.secondaryBtnHref || '#';
   // Determine if buttons are external / hash links
-  const isExternal = (href) =>
-    !href || href === "#" || /^(https?:\/\/|mailto:|tel:|#)/.test(href);
 
   return (
     <section className="relative w-full min-h-[600px] flex items-center pt-[130px] md:pt-[180px] overflow-hidden">
-
       {/* Background image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('${process.env.NEXT_PUBLIC_IMG_PATH}images/alumni/BG.webp')`,
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_IMG_PATH}images/alumni/alumni-bg-img.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -32,14 +30,10 @@ export default function AlumniHeroSection({ pageData }) {
       {/* Content */}
       <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-6 py-14 md:py-20">
         <div className="flex flex-col gap-6 max-w-[750px]">
-
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/95 rounded-full w-fit">
-            <span
-              className="w-2 h-2 rounded-full bg-[#009FFF] shrink-0"
-              aria-hidden="true"
-            />
+            <span className="w-2 h-2 rounded-full bg-[#009FFF] shrink-0" aria-hidden="true" />
             <span className="text-[#1E1E1E] text-[11px] font-semibold tracking-[0.5px] uppercase font-sans">
-              {hero.tag || hero.label || "SUCCESS STORIES"}
+              {hero.tag || hero.label || 'SUCCESS STORIES'}
             </span>
           </div>
 
@@ -73,7 +67,6 @@ export default function AlumniHeroSection({ pageData }) {
 
         {/* Right: visual placeholder (hidden on mobile) */}
         <div className="shrink-0 w-[340px] min-h-[400px] md:w-[260px] md:min-h-[320px] sm:hidden" />
-
       </div>
     </section>
   );
