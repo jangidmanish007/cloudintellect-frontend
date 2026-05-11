@@ -98,10 +98,6 @@ export const generateBreadcrumbStructuredData = (breadcrumbs) => {
   });
 };
 
-/**
- * Generate organization structured data
- * @returns {Object} Organization JSON-LD
- */
 export const generateOrganizationStructuredData = () => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cloudintellect.com';
 

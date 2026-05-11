@@ -2,6 +2,9 @@ import { getPageBySlug } from "@/_services/homeService";
 import MainContactUs from "@/components/contact-us/MainContactUs";
 import { getMetaDataStatic } from "@/_services/seoService";
 
+// Enable dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 // Generate metadata using SEO service
 export async function generateMetadata() {
   return await getMetaDataStatic({

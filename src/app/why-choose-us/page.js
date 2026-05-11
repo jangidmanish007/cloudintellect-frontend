@@ -2,6 +2,9 @@ import { getWhyChooseUsPageData } from "@/_services/aboutService";
 import { getMetaDataStatic } from "@/_services/seoService";
 import MainWhyChooseUs from "@/components/why-choose-us/MainWhyChooseUs";
 
+// Enable dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 // Generate metadata using SEO service
 export async function generateMetadata() {
   return await getMetaDataStatic({
