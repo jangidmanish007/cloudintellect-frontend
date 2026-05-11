@@ -102,6 +102,11 @@ function GoogleIcon({ size = 20 }) {
    Review Card
 ───────────────────────────────────────────── */
 function ReviewCard({ review }) {
+  // Determine the correct image path based on whether it's dynamic or static data
+  const imagePath = review.profileImage?.startsWith('images/')
+    ? `${process.env.NEXT_PUBLIC_IMG_PATH}${review.profileImage}`
+    : `${process.env.DYNAMIC_IMG_BASE_PATH}${review.profileImage}`;
+
   return (
     <motion.article
       variants={fadeUp}
@@ -112,13 +117,7 @@ function ReviewCard({ review }) {
         <div className="flex items-center gap-3 min-w-0">
           {/* Avatar */}
           <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-[#009FFF] flex items-center justify-center">
-            <img
-              src={`${process.env.NEXT_PUBLIC_IMG_PATH}${review.profileImage}`}
-              alt=""
-              aria-hidden
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
+            <img src={imagePath} alt="" aria-hidden className="w-full h-full object-cover" loading="lazy" />
           </div>
 
           {/* Name + time */}
@@ -132,7 +131,7 @@ function ReviewCard({ review }) {
       </div>
 
       {/* Stars */}
-      <StarRating count={review.rating} size={14} />
+      <StarRating count={review.rating || 5} size={14} />
 
       {/* Review text */}
       <p className="text-[13px] text-[#4B5563] leading-[1.65]">{review.text}</p>
@@ -151,7 +150,10 @@ function ReviewCard({ review }) {
 /* ─────────────────────────────────────────────
    Main Component
 ───────────────────────────────────────────── */
-export default function StudentReviews() {
+export default function StudentReviews({ testimonials = [] }) {
+  // Use dynamic data if available, otherwise fallback to static data
+  const reviews = testimonials.length > 0 ? testimonials : REVIEWS;
+
   return (
     <section className="bg-[#FFFBF2] py-12 sm:py-16 lg:py-20 px-[16px]">
       <div className="max-w-[1280px] mx-auto">
@@ -189,8 +191,8 @@ export default function StudentReviews() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {REVIEWS.map((review, index) => (
-            <ReviewCard key={index} review={review} />
+          {reviews.map((review, index) => (
+            <ReviewCard key={review._id || index} review={review} />
           ))}
         </motion.div>
       </div>

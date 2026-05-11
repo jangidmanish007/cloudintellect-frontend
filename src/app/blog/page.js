@@ -1,13 +1,19 @@
 import { getBlogPageData, getBlogPosts } from "@/_services/blogService";
+import { getMetaDataStatic } from "@/_services/seoService";
 import MainBlog from "@/components/blog/MainBlog";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: "Blog - CloudIntellect",
-  description: "Stay updated with the latest insights, tips, and trends in Salesforce and cloud technologies.",
-};
+// Generate metadata using SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "Blog - CloudIntellect",
+    description: "Stay updated with the latest insights, tips, and trends in Salesforce and cloud technologies.",
+    meta_keywords: "salesforce blog, cloud computing blog, salesforce tips, technology insights, salesforce trends",
+    slug: "blog",
+  });
+}
 
 // Hardcoded categories matching the API response
 const BLOG_CATEGORIES = [

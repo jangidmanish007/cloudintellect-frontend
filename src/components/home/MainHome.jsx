@@ -42,7 +42,7 @@ export default function MainHome({ homePageData }) {
         />
       </div>
       <div id="reviews">
-        <StudentReviews />
+        <StudentReviews testimonials={homePageData?.testimonials} />
       </div>
       <AchievementHighlights />
       <div id="news">

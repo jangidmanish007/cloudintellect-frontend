@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -18,7 +19,9 @@ const fadeUp = {
 const staggerContainer = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.08 },
+    transition: {
+      staggerChildren: 0.08,
+    },
   },
 };
 
@@ -50,6 +53,8 @@ const mainFeatureVariant = {
 };
 
 export default function NewsAndEvents({ newsAndEventsData }) {
+  const [showScrollbar, setShowScrollbar] = useState(false);
+
   const data = newsAndEventsData || {};
 
   const headingLine1 = data.headingLine1 || 'News and';
@@ -57,6 +62,8 @@ export default function NewsAndEvents({ newsAndEventsData }) {
   const mainFeature = data.mainFeature || {};
   const timelineItems = Array.isArray(data.timelineItems) ? data.timelineItems : [];
   const sideArticles = Array.isArray(data.sideArticles) ? data.sideArticles : [];
+
+  // Calculate animation duration: stagger delay for all items + last item animation
 
   return (
     <section className="relative bg-[#F8FAFC] py-16 px-[16px] overflow-hidden">
@@ -77,11 +84,17 @@ export default function NewsAndEvents({ newsAndEventsData }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* ── Left Column: Timeline Items ── */}
           <motion.div
-            className="lg:col-span-3 md:col-span-4 flex flex-col gap-4 max-h-[400px] sm:max-h-[500px] lg:max-h-[742px] overflow-y-auto pr-2 custom-scrollbar"
+            className={`lg:col-span-3 md:col-span-4 flex flex-col gap-4 max-h-[400px] sm:max-h-[500px] lg:max-h-[742px] pr-2 transition-all duration-300 ${
+              showScrollbar ? 'overflow-y-auto custom-scrollbar' : 'overflow-y-hidden'
+            }`}
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
+            onAnimationComplete={() => {
+              // Show scrollbar after animation completes
+              setTimeout(() => setShowScrollbar(true), 100);
+            }}
           >
             {timelineItems?.map((item, i) => (
               <motion.div

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getBlogPostBySlug } from "@/_services/blogService";
+import { getMetaDataStatic } from "@/_services/seoService";
 import MainBlogPost from "@/components/blog/blog-post/MainBlogPost";
 
 // Enable dynamic rendering for this page
@@ -27,10 +28,14 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  return {
+  // Generate SEO metadata with keywords and canonical URL
+  return await getMetaDataStatic({
     title: `${blogPost.title} - CloudIntellect Blog`,
-    description: blogPost.excerpt || "Read our latest blog post about Salesforce and cloud technologies.",
-  };
+    description: blogPost.excerpt || blogPost.meta_description || "Read our latest blog post about Salesforce and cloud technologies.",
+    meta_keywords: blogPost.meta_keywords || "salesforce, cloud computing, technology blog, salesforce tips",
+    slug: `blog/${slug}`,
+    image: blogPost.featured_image || undefined,
+  });
 }
 
 export default async function BlogPostDetailPage({ params }) {

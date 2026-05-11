@@ -75,24 +75,17 @@ export default function WhyChooseUs({ whyChoose }) {
                       aria-expanded={true}
                       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleToggle(index)}
                     >
-                      {/*
-                        Layout (matches image):
-                        [large faded number] [title + underline + description]   [img1] [img2]
-                      */}
                       <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-10">
-                        {/* Left block: number + text */}
                         <div className="flex items-start gap-5 sm:gap-8 flex-1 min-w-0">
-                          {/* Large faded number */}
                           <span className="text-[60px] text-[#E9E9E9] font-segoe font-bold leading-[50px]">
-                            0{index + 1}
+                            {(index <= 8 && '0') || ''}
+                            {index + 1}
                           </span>
 
-                          {/* Title + underline + body text */}
                           <div className="flex-1 min-w-0">
                             <h3 className="excon-font text-[#1A1A1A] text-[18px] sm:text-[21px] lg:text-[23px] font-bold leading-snug mb-2 m-0">
                               {item.title}
                             </h3>
-                            {/* Short horizontal rule under title */}
                             <div className="w-7 h-[2px] bg-[#1A1A1A] mb-4" />
                             <p className="ranade-font text-[#5A6475] text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.8] m-0 max-w-[460px]">
                               {item.content}
@@ -102,18 +95,12 @@ export default function WhyChooseUs({ whyChoose }) {
 
                         {/* Right block: two images side by side */}
                         {imgSrc && (
-                          <div className="flex gap-3 shrink-0 lg:self-start">
+                          <div className="">
                             <img
-                              src={imgSrc}
+                              src={`${imgSrc}`}
                               alt=""
                               aria-hidden
-                              className="w-[150px] h-[130px] sm:w-[190px] sm:h-[160px] lg:w-[220px] lg:h-[185px] object-cover"
-                            />
-                            <img
-                              src={imgSrc}
-                              alt=""
-                              aria-hidden
-                              className="w-[150px] h-[130px] sm:w-[190px] sm:h-[160px] lg:w-[220px] lg:h-[185px] object-cover"
+                              className="w-[340px] rounded-[4px] h-[150px] sm:w-[300px] sm:h-[130px] lg:w-[534px] lg:h-[259px] object-cover"
                             />
                           </div>
                         )}
@@ -134,7 +121,8 @@ export default function WhyChooseUs({ whyChoose }) {
                     >
                       {/* Faded number */}
                       <span className="text-[60px] text-[#E9E9E9] font-segoe font-bold leading-[50px]">
-                        0{index + 1}
+                        {(index <= 8 && '0') || ''}
+                        {index + 1}
                       </span>
 
                       {/* Title */}

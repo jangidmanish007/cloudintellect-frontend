@@ -1,13 +1,19 @@
 import MainAbout from "@/components/about/MainAbout";
 import { getAboutPageData } from "@/_services/aboutService";
+import { getMetaDataStatic } from "@/_services/seoService";
 
 // Enable dynamic rendering for this page
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: "About Us - Cloud Intellect",
-  description: "Learn about Cloud Intellect, a premier Salesforce Workforce Development Partner bridging education and industry.",
-};
+// Generate metadata using the SEO service
+export async function generateMetadata() {
+  return await getMetaDataStatic({
+    title: "About Us - Cloud Intellect",
+    description: "Learn about Cloud Intellect, a premier Salesforce Workforce Development Partner bridging education and industry.",
+    meta_keywords: "cloud intellect, salesforce training, workforce development, salesforce certification, about us",
+    slug: "about",
+  });
+}
 
 export default async function AboutPage() {
   let aboutPageData = {

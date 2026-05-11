@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "CloudIntellect - Intelligent Cloud Solutions",
   description: "Empowering businesses with intelligent cloud solutions and cutting-edge technology.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cloudintellect.com'),
 };
 
 export default function RootLayout({ children }) {

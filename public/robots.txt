@@ -1,0 +1,32 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+Disallow: /api-proxy/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /404
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /api-proxy/
+Disallow: /admin/
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /api-proxy/
+Disallow: /admin/
+
+# Host
+Host: https://www.cloudintellect.com
+
+# Sitemaps
+Sitemap: https://www.cloudintellect.com/sitemap.xml
+Sitemap: https://www.cloudintellect.com/blog-sitemap.xml

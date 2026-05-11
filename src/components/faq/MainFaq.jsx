@@ -1,9 +1,9 @@
-import FaqSection from "./FaqSection";
+import Faqs from './Faqs';
 
 export default function MainFaq({ faqPageData }) {
   return (
     <>
-      <FaqSection pageData={faqPageData?.pageData} />
+      <Faqs pageData={faqPageData?.pageData} />
     </>
   );
 }

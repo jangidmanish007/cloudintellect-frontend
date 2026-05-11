@@ -28,30 +28,6 @@ const itemVariants = {
   },
 };
 
-const fadeInUpVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  },
-};
-
-const slideInLeftVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  },
-};
-
 const slideInRightVariants = {
   hidden: { opacity: 0, x: 30 },
   visible: {
@@ -80,15 +56,19 @@ export default function LeaderShipEdge({ leadershipData }) {
           className="font-excon text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-light leading-tight text-center mb-8 sm:mb-10 md:mb-14 lg:mb-20 text-white px-4"
         >
           {leadershipData?.title || 'The Cloud Intellect'}{' '}
-          <motion.span
-            className="font-bold inline-block"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            Edge
-          </motion.span>
+          {(leadershipData?.title && <></>) || (
+            <>
+              <motion.span
+                className="font-bold inline-block"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                Edge
+              </motion.span>
+            </>
+          )}
         </motion.h2>
 
         {/* Two Column Layout */}
