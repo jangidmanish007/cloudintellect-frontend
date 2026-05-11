@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroApplicationForm from './HeroApplicationForm';
-import { ArrowBigRight, ArrowBigRightDashIcon, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
 const SLIDES = [
@@ -88,9 +88,9 @@ export default function HomeBanner() {
       <div className="absolute inset-0 bg-black/40 z-0" />
 
       <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10 py-10 lg:py-0">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-stretch gap-6 lg:gap-0 min-h-[580px] lg:min-h-[640px]">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-stretch lg:gap-0 min-h-[580px] lg:min-h-[640px]">
           {/* ── LEFT: Text + Slider ── */}
-          <div className="flex flex-col justify-center flex-1 lg:max-w-[38%] xl:max-w-[36%] pb-10">
+          <div className="flex flex-col justify-center flex-1 lg:max-w-[38%] xl:max-w-[36%] lg:pb-10">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -110,8 +110,10 @@ export default function HomeBanner() {
               </button>
             </motion.div>
 
+            {/* Person image - Mobile/Tablet only */}
+
             {/* Slider info bar */}
-            <div className="">
+            <div className="mt:lg-0 mt-6">
               <Slider ref={sliderRef} {...settings}>
                 {SLIDES.map((slide, i) => (
                   <div key={i}>
@@ -207,7 +209,7 @@ export default function HomeBanner() {
           </div>
 
           {/* ── CENTER: Person image ── */}
-          <div className="hidden lg:flex flex-1 items-end justify-center relative self-end">
+          <div className="flex flex-1 items-end justify-center relative self-end">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentSlide}
@@ -217,17 +219,15 @@ export default function HomeBanner() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="max-h-[580px] w-auto object-contain object-bottom drop-shadow-2xl"
+                className="max-h-[200px] sm:max-h-[240px]  xl:max-h-[580px] w-auto object-contain object-bottom drop-shadow-2xl"
               />
             </AnimatePresence>
           </div>
-
-          {/* ── RIGHT: Application form ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-            className="w-full lg:w-[340px] xl:w-[400px] shrink-0 flex items-start pt-6 lg:py-6"
+            className="w-full lg:w-[340px] xl:w-[400px] shrink-0 flex items-start pt-0 lg:py-6"
           >
             <HeroApplicationForm />
           </motion.div>

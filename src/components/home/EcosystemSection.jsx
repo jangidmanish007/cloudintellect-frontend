@@ -328,7 +328,7 @@ export default function EcosystemSection({ ecosystem }) {
                 </div>
 
                 {/* Main content */}
-                <div className="mt-auto pt-6 sm:pr-0 pr-[80px]">
+                <div className="mt-auto pt-6 pr-[80px]">
                   <p className="excon-font font-bold text-white text-[32px] sm:text-[40px] lg:text-[48px] leading-none tracking-[-1.2px] lg:mb-0 mb-4">
                     {c5.stat}
                   </p>

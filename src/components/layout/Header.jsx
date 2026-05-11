@@ -342,7 +342,7 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <ul
-            className={`hidden lg:flex items-center gap-10 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+            className={`hidden lg:flex items-center xl:gap-10 gap-6 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}
           >
             {mainNav.map((item) => (
               <li
@@ -353,7 +353,7 @@ export default function Header() {
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`transition hover:opacity-80 text-xs font-normal cursor-pointer ${isScrolled ? 'hover:text-blue' : 'hover:text-white/80'}`}
+                  className={`transition hover:opacity-80 xl:text-xs text-[10px] font-normal cursor-pointer ${isScrolled ? 'hover:text-blue' : 'hover:text-white/80'}`}
                 >
                   {item.label}
                 </a>
@@ -430,11 +430,14 @@ export default function Header() {
         className={`hidden lg:block transition-colors duration-300 px-4 ${isScrolled ? 'bg-white' : 'bg-transparent border-white/20'}`}
       >
         <div
-          className={`mx-auto max-w-[1522px] px-4 flex items-center justify-evenly gap-1 h-11 text-xs font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white bg-[#0000003D] rounded-sm'}`}
+          className={`mx-auto max-w-[1522px] xl:px-4 flex items-center justify-evenly gap-1 h-11 text-xs font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-700' : 'text-white bg-[#0000003D] rounded-sm'}`}
         >
           {secondaryNav.map((item, idx) => (
-            <div key={item.label} className="flex items-center justify-center relative text-center min-w-[100px]">
-              <div className="secondary-nav-item relative px-3 py-2">
+            <div
+              key={item.label}
+              className="flex items-center justify-center relative text-center min-w-[80px] xl:min-w-[100px]"
+            >
+              <div className="secondary-nav-item relative xl:px-3 px-1 py-2">
                 {item.children ? (
                   <>
                     <button className={`flex items-center gap-1 transition hover:opacity-70`}>

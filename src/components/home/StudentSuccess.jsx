@@ -148,6 +148,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
         img.src = imgSrc;
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [learners]);
 
   /* ── Keep activeIndex in bounds (derived, no effect needed) ── */
@@ -174,10 +175,10 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
 
   return (
     <section className="bg-[#009FFF] py-12 sm:py-16 lg:py-20 px-[16px] overflow-hidden">
-      <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row lg:justify-between gap-10 lg:gap-8 items-start">
+      <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row lg:justify-between gap-10 2xl:gap-8 items-start">
         {/* ══ LEFT COLUMN ══ */}
         <motion.div
-          className="w-full lg:max-w-[380px] xl:max-w-[528px] shrink-0 flex flex-col"
+          className="w-full lg:max-w-[460px] xl:max-w-[528px] shrink-0 flex flex-col"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -252,7 +253,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
           custom={0.1}
         >
           <div className="bg-[#FAFAFA] overflow-hidden">
-            <div className="flex flex-col sm:flex-row gap-0 min-h-[468px]">
+            <div className="flex flex-col sm:flex-row gap-0">
               {/* Text side with animation */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -261,7 +262,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center"
+                  className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center min-h-[360px] h-[380px] sm:h-[400px] lg:h-[448px]"
                 >
                   {/* Quote icon */}
                   <div className="text-[#009FFF] mb-4" aria-hidden>
@@ -277,7 +278,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
 
                   {/* Testimonial body */}
                   {activeLearner.testimonial && (
-                    <p className="ranade-font text-[10px] text-[#5A6475] leading-[1.4] m-0">
+                    <p className="ranade-font text-[10px] text-[#5A6475] leading-[1.6] m-0 overflow-y-auto max-h-[280px] sm:max-h-[320px] lg:max-h-[360px] pr-2">
                       {activeLearner.testimonial}
                     </p>
                   )}
@@ -286,7 +287,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
 
               {/* Photo side - No animation wrapper, instant display */}
               {(activeLearner.mainImage || activeLearner.thumbnailImage) && (
-                <div className="sm:w-[220px] lg:w-[320px] shrink-0 relative overflow-hidden">
+                <div className="w-full sm:w-[320px] lg:w-[320px] shrink-0 relative overflow-hidden h-[400px] sm:h-[400px] lg:h-[448px]">
                   {/* Render all images but only show active one */}
                   {learners.map((learner) => (
                     <div
@@ -302,7 +303,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
                         src={learner.mainImage || learner.thumbnailImage}
                         alt=""
                         aria-hidden
-                        className="w-full h-[416px] sm:h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                       />
                     </div>
                   ))}

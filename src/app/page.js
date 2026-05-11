@@ -18,7 +18,8 @@ export async function generateMetadata() {
 export default async function Home() {
   let homePageData = {
     pageData: null,
-    successStories: []
+    successStories: [],
+    testimonials: []
   };
 
   try {
@@ -32,6 +33,8 @@ export default async function Home() {
     const successStoriesRes = await getSuccessStories();
     if (successStoriesRes?.status) {
       homePageData.successStories = successStoriesRes.result || [];
+      // Use the same API data for testimonials/reviews
+      homePageData.testimonials = successStoriesRes.result || [];
     }
   } catch (error) {
     console.error('Error fetching home page data:', error);
