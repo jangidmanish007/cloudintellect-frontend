@@ -77,7 +77,7 @@ export default function HomeBanner() {
 
   return (
     <section
-      className="relative w-full min-h-[1374px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] lg:pb-0 pb-[64px]"
+      className="relative w-full min-h-[1380px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[180px] lg:pb-0 pb-[64px]"
       style={{
         backgroundImage: "url('images/home/home-banner-img-1.webp')",
         backgroundSize: 'cover',
