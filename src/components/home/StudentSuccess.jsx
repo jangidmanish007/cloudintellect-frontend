@@ -262,7 +262,7 @@ export default function StudentSuccess({ successStories, sectionContent = {} }) 
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center min-h-[360px] h-[380px] sm:h-[400px] lg:h-[448px]"
+                  className="flex-1 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-center min-h-[260px] h-[380px] sm:h-[400px] lg:h-[448px]"
                 >
                   {/* Quote icon */}
                   <div className="text-[#009FFF] mb-4" aria-hidden>
