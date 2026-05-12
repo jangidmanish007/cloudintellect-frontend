@@ -71,7 +71,7 @@ export default function OurPlacement({ placements }) {
   );
 
   return (
-    <section className="w-full pb-[80px] pt-[120px] px-[16px] overflow-hidden">
+    <section className="w-full lg:pb-[80px] pb-[60px] lg:pt-[120px] pt-[64px] px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         {/* First Background Box */}
         {placementsList.length > 0 && (
@@ -85,10 +85,10 @@ export default function OurPlacement({ placements }) {
             {/* Placements Grid with Decorative Boxes */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative pt-[60px]">
               {/* Left Decorative Box */}
-              <div className="absolute top-0 left-0 sm:left-[20px] lg:left-[12%] w-[280px] sm:w-[300px] lg:w-[329px] h-full rounded-[24px] bg-[#009DE31A] border border-[#0000001A] -z-10"></div>
+              <div className="absolute top-0 left-[50%] sm:translate-x-0 translate-x-[-50%] sm:left-[20px] lg:left-[12%] w-[150px] sm:w-[300px] lg:w-[329px] h-full rounded-[24px] bg-[#009DE31A] border border-[#0000001A] -z-10"></div>
 
               {/* Right Decorative Box */}
-              <div className="absolute top-0 right-0 sm:right-[20px] lg:right-[12%] w-[280px] sm:w-[300px] lg:w-[329px] h-full rounded-[24px] bg-[#009DE31A] border border-[#0000001A] -z-10"></div>
+              <div className="absolute top-0 right-0 sm:block hidden sm:right-[20px] lg:right-[12%] w-[280px] sm:w-[300px] lg:w-[329px] h-full rounded-[24px] bg-[#009DE31A] border border-[#0000001A] -z-10"></div>
 
               {placementsList.map((placement, index) => (
                 <PlacementCard key={placement._id || index} placement={placement} index={index} />
