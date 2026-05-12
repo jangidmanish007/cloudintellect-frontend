@@ -185,6 +185,8 @@ export default function HeroApplicationForm() {
         dateOfBirth: format(formData.dateOfBirth, 'yyyy-MM-dd'),
         city: formData.city.trim(),
         product: formData.product,
+        // Add UTM parameters if available
+        // ...getStoredUtmParams(),
       };
 
       const apiUrl = buildApiUrl(process.env.HERO_APPLICATION_SUBMIT);

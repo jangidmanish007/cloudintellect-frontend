@@ -36,6 +36,7 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="course" />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {/* <UtmTracker /> */}
         <Header />
         <main className="grow">
           {children}

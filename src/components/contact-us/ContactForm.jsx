@@ -164,6 +164,8 @@ export default function ContactForm({ contactInfo, location }) {
         message: formData.message,
         source: 'contact-page',
         consent: true,
+        // Add UTM parameters if available
+        // ...getStoredUtmParams(),
       };
 
       const apiUrl = buildApiUrl(process.env.CONTACT_FORM_SUBMIT);

@@ -190,6 +190,12 @@ export default function ApplyModal({ isOpen, onClose, selectedJob }) {
       formDataToSend.append('source', 'career-page');
       formDataToSend.append('resume', resumeFile);
 
+      // Add UTM parameters if available
+      // const utmParams = getStoredUtmParams();
+      // Object.keys(utmParams).forEach((key) => {
+      //   formDataToSend.append(key, utmParams[key]);
+      // });
+
       // Note: For file uploads, we still need to use fetch directly with FormData
       const apiUrl = buildApiUrl(process.env.CAREER_LEADS_SUBMIT);
       const response = await fetch(apiUrl, {
