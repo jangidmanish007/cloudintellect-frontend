@@ -67,7 +67,7 @@ export default function HomeBanner() {
     speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     arrows: false,
     beforeChange: (_, next) => setCurrentSlide(next),
@@ -77,7 +77,7 @@ export default function HomeBanner() {
 
   return (
     <section
-      className="relative w-full min-h-[1354px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] lg:pb-0 pb-[64px]"
+      className="relative w-full min-h-[1374px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] lg:pb-0 pb-[64px]"
       style={{
         backgroundImage: "url('images/home/home-banner-img-1.webp')",
         backgroundSize: 'cover',
@@ -125,10 +125,10 @@ export default function HomeBanner() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
                           transition={{ duration: 0.4 }}
-                          className="flex items-center lg:gap-12 gap-6 rounded pb-4"
+                          className="flex items-center lg:gap-12 sm:gap-6 gap-4 rounded pb-4"
                         >
                           {/* Name + designation */}
-                          <div className="min-w-0">
+                          <div className="lg:min-w-0 min-w-[26%]">
                             <p className="text-white font-bold md:text-[24px] text-[16px] leading-tight">
                               {slide.name} <span className="font-light block">{slide.lastName}</span>
                             </p>
@@ -140,7 +140,7 @@ export default function HomeBanner() {
                           <div className="w-px h-8 bg-white/30 shrink-0" />
 
                           {/* Package */}
-                          <div className="shrink-0">
+                          <div className="shrink-0 lg:min-w-0  min-w-[26%] lg:text-start text-center">
                             <p className="text-white font-bold md:text-[24px] text-[16px] leading-tight text-center">
                               {slide.package} <span className="font-light text-xs block">LPA</span>
                             </p>
