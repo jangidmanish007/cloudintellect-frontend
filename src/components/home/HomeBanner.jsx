@@ -77,7 +77,7 @@ export default function HomeBanner() {
 
   return (
     <section
-      className="relative w-full min-h-[600px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[120px]"
+      className="relative w-full min-h-[1354px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] pb-[64px]"
       style={{
         backgroundImage: "url('images/home/home-banner-img-1.webp')",
         backgroundSize: 'cover',
@@ -87,7 +87,7 @@ export default function HomeBanner() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 z-0" />
 
-      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10 py-10 lg:py-0">
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-stretch lg:gap-0 min-h-[580px] lg:min-h-[640px]">
           {/* ── LEFT: Text + Slider ── */}
           <div className="flex flex-col justify-center flex-1 lg:max-w-[38%] xl:max-w-[36%] lg:pb-10">
@@ -209,7 +209,7 @@ export default function HomeBanner() {
           </div>
 
           {/* ── CENTER: Person image ── */}
-          <div className="flex flex-1 items-end justify-center relative self-end">
+          <div className="flex flex-1 items-end justify-center relative self-center">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentSlide}
