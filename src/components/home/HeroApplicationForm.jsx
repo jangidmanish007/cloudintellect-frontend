@@ -186,8 +186,12 @@ export default function HeroApplicationForm() {
         product: formData.product,
       };
 
-      // Use the /api-proxy path to avoid CORS issues
-      const response = await fetch(`/api-proxy/${process.env.HERO_APPLICATION_SUBMIT}`, {
+      // Development: use /api-proxy, Production: use direct API URL
+      const isDevelopment = process.env.NODE_ENV === 'development';
+      const apiUrl = isDevelopment
+        ? `/api-proxy/${process.env.HERO_APPLICATION_SUBMIT}`
+        : `${process.env.API_BASE_URL}${process.env.HERO_APPLICATION_SUBMIT}`;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

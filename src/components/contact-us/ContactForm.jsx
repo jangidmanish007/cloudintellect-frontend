@@ -165,8 +165,12 @@ export default function ContactForm({ contactInfo, location }) {
         consent: true,
       };
 
-      // Use the /api-proxy path to avoid CORS issues
-      const response = await fetch(`/api-proxy/${process.env.CONTACT_FORM_SUBMIT}`, {
+      // Development: use /api-proxy, Production: use direct API URL
+      const isDevelopment = process.env.NODE_ENV === 'development';
+      const apiUrl = isDevelopment
+        ? `/api-proxy/${process.env.CONTACT_FORM_SUBMIT}`
+        : `${process.env.API_BASE_URL}${process.env.CONTACT_FORM_SUBMIT}`;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
