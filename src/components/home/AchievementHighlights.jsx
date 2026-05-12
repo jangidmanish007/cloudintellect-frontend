@@ -88,7 +88,7 @@ export default function AchievementHighlights() {
         },
       },
       {
-        breakpoint: 390,
+        breakpoint: 500,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -190,7 +190,7 @@ export default function AchievementHighlights() {
               {gallery.map((item, i) => (
                 <div
                   key={i}
-                  className="outline-none px-1 w-full lg:max-w-[560px] md:max-w-[400px] sm:max-w-[360px] xs:max-w-[280px] max-w-[260px]"
+                  className="outline-none px-1 w-full lg:max-w-[560px] md:max-w-[400px] sm:max-w-[360px] xs:max-w-[260px] max-w-[224px]"
                 >
                   <div className="rounded-lg overflow-hidden aspect-4/3 bg-gray-200 shadow-sm">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
