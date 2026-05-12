@@ -209,7 +209,7 @@ export default function HomeBanner() {
           </div>
 
           {/* ── CENTER: Person image ── */}
-          <div className="flex flex-1 items-end justify-center relative self-center">
+          <div className="flex flex-1 items-end justify-center relative self-center mt-auto">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentSlide}
