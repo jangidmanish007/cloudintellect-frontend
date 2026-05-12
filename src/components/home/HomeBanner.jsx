@@ -67,7 +67,7 @@ export default function HomeBanner() {
     speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
     beforeChange: (_, next) => setCurrentSlide(next),
