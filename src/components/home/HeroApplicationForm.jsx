@@ -9,6 +9,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { validEmail } from '@/_helper/Regex';
+import { buildApiUrl } from '@/_utils/clientApi';
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const triggerCls = 'form-field flex items-center justify-between outline-0';
@@ -186,11 +187,7 @@ export default function HeroApplicationForm() {
         product: formData.product,
       };
 
-      // Development: use /api-proxy, Production: use direct API URL
-      const isDevelopment = process.env.NODE_ENV === 'development';
-      const apiUrl = isDevelopment
-        ? `/api-proxy/${process.env.HERO_APPLICATION_SUBMIT}`
-        : `${process.env.API_BASE_URL}${process.env.HERO_APPLICATION_SUBMIT}`;
+      const apiUrl = buildApiUrl(process.env.HERO_APPLICATION_SUBMIT);
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {

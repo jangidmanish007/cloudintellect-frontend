@@ -1,20 +1,23 @@
-/**
- * Client-side API utility
- * Development: Uses /api-proxy to avoid CORS issues (proxied via next.config.mjs)
- * Production: Direct API calls to API_BASE_URL
- */
+
+export function buildApiUrl(endpoint) {
+  const cleanEndpoint = endpoint?.startsWith('/') ? endpoint.slice(1) : endpoint;
+
+  // Check if we're on the specific Vercel preview domain
+  const isVercelPreview = typeof window !== 'undefined' &&
+    window.location.hostname === 'cloudintellect-frontend-qi1g.vercel.app';
+
+  // Use proxy only for local dev OR specific Vercel preview domain
+  const useProxy = process.env.NODE_ENV === 'development' || isVercelPreview;
+
+  return useProxy
+    ? `/api-proxy/${cleanEndpoint}`
+    : `${process.env.API_BASE_URL}${cleanEndpoint}`;
+}
 
 export async function clientApi(endpoint, options = {}) {
   try {
     const { method = 'GET', body = null } = options;
-
-    // Remove leading slash if present
-    const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
-    const isDevelopment = process.env.NODE_ENV === 'development';
-
-    const url = isDevelopment
-      ? `/api-proxy/${cleanEndpoint}`
-      : `${process.env.API_BASE_URL}${cleanEndpoint}`;
+    const url = buildApiUrl(endpoint);
 
     const fetchOptions = {
       method,

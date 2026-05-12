@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Upload, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
+import { buildApiUrl } from '@/_utils/clientApi';
 
 export default function ApplyModal({ isOpen, onClose, selectedJob }) {
   const [formData, setFormData] = useState({
@@ -190,11 +191,7 @@ export default function ApplyModal({ isOpen, onClose, selectedJob }) {
       formDataToSend.append('resume', resumeFile);
 
       // Note: For file uploads, we still need to use fetch directly with FormData
-      // Development: use /api-proxy, Production: use direct API URL
-      const isDevelopment = process.env.NODE_ENV === 'development';
-      const apiUrl = isDevelopment
-        ? `/api-proxy/${process.env.CAREER_LEADS_SUBMIT}`
-        : `${process.env.API_BASE_URL}${process.env.CAREER_LEADS_SUBMIT}`;
+      const apiUrl = buildApiUrl(process.env.CAREER_LEADS_SUBMIT);
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formDataToSend,

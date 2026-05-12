@@ -3,6 +3,7 @@
 import { ChevronDown, Mail, MapPin, Phone, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
+import { buildApiUrl } from '@/_utils/clientApi';
 
 // Default fallback data
 const staticContentInfo = {
@@ -165,11 +166,7 @@ export default function ContactForm({ contactInfo, location }) {
         consent: true,
       };
 
-      // Development: use /api-proxy, Production: use direct API URL
-      const isDevelopment = process.env.NODE_ENV === 'development';
-      const apiUrl = isDevelopment
-        ? `/api-proxy/${process.env.CONTACT_FORM_SUBMIT}`
-        : `${process.env.API_BASE_URL}${process.env.CONTACT_FORM_SUBMIT}`;
+      const apiUrl = buildApiUrl(process.env.CONTACT_FORM_SUBMIT);
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {

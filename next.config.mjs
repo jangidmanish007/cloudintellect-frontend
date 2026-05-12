@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
-    if (process.env.NODE_ENV === 'development') {
+    // Use proxy only for local development
+    // Vercel preview domain will also use this via client-side check
+    if (process.env.NODE_ENV === 'development' || process.env.VERCEL) {
       return [
         {
           source: '/api-proxy/:path*',
@@ -9,7 +11,7 @@ const nextConfig = {
         },
       ];
     }
-    // No rewrites in production
+
     return [];
   },
 
