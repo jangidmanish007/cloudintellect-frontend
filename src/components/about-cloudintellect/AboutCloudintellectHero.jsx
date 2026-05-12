@@ -24,16 +24,14 @@ export default function AboutCloudintellectHero({ hero }) {
 
   return (
     <motion.section className="w-full bg-[#061A33] overflow-hidden">
-      <motion.div
-        className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]"
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
+      <div className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]">
         {/* Background Image with Opacity */}
-        <div
-          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-position-[72%_center] bg-position-[70%_top] lg:opacity-75 opacity-50"
+        <motion.div
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[50%_top] lg:opacity-100 opacity-50"
           style={{ backgroundImage: `url('${bgImageUrl}')` }}
+          initial={{ scale: 1.1, visibility: 'hidden' }}
+          animate={{ scale: 1, visibility: 'unset' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         />
 
         <div className="relative z-10 max-w-[1280px] mx-auto">
@@ -124,7 +122,7 @@ export default function AboutCloudintellectHero({ hero }) {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.section>
   );
 }

@@ -504,99 +504,53 @@ export default function Header() {
 
           {/* Nav */}
           <div className="flex-1 overflow-y-auto p-4">
-            {/* Main */}
-            <div className="mb-6">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Main Menu</h3>
-              <ul className="space-y-1">
-                {mainNav.map((item) => (
-                  <li key={item.label}>
-                    {item.children ? (
-                      <>
-                        <button
-                          onClick={() => toggleMobileAccordion(`main-${item.label}`)}
-                          className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
-                        >
-                          {item.label}
-                          <ChevronDown size={16} />
-                        </button>
-                        <div
-                          className={`mobile-accordion-content ${openMobileAccordion === `main-${item.label}` ? 'open' : ''}`}
-                        >
-                          <ul className="ml-4 mt-1 space-y-1">
-                            {item.children.map((child) => (
-                              <li key={child.label}>
-                                <Link
-                                  href={child.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded"
-                                >
-                                  {child.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </>
-                    ) : (
-                      <a
-                        href={item.href}
-                        onClick={(e) => handleNavClick(e, item.href)}
-                        className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded cursor-pointer"
-                      >
-                        {item.label}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             {/* Secondary */}
-            <div>
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">More</h3>
-              <ul className="space-y-1">
-                {secondaryNav.map((item) => (
-                  <li key={item.label}>
-                    {item.children ? (
-                      <>
-                        <button
-                          onClick={() => toggleMobileAccordion(`sec-${item.label}`)}
-                          className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
-                        >
-                          {item.label}
-                          <ChevronDown size={16} />
-                        </button>
-                        <div
-                          className={`mobile-accordion-content ${openMobileAccordion === `sec-${item.label}` ? 'open' : ''}`}
-                        >
-                          <ul className="ml-4 mt-1 space-y-1">
-                            {item.children.map((child) => (
-                              <li key={child.label}>
-                                <Link
-                                  href={child.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded"
-                                >
-                                  {child.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+            <ul className="space-y-1">
+              {secondaryNav.map((item) => (
+                <li key={item.label}>
+                  {item.children ? (
+                    <>
+                      <button
+                        onClick={() => toggleMobileAccordion(`sec-${item.label}`)}
+                        className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
                       >
                         {item.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+                        {openMobileAccordion === `sec-${item.label}` ? (
+                          <ChevronDown size={16} />
+                        ) : (
+                          <ChevronRight size={16} />
+                        )}
+                      </button>
+                      <div
+                        className={`mobile-accordion-content ${openMobileAccordion === `sec-${item.label}` ? 'open' : ''}`}
+                      >
+                        <ul className="ml-4 mt-1 space-y-1">
+                          {item.children.map((child) => (
+                            <li key={child.label}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Footer actions */}

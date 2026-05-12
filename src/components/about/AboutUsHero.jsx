@@ -17,20 +17,49 @@ function AboutUsHero({ hero }) {
 
   const bgImageUrl = `${process.env.NEXT_PUBLIC_IMG_PATH}images/about-us/about-us-map-bg.webp`;
 
+  // Reusable Stats Component
+  const renderStats = () => {
+    if (stats.length === 0) return null;
+
+    return (
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-full sm:max-w-[480px] w-full">
+        {stats.map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-[#0000001A] rounded-[14px] p-4 sm:p-5 md:p-6 flex flex-col gap-1.5 sm:gap-2 border border-white/5 transition-all duration-300 hover:bg-[rgba(0,0,0,0.15)] hover:border-white/10"
+          >
+            <span className="font-excon text-[32px] sm:text-[40px] md:text-[48px] font-bold text-[#009FFF] leading-none">
+              {stat.value}
+            </span>
+            <span className="ranade-font text-[10px] sm:text-xs font-medium text-white/70 tracking-wider uppercase">
+              {stat.label}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <section className="w-full bg-[#0b1c33] overflow-hidden px-[16px]">
-      <motion.div
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="max-w-[1280px] mx-auto bg-no-repeat bg-bottom bg-contain pt-[180px] xl:pt-[280px] md:pt-[230px] md:pb-[80px] pb-[40px] xl:pb-[100px]"
-        style={{ backgroundImage: `url('${bgImageUrl}')` }}
-      >
+      <div className="relative max-w-[1280px] mx-auto pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]">
+        {/* Background Image with Opacity */}
+        <motion.div
+          className="absolute inset-0 bg-no-repeat bg-contain lg:bg-bottom bg-bottom lg:opacity-100 opacity-50"
+          style={{ backgroundImage: `url('${bgImageUrl}')` }}
+          initial={{ scale: 1.1, visibility: 'hidden' }}
+          animate={{ scale: 1, visibility: 'unset' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           {/* Left Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
             className="flex flex-col gap-4 sm:gap-5 md:gap-6"
           >
@@ -79,6 +108,18 @@ function AboutUsHero({ hero }) {
               </motion.p>
             )}
 
+            {/* Stats - Mobile Only (Before CTA Buttons) */}
+            <div className="block lg:hidden">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex justify-center items-center"
+              >
+                {renderStats()}
+              </motion.div>
+            </div>
+
             {/* Buttons */}
             {(heroData.primaryButtonText || heroData.secondaryButtonText) && (
               <motion.div
@@ -108,37 +149,19 @@ function AboutUsHero({ hero }) {
             )}
           </motion.div>
 
-          {/* Right Section - Stats */}
-          {stats.length > 0 && (
+          {/* Right Section - Stats (Desktop Only) */}
+          <div className="hidden lg:flex">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-              className="flex justify-center lg:justify-center items-center"
+              className="flex justify-center lg:justify-center items-center w-full"
             >
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-full sm:max-w-[480px] w-full">
-                {stats.map((stat, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-[#0000001A] rounded-[14px] p-4 sm:p-5 md:p-6 flex flex-col gap-1.5 sm:gap-2 border border-white/5 transition-all duration-300 hover:bg-[rgba(0,0,0,0.15)] hover:border-white/10"
-                  >
-                    <span className="font-excon text-[32px] sm:text-[40px] md:text-[48px] font-bold text-[#009FFF] leading-none">
-                      {stat.value}
-                    </span>
-                    <span className="ranade-font text-[10px] sm:text-xs font-medium text-white/70 tracking-wider uppercase">
-                      {stat.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+              {renderStats()}
             </motion.div>
-          )}
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

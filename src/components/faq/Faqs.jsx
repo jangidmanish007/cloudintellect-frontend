@@ -62,7 +62,7 @@ export default function Faqs({ pageData }) {
   return (
     <>
       {/* ── Hero banner ── */}
-      <section className="relative w-full min-h-[600px] flex items-center pt-[130px] md:pt-[206px] overflow-hidden">
+      <section className="relative w-full lg:min-h-[600px] min-h-[400px] flex items-center pt-[130px] md:pt-[206px] overflow-hidden">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{

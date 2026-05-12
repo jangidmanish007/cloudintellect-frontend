@@ -25,16 +25,14 @@ export default function GalleryBanner({ hero }) {
 
   return (
     <motion.section className="w-full bg-[#0B1C33] overflow-hidden">
-      <motion.div
-        className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]"
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
+      <div className="relative px-[16px] pt-[180px] xl:pt-[280px] md:pt-[230px] pb-[64px] xl:pb-[100px]">
         {/* Background Image with Opacity */}
-        <div
-          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[60%_top] lg:opacity-100 opacity-30"
+        <motion.div
+          className="absolute inset-0 bg-no-repeat bg-cover lg:bg-bottom bg-position-[70%_top] lg:opacity-100 opacity-50"
           style={{ backgroundImage: `url('${bgImageUrl}')` }}
+          initial={{ scale: 1.1, visibility: 'hidden' }}
+          animate={{ scale: 1, visibility: 'unset' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         />
         <div className="relative z-10 max-w-[1280px] mx-auto">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-10">
@@ -121,7 +119,7 @@ export default function GalleryBanner({ hero }) {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.section>
   );
 }

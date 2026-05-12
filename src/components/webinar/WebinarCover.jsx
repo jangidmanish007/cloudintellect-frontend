@@ -14,7 +14,7 @@ export default function WebinarCover({ webinarsCover, topicsData }) {
   const topics = topicsData || [];
 
   return (
-    <section className="w-full bg-gray-50 lg:py-[80px] md:py-[60px] py-[40px] px-[16px]">
+    <section className="w-full bg-gray-50 lg:py-[80px] md:py-[60px] py-[40px] px-[16px] overflow-hidden">
       <div className="max-w-[1280px] mx-auto">
         <div className="flex lg:flex-row flex-col justify-between lg:gap-[24px] gap-[40px]">
           {/* Left Column - Info */}

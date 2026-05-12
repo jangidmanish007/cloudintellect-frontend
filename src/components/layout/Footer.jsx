@@ -90,7 +90,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1280px] lg:pt-[80px] lg:pb-[64px] pt-[64px] pb-[40px]">
         <div className="flex flex-col md:grid grid-cols-2 lg:grid-cols-[3fr_1.4fr_1.4fr_.7fr] gap-8 lg:gap-[64px]">
           {/* Col 1 – Brand & Contact (Full width on mobile) */}
-          <div className="flex flex-col justify-center md:justify-start md:items-start items-center gap-6 w-full">
+          <div className="flex flex-col justify-start md:justify-start md:items-start gap-6 w-full">
             {/* Logo */}
             <div className="flex items-center">
               <Image
@@ -103,9 +103,7 @@ export default function Footer() {
             </div>
 
             {/* Tagline */}
-            <p className="text-sm text-gray-400 md:text-start text-center leading-relaxed max-w-[280px]">
-              {brand.tagline}
-            </p>
+            <p className="text-sm text-gray-400 md:text-start leading-relaxed sm:max-w-[280px]">{brand.tagline}</p>
 
             {/* Contact info */}
             <div className="flex flex-col gap-3">
