@@ -1,12 +1,40 @@
 'use client';
 
 import { ChevronDown, Mail, MapPin, Phone, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { validEmail, validFullName, validIndianPhone } from '@/_helper/Regex';
 
-const PROGRAMS = ['SFDC', 'SFMC'];
+// Default fallback data
+const staticContentInfo = {
+  email: 'info@cloudintellect.in',
+  phoneNumbers: [
+    { number: '+91 876-899-6944', label: 'Call Us' },
+    { number: '+91 986-018-3175', label: 'Call Us' },
+  ],
+  programs: ['SFDC', 'SFMC'],
+  mapEmbedUrl:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2613!2d73.7674!3d18.5594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMzJzM0LjAiTiA3M8KwNDYnMDIuNiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin',
+};
 
-export default function ContactForm() {
+const staticLocations = [
+  {
+    city: 'Pune',
+    address: '3rd floor block 306, Baner Biz Bay, Laxman Nagar, Baner, Pune, Maharashtra 411045',
+    mapUrl: 'https://maps.app.goo.gl/mDQKXgFEXh4xpnaP7',
+  },
+  {
+    city: 'Nagpur',
+    address:
+      'Cloud Intellect, Plot no. 8, Sanjay Heights, Beltarodi Rd, near ICICI Bank, Besa, Nagpur, Maharashtra 440037',
+    mapUrl: 'https://maps.app.goo.gl/EumdJMrDNapgyqmD7',
+  },
+];
+
+export default function ContactForm({ contactInfo, location }) {
+  // Use dynamic data or fallback to defaults
+  const contactData = contactInfo || staticContentInfo;
+  const locationData = location || staticLocations;
+  const programs = contactData?.programs || staticContentInfo.programs;
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -18,7 +46,6 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
   const [submitMessage, setSubmitMessage] = useState('');
-  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     fullName: '',
     email: '',
@@ -27,21 +54,6 @@ export default function ContactForm() {
     message: '',
   });
   const [buttonClicked, setButtonClicked] = useState(false);
-
-  // Real-time validation when buttonClicked is true
-  useEffect(() => {
-    if (buttonClicked) {
-      formValidation();
-    }
-  }, [formData.fullName, formData.email, formData.phoneNumber, formData.program, formData.message, buttonClicked]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const formValidation = () => {
     let fullNameMsg = '';
@@ -96,26 +108,32 @@ export default function ContactForm() {
       isValid = true;
     }
 
-    if (isValid) {
-      setError(false);
-      setErrorMessage({
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        program: '',
-        message: '',
-      });
-      return true;
-    } else {
-      setError(true);
-      setErrorMessage({
-        fullName: fullNameMsg,
-        email: emailMsg,
-        phoneNumber: phoneNumberMsg,
-        program: programMsg,
-        message: messageMsg,
-      });
-      return false;
+    const newErrorMessage = {
+      fullName: fullNameMsg,
+      email: emailMsg,
+      phoneNumber: phoneNumberMsg,
+      program: programMsg,
+      message: messageMsg,
+    };
+
+    setErrorMessage(newErrorMessage);
+    return isValid;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const newFormData = {
+      ...formData,
+      [name]: value,
+    };
+    setFormData(newFormData);
+
+    // Validate in real-time if button was clicked
+    if (buttonClicked) {
+      // Validate the updated form data
+      setTimeout(() => {
+        formValidation();
+      }, 0);
     }
   };
 
@@ -185,7 +203,6 @@ export default function ContactForm() {
       program: '',
       message: '',
     });
-    setError(false);
     setErrorMessage({
       fullName: '',
       email: '',
@@ -260,7 +277,7 @@ export default function ContactForm() {
                   }`}
                 >
                   <option value="">Select Program</option>
-                  {PROGRAMS.map((p) => (
+                  {programs.map((p) => (
                     <option key={p} value={p}>
                       {p}
                     </option>
@@ -329,45 +346,42 @@ export default function ContactForm() {
         <div className="w-full lg:w-100 flex flex-col gap-4">
           <div className="bg-[#0B1C33] rounded-md p-6 md:p-10 text-white flex flex-col md:gap-3 gap-2">
             <h3 className="text-md font-bold mb-2">Contact Information</h3>
+
+            {/* Dynamic Phone Numbers */}
+            {contactData?.phoneNumbers?.map((phone, index) => (
+              <a
+                key={index}
+                href={`tel:${phone.number.replace(/\s/g, '')}`}
+                className="flex items-center gap-3 bg-[#1a2d42] hover:bg-[#1f3550] transition-colors rounded-xl px-4 py-3 mb-2.5 group"
+              >
+                <div className="shrink-0 w-8 h-8 bg-[#22C55E33] rounded-full flex items-center justify-center">
+                  <Phone size={14} className="text-[#4ADE80]" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="ranade-font text-sm font-semibold leading-tight">{phone.number}</p>
+                  <p className="ranade-font text-xs text-[#FFFFFFBF]">{phone.label}</p>
+                </div>
+              </a>
+            ))}
+
+            {/* Dynamic Email */}
             <a
-              href="tel:+918768996944"
-              className="flex items-center gap-3 bg-[#1a2d42] hover:bg-[#1f3550] transition-colors rounded-xl px-4 py-3 mb-2.5 group"
-            >
-              <div className="shrink-0 w-8 h-8 bg-[#22C55E33] rounded-full flex items-center justify-center">
-                <Phone size={14} className="text-[#4ADE80]" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <p className="ranade-font text-sm font-semibold leading-tight">+91 876-899-6944</p>
-                <p className="ranade-font text-xs text-[#FFFFFFBF]">Call Us</p>
-              </div>
-            </a>
-            <a
-              href="tel:+919860183175"
-              className="flex items-center gap-3 bg-[#1a2d42] hover:bg-[#1f3550] transition-colors rounded-xl px-4 py-3 mb-2.5 group"
-            >
-              <div className="shrink-0 w-8 h-8 bg-[#22C55E33] rounded-full flex items-center justify-center">
-                <Phone size={14} className="text-[#4ADE80]" />
-              </div>
-              <div className="flex flex-col gap-1">
-                <p className="ranade-font text-sm font-semibold leading-tight">+91 986-018-3175</p>
-                <p className="ranade-font text-xs text-[#FFFFFFBF]">Call Us</p>
-              </div>
-            </a>
-            <a
-              href="mailto:info@cloudintellect.in"
+              href={`mailto:${contactData?.email}`}
               className="flex items-center gap-3 bg-[#1a2d42] hover:bg-[#1f3550] transition-colors rounded-xl px-4 py-3 mb-4 group"
             >
               <div className="shrink-0 w-8 h-8 bg-[#22C55E33] rounded-full flex items-center justify-center">
                 <Mail size={14} className="text-[#4ADE80]" />
               </div>
               <div className="flex flex-col gap-1">
-                <p className="ranade-font text-sm font-semibold leading-tight">info@cloudintellect.in</p>
+                <p className="ranade-font text-sm font-semibold leading-tight">{contactData?.email}</p>
                 <p className="ranade-font text-xs text-[#FFFFFFBF]">Email Us</p>
               </div>
             </a>
+
+            {/* Dynamic Map Embed */}
             <div className="rounded-xl overflow-hidden h-36 w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2613!2d73.7674!3d18.5594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMzJzM0LjAiTiA3M8KwNDYnMDIuNiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                src={contactData?.mapEmbedUrl || staticContentInfo.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -377,45 +391,30 @@ export default function ContactForm() {
               />
             </div>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start gap-3">
-            <div className="shrink-0 w-10 h-10 bg-[#009FFF1A] rounded-md flex items-center justify-center">
-              <MapPin size={20} className="text-blue-500" />
+
+          {/* Dynamic Locations */}
+          {locationData?.map((loc, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start gap-3"
+            >
+              <div className="shrink-0 w-10 h-10 bg-[#009FFF1A] rounded-md flex items-center justify-center">
+                <MapPin size={20} className="text-blue-500" />
+              </div>
+              <div>
+                <h4 className="text-md font-bold text-black mb-1">{loc.city}</h4>
+                <p className="ranade-font text-xs md:text-sm text-black leading-relaxed mb-1.5">{loc.address}</p>
+                <a
+                  href={loc.mapUrl || staticContentInfo.mapEmbedUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ranade-font text-xs md:text-sm font-semibold text-[#009DE3] hover:underline"
+                >
+                  View on Map
+                </a>
+              </div>
             </div>
-            <div>
-              <h4 className="text-md font-bold text-black mb-1">Pune</h4>
-              <p className="ranade-font text-xs md:text-sm text-black leading-relaxed mb-1.5">
-                3rd floor block 306, Baner Biz Bay, Laxman Nagar, Baner, Pune, Maharashtra 411045
-              </p>
-              <a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ranade-font text-xs md:text-sm font-semibold text-[#009DE3] hover:underline"
-              >
-                View on Map
-              </a>
-            </div>
-          </div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start gap-3">
-            <div className="shrink-0 w-10 h-10 bg-[#009FFF1A] rounded-md flex items-center justify-center">
-              <MapPin size={20} className="text-blue-500" />
-            </div>
-            <div>
-              <h4 className="text-md font-bold text-black mb-1">Nagpur</h4>
-              <p className="ranade-font text-xs md:text-sm text-black leading-relaxed mb-1.5">
-                Cloud Intellect, Plot no. 8, Sanjay Heights, Beltarodi Rd, near ICICI Bank, Besa, Nagpur, Maharashtra
-                440037
-              </p>
-              <a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ranade-font text-xs md:text-sm font-semibold text-[#009DE3] hover:underline"
-              >
-                View on Map
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

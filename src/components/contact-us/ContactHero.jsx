@@ -6,7 +6,6 @@ import { ArrowRight } from 'lucide-react';
 export default function ContactHero({ pageData }) {
   const hero = pageData?.content?.hero || {};
 
-  const backgroundImage = hero.backgroundImage || hero.bgImage || '/images/BG (2).webp';
   const tag = hero.tag || hero.label || 'SPECIALIZATION PROGRAM';
   const heading = hero.heading || hero.title || 'Real Stories. Real Careers.';
   const description =

@@ -36,6 +36,7 @@ export default async function Home() {
       // Use the same API data for testimonials/reviews
       homePageData.testimonials = successStoriesRes.result || [];
     }
+
   } catch (error) {
     console.error('Error fetching home page data:', error);
   }
