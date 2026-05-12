@@ -77,7 +77,7 @@ export default function HomeBanner() {
 
   return (
     <section
-      className="relative w-full min-h-[1354px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] pb-[64px]"
+      className="relative w-full min-h-[1354px] lg:min-h-[956px] overflow-hidden flex items-end lg:pt-0 pt-[140px] lg:pb-0 pb-[64px]"
       style={{
         backgroundImage: "url('images/home/home-banner-img-1.webp')",
         backgroundSize: 'cover',
@@ -219,7 +219,7 @@ export default function HomeBanner() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="max-h-[200px] sm:max-h-[240px]  xl:max-h-[580px] w-auto object-contain object-bottom drop-shadow-2xl"
+                className="max-h-[200px] min-h-[200px] sm:max-h-[240px]  xl:max-h-[580px] w-auto object-contain object-bottom drop-shadow-2xl"
               />
             </AnimatePresence>
           </div>
