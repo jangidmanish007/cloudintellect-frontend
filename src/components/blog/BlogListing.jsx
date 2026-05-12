@@ -200,7 +200,7 @@ export default function BlogListing({ posts: initialPosts = [], categories = [] 
               >
                 {/* Post Image */}
                 {post.featuredImage && (
-                  <div className="relative w-full h-[220px] sm:h-[220px] overflow-hidden mb-[14px]">
+                  <div className="relative w-full h-[220px] sm:h-[220px] overflow-hidden mb-[14px] rounded-[10px]">
                     <Image
                       src={`${process.env.DYNAMIC_IMG_BASE_PATH}${post.featuredImage}`}
                       alt={post.title || 'Blog post image'}

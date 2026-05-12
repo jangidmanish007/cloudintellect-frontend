@@ -18,6 +18,7 @@ export async function generateMetadata() {
 // Hardcoded categories matching the API response
 const BLOG_CATEGORIES = [
   "Admin & Reports",
+  "Clouds & AI",
   "Development (Apex/LWC)",
   "Training & Career"
 ];
@@ -41,6 +42,7 @@ export default async function BlogListingPage() {
   try {
     // Fetch blog posts from API (all posts initially)
     const postsRes = await getBlogPosts();
+
     if (postsRes?.status) {
       blogPosts = postsRes.result;
     }
