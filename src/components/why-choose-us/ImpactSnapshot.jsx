@@ -59,7 +59,7 @@ export default function ImpactSnapshot({ impactSnapshot }) {
               </div>
               {/* Vertical Divider - Only show on desktop between items */}
               {index !== metrics.length - 1 && (
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-px border-l border-[#000000] lg:block md:hidden sm:hidden" />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-px border-l border-[#000000] lg:block hidden" />
               )}
             </motion.div>
           ))}

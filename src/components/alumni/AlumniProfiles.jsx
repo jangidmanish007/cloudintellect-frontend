@@ -5,8 +5,8 @@ export default function AlumniProfiles({ alumniProfile = [], pageData }) {
   if (!alumniProfile.length) return null;
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4 md:px-0">
+    <section className=" bg-white px-[16px] lg:py-[80px] py-[60px]">
+      <div className="max-w-[1280px] mx-auto w-full">
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {alumniProfile.map((item) => (
             <div key={item._id} className="bg-[#f5f5f5] border border-gray-200 rounded-2xl p-6 max-w-sm w-full">

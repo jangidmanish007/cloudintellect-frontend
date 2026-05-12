@@ -36,7 +36,7 @@ export default function UpcomingBatches({ batchesData }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-[8px] lg:p-[24px] border border-[#0000001A] overflow-hidden transition-shadow duration-300"
+                className="bg-white rounded-[8px] lg:p-[24px] p-[16px] border border-[#0000001A] overflow-hidden transition-shadow duration-300"
               >
                 {/* Banner with Icon */}
                 <div
@@ -56,15 +56,15 @@ export default function UpcomingBatches({ batchesData }) {
 
                 {/* Content */}
                 <div className="pt-[24px]">
-                  <h3 className="font-excon text-xl md:text-[26px] font-bold text-dark mb-[18px] lg:mb-[24px]">
+                  <h3 className="font-excon text-xl md:text-[26px] font-bold text-dark mb-[16px] lg:mb-[24px]">
                     {batch.title}
                   </h3>
-                  <p className="font-ranade text-[18px] md:text-[20px] text-dark  mb-[18px] lg:mb-[24px] line-clamp-2">
+                  <p className="font-ranade text-[18px] md:text-[20px] text-dark  mb-[16px] lg:mb-[24px] line-clamp-2">
                     {batch.description}
                   </p>
 
                   {/* Batch Info */}
-                  <div className="space-y-4 mb-6 bg-[#F8FAFC] border border-[#0000001A] rounded-[8px] p-[24px]">
+                  <div className="space-y-4 mb-6 bg-[#F8FAFC] border border-[#0000001A] rounded-[8px] p-[16px] lg:p-[24px]">
                     <div className="flex items-start justify-between gap-4">
                       <div className="">
                         <span className="block text-xs text-gray-500 mb-1">Batch Start</span>

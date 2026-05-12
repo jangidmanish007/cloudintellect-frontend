@@ -16,9 +16,9 @@ export default function AboutBridging({ bridgingData }) {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
           {/* Left Section */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-[24px]">
             {bridgingData.intro && (
-              <p className="ranade-font text-base md:text-[18px] text-gray-700 leading-relaxed mb-[24px] max-w-[80%]">
+              <p className="ranade-font text-base md:text-[18px] text-gray-700 leading-relaxed mb-0 max-w-[80%]">
                 {bridgingData.intro}
               </p>
             )}

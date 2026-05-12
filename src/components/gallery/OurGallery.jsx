@@ -141,7 +141,7 @@ const OurGallery = ({ categories = [], initialImages = [] }) => {
           </div>
         ) : (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -152,7 +152,7 @@ const OurGallery = ({ categories = [], initialImages = [] }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-4/3 bg-gray-100"
+                className="group relative overflow-hidden lg:rounded-2xl rounded-[10px] cursor-pointer aspect-4/3 bg-gray-100"
                 onClick={() => handleImageClick(index)}
               >
                 <Image
